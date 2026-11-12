@@ -1,4 +1,4 @@
-# Marle Hotel & Restaurant — Hotel Management System
+# Marle Hotel & Restaurant - Hotel Management System with Sentiment AI
 
 A complete hotel operations system in plain **PHP 8 + MySQL**: a public booking website, a guest portal, and a role-based staff console — no framework, no Composer, no build step, deployable on ordinary shared hosting.
 
