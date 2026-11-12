@@ -2,8 +2,6 @@
 
 A complete hotel operations system in plain **PHP 8 + MySQL**: a public booking website, a guest portal, and a role-based staff console — no framework, no Composer, no build step, deployable on ordinary shared hosting.
 
-![Marle Hotel front entrance](img/marle-entrance.jpg)
-
 ## Overview
 
 Marle Hotel & Restaurant is a small hotel in Sabutan Ibayo, Silang, Cavite, Philippines. This repository is the management system built for it: guests book a room by the night or by the hour, pay a 50 % deposit, and manage their stay from a phone; the front desk, the managers and the owner run the same bookings from one console with three separate sets of permissions.
