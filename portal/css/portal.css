@@ -1,0 +1,121 @@
+/* Portal Homepage - Marle Hotel */
+
+/* Hero */
+#home { padding: 30px 30px 40px 30px; }
+
+/* Check-in Status Bar */
+.check-in-area { background: var(--marle-brown); color: var(--marle-gold); border: 2px solid var(--marle-gold); margin-top: -5rem; padding: 10px 0; border-radius: 20px; position: relative; z-index: 15; margin-bottom: 40px; max-width: 300px; width: 90%; margin-left: auto; margin-right: auto; text-align: center; }
+
+/* Guest Info Strip */
+.guest-info-area { background: #fff; box-shadow: 0 .5rem .75rem rgb(0 0 0 / 8%); margin-top: -2.5rem; padding: 1.25rem 1rem; border-radius: 20px; position: relative; z-index: 10; max-width: 600px; width: 92%; margin-left: auto; margin-right: auto; }
+.guest-info-area p { margin-bottom: 2px; font-size: .7rem; color: #6c757d; }
+.guest-info-area h3 { font-size: 1.1rem; margin-bottom: 0; font-weight: 700; }
+
+/* Quick-Action Category Cards */
+.scroll-container { display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 12px 0 32px 0; gap: 12px; scrollbar-width: none; }
+.scroll-container::-webkit-scrollbar { display: none; }
+.category-card-wrapper { flex: 0 0 140px; text-decoration: none; color: inherit; }
+.category-card { border: none; border-radius: 16px; background: #fff; transition: transform .2s ease, box-shadow .2s ease; cursor: pointer; }
+.category-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.08); }
+.category-card .card-body { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px 10px; min-height: 110px; }
+.category-card i { font-size: 1.6rem; margin-bottom: 8px; color: var(--marle-gold-deep); background: var(--marle-cream); padding: 10px; border-radius: 50%; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; }
+.category-card .card-title { font-size: .85rem; font-weight: 650; color: var(--marle-gold-deep); margin-bottom: 2px; }
+.category-card .card-text { font-size: .72rem; }
+.horizontal-section { padding: 0 16px; }
+
+/* Desktop category cards */
+@media (min-width: 768px) {
+    .scroll-container { flex-wrap: wrap; justify-content: center; overflow-x: visible; gap: 16px; }
+    .category-card-wrapper { flex: 0 1 160px; max-width: 180px; }
+}
+
+/* Hotel Services Section */
+.hotel-services { padding: 8px 0; margin-top: .5rem; }
+.see-all { text-decoration: none; color: var(--marle-gold-deep); font-size: .85rem; font-weight: 500; }
+
+/* Service Icon */
+.service-icon-container { width: 56px; height: 56px; min-width: 56px; background-color: var(--marle-cream); color: var(--marle-gold-deep); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.service-icon-container i { margin: 0 !important; padding: 0 !important; }
+
+/* Add Button */
+.add-service-btn { font-size: 13px; padding: 7px 9px; background-color: var(--marle-brown); color: var(--marle-gold); border-radius: 10px; border: none; transition: transform .2s; cursor: pointer; height: fit-content; }
+.add-service-btn:active { transform: scale(.9); }
+
+/* Extend Stay Card */
+.extend-stay { background-color: var(--marle-brown); color: var(--marle-beige,#ccc); }
+.card-title-extend { color: #fff; font-size: 1rem; }
+.review { background-color: var(--marle-gold); border-color: var(--marle-gold); color: #fff; border-radius: 12px; font-weight: 600; padding: .55rem 1rem; }
+.review:hover { background: #d99600; border-color: #d99600; color: #fff; }
+
+/* Footer */
+.footer { text-decoration: none; color: var(--marle-gold-deep); font-size: .85rem; }
+@media (max-width: 768px) { .check-in-area { margin-top: -4rem; } }
+
+/* Homepage Service Card Hover */
+.service-icon-container{transition:all .25s ease}
+.card:hover .service-icon-container{background:var(--marle-rust);color:#fff;transform:scale(1.05)}
+.add-service-btn{transition:all .2s ease}
+.add-service-btn:hover{background:var(--marle-rust);transform:scale(1.05)}
+
+/* Footer Separator */
+.portal-footer{border-top:1px solid rgba(53,36,20,.08);margin-top:8px}
+
+/* Desktop Spacing */
+@media(min-width:768px){
+  .scroll-container{gap:16px!important}
+  .category-card-wrapper{flex:0 1 160px;max-width:180px}
+  .row.g-3{row-gap:20px!important}
+}
+@media(max-width:767.98px){
+  .scroll-container{gap:10px!important;padding:8px 0 24px 0}
+  .category-card-wrapper{flex:0 0 130px}
+  .category-card .card-body{padding:14px 8px;min-height:100px}
+  .category-card i{width:40px;height:40px;padding:8px;font-size:1.4rem}
+  .row.g-3{row-gap:14px!important}
+  .content.p-4{padding:0 16px!important}
+  .content.p-4.pt-0{padding-top:0!important}
+}
+
+/* Bottom Section Spacing */
+.content.p-4.mb-2{margin-bottom:16px!important}
+
+/* Modern concierge treatment */
+#home{min-height:32vh;padding:48px 24px 66px}
+.check-in-area{background:var(--marle-brown);border:1px solid #4c665d;border-radius:var(--radius-md);box-shadow:var(--portal-shadow);color:#f4d8ac;padding:12px 0}
+.guest-info-area{background:var(--marle-card);border:1px solid var(--marle-line);border-radius:var(--radius-md);box-shadow:var(--portal-shadow);padding:1.35rem 1.1rem}
+.guest-info-area p{color:var(--marle-muted)!important}
+.guest-info-area h3{color:var(--marle-ink)}
+.category-card{background:var(--marle-card);border:1px solid var(--marle-line);border-radius:var(--radius-md);box-shadow:var(--portal-shadow-soft)}
+.category-card i,.service-icon-container{background:#eef2ee;color:var(--marle-gold-deep)}
+.category-card .card-title{color:var(--marle-ink)}
+.category-card .card-text{color:var(--marle-muted)}
+.service-icon-container{border-radius:11px}
+.add-service-btn{background:var(--marle-brown);color:#fff;border-radius:8px}
+.add-service-btn:hover{background:var(--marle-rust)}
+.extend-stay{background:linear-gradient(135deg,var(--marle-brown),#38504a);border-color:#4c665d}
+.review{background:var(--marle-gold-deep);border-color:var(--marle-gold-deep);border-radius:8px}
+.review:hover{background:var(--marle-rust);border-color:var(--marle-rust)}
+
+/* Dashboard composition */
+.dashboard-page{max-width:1200px;margin:0 auto}
+.dashboard-hero .landing-text{text-align:left;margin-left:max(0px, calc((100% - 1080px) / 2));}
+.dashboard-hero .landing-text .line{margin-left:0}
+.dashboard-page .check-in-area{margin-top:-32px;max-width:1080px;width:calc(100% - 48px);text-align:left;padding:14px 22px}
+.dashboard-page .guest-info-area{margin-top:16px;max-width:1080px;width:calc(100% - 48px);padding:20px 22px}
+.dashboard-page .running-bill-summary{max-width:1080px;margin:24px auto!important}
+.dashboard-page .running-bill-summary .card{border-radius:var(--radius-md)}
+.dashboard-page .horizontal-section,.dashboard-page .content.p-4{max-width:1080px;margin-left:auto;margin-right:auto}
+.dashboard-page .scroll-container{justify-content:flex-start}
+.dashboard-page .hotel-services{padding:0;margin-top:12px}
+.dashboard-page .hotel-services h4{font-size:1.25rem}
+@media(max-width:767.98px){
+  .dashboard-page .check-in-area,.dashboard-page .guest-info-area{width:calc(100% - 28px)}
+  .dashboard-page .dashboard-hero .landing-text{margin-left:0}
+  /* Bill card: centered with equal side gutters. The Bootstrap .container
+     class + width:100% was pushing the right edge past the viewport (437px
+     on a 423px iPhone 16 Pro Max screen) — the source of the horizontal
+     scroll and the off-center card. */
+  .dashboard-page .running-bill-summary{width:auto!important;max-width:none!important;margin:20px 14px!important;padding-left:0;padding-right:0}
+  .dashboard-page .running-bill-summary .card{width:100%}
+  .dashboard-page .content.p-4{padding-inline:14px!important}
+}

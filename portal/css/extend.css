@@ -1,0 +1,159 @@
+/* Extend Page - Marle Hotel */
+
+/* Hero */
+#home{color:var(--marle-brown);padding:24px 20px 40px;text-align:left;align-items:flex-start;justify-content:flex-start}
+
+/* Current Booking */
+.current-booking-area { background: #fff; box-shadow: 0 .4rem .6rem rgb(0 0 0 / 8%); margin-top: 1.5rem; padding: 1.25rem; border-radius: 20px; max-width: 600px; width: 92%; margin-left: auto; margin-right: auto; }
+.current-booking-area p, .current-booking-area h5, .current-booking-area b { line-height: 1.2; }
+.border-secondary { border-color: #d6dbe0 !important; }
+
+/* Pending Banner */
+.pending-banner { display: flex; align-items: center; gap: 12px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 14px; padding: 12px 16px; margin-bottom: 16px; }
+
+/* Hours Booked */
+.hours-booked { border: 2px solid var(--marle-gold); background-color: #faedd0cf; border-radius: 16px; padding: 16px; display: flex; align-items: center; }
+.hours { color: var(--marle-gold); }
+
+/* Plus/Minus Buttons */
+.bi-dash, .bi-plus { padding: 12px; font-weight: 500; background-color: #faedd0cf; border-radius: 50%; }
+.bi-dash:hover, .bi-plus:hover { background-color: #faedd0cf; border-color: var(--marle-gold-deep); color: var(--marle-gold-deep); }
+.bi-plus:focus, .bi-plus:focus:not(:focus-visible) { outline: none; box-shadow: none; }
+.bi-plus:focus-visible { outline: 2px solid var(--marle-gold); outline-offset: 2px; }
+#btnMinus, #btnPlus { border: 2px solid transparent; outline: none !important; box-shadow: none !important; background: none !important; padding: 0 !important; }
+
+/* Rate Badge */
+.rate-badge { display: inline-block; background: #faedd0cf; color: var(--marle-gold-deep); border: 1px solid var(--marle-gold); border-radius: 20px; padding: 5px 14px; font-size: .8rem; font-weight: 600; }
+
+/* New Date + Estimated Total */
+.new-date { width: 96%; background-color: #fff; border: 1px solid #faedd0cf; border-radius: 16px; padding: 4px 12px; }
+.new-check-out-date { padding: 8px 0; font-weight: 600; }
+.estimated-total { border: 2px solid var(--marle-gold); background-color: #faedd0cf; border-radius: 16px; padding: 20px; width: 96%; }
+
+/* Extension Button */
+.extension-btn { background-color: var(--marle-gold); font-weight: 600; border-radius: 12px; padding: 14px; width: 96%; border: none; color: #fff; }
+.extension-btn:hover { background: #d99600; transform: translateY(-1px); }
+.extension-btn:disabled { opacity: .5; transform: none; }
+
+/* Extension History */
+.ext-status-filter-btn { border-radius: 50px; padding: 6px 16px; border: 1px solid var(--marle-gold-deep); background: #fff; color: var(--marle-gold-deep); font-size: .8rem; font-weight: 500; transition: all .2s ease; }
+.ext-status-filter-btn:hover { border-color: var(--marle-gold); color: var(--marle-gold); }
+.ext-status-filter-btn.active { background: var(--marle-gold-deep); border-color: var(--marle-gold-deep); color: var(--marle-gold); }
+.history-card { background: #fff; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.04); border-left: 4px solid #28a745; }
+.history-card.denied { border-left-color: #dc3545; }
+
+/* Badge Paid/Unpaid (shared with services) */
+.badge-paid { background: #d4edda; color: #155724; padding: 3px 10px; border-radius: 20px; font-size: .75rem; font-weight: 600; }
+.badge-unpaid { background: #fff3cd; color: #856404; padding: 3px 10px; border-radius: 20px; font-size: .75rem; font-weight: 600; }
+
+/* Hover Animations */
+.history-card{transition:all .2s ease}
+.history-card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.current-booking-area{transition:box-shadow .2s ease}
+.current-booking-area:hover{box-shadow:0 .6rem 1rem rgb(0 0 0 / 12%)}
+.extension-btn{transition:all .2s ease}
+.extension-btn:not(:disabled):hover{background:#d99600;transform:translateY(-1px);box-shadow:0 4px 12px rgba(255,182,10,.3)}
+
+/* Spacing */
+@media(max-width:767.98px){
+  .current-booking-area{padding:1rem;width:94%}
+  .container{padding-left:12px;padding-right:12px}
+  .estimated-total{padding:16px;width:94%}
+}
+
+/* Section Spacing (match services) */
+.current-booking-area{margin-top:1.5rem}
+.container.mt-4{margin-top:1.25rem!important}
+.container.mt-2.mb-5{margin-top:1rem!important;margin-bottom:2rem!important}
+
+/* Hour Preset Buttons */
+.preset-btn{border:2px solid var(--marle-gold)!important;border-radius:12px!important;padding:10px 20px!important;font-weight:600;color:var(--marle-gold-deep)!important;background:#fff!important;transition:all .2s ease!important;min-width:60px}
+.preset-btn:hover{background:var(--marle-gold)!important;color:#fff!important}
+.preset-btn.active{background:var(--marle-gold-deep)!important;border-color:var(--marle-gold-deep)!important;color:#fff!important}
+.preset-btn:disabled{opacity:.4;transform:none!important}
+
+/* Modern concierge treatment */
+#home{min-height:26vh;padding:42px 24px 54px}
+#home .landing-text>p:first-child{font-size:.72rem;font-weight:700;letter-spacing:.16em;color:var(--marle-gold-deep)!important}
+#home .landing-text h1{max-width:560px;font-size:clamp(2.1rem,5vw,3.7rem);line-height:1.08}
+#home .landing-text h1 span{color:var(--marle-rust)!important}
+#home .landing-text>p:last-child{max-width:430px;color:var(--marle-ink-soft)!important}
+.current-booking-area{background:var(--marle-card);border:1px solid var(--marle-line);box-shadow:var(--portal-shadow);border-radius:var(--radius-md);padding:1.5rem;max-width:680px}
+.current-booking-area>p,.container.mt-4> .row> .text-start p,.container.mt-2.mb-5>p{color:var(--marle-muted)!important;letter-spacing:.14em!important;font-size:.68rem!important}
+.current-booking-area h5{color:var(--marle-ink)}
+.current-booking-area .date{color:var(--marle-ink);font-size:.95rem}
+.current-booking-area .text-muted{color:var(--marle-muted)!important}
+.pending-banner{background:#fff7e8;border-color:#e8c98e;border-radius:var(--radius-sm);color:var(--marle-ink);padding:13px 15px}
+.pending-banner .text-warning{color:var(--marle-gold-deep)!important}
+.hours-booked{border:1px solid #dfc08b;background:linear-gradient(135deg,#fff7e8,#f6ead6);border-radius:var(--radius-sm);padding:18px}
+.hours{color:var(--marle-rust)}
+.rate-badge{background:#fff7e8;color:var(--marle-gold-deep);border-color:#e8c98e;border-radius:8px;padding:6px 12px}
+.preset-btn{border:1px solid var(--marle-line)!important;border-radius:9px!important;padding:10px 18px!important;color:var(--marle-ink-soft)!important;background:var(--marle-card)!important;min-width:58px}
+.preset-btn:hover{border-color:var(--marle-gold)!important;background:#fff7e8!important;color:var(--marle-gold-deep)!important}
+.preset-btn.active{background:var(--marle-brown)!important;border-color:var(--marle-brown)!important;color:#fff!important;box-shadow:0 5px 12px rgba(38,52,49,.16)}
+.new-date{width:96%;background:var(--marle-card);border:1px solid var(--marle-line);border-radius:var(--radius-sm);padding:8px 14px}
+.new-check-out-date{color:var(--marle-ink);font-weight:700}
+.estimated-total{border:1px solid #dfc08b;background:linear-gradient(135deg,#fff7e8,#f6ead6);border-radius:var(--radius-sm);padding:20px;width:96%}
+.estimated-total h4{color:var(--marle-ink)}
+.estimated-total .text-muted{color:var(--marle-muted)!important}
+.receipt-icon-container{color:var(--marle-gold-deep)}
+.receipt-icon-container .text-muted{color:var(--marle-gold-deep)!important;opacity:.7}
+.form textarea.form-control{border:1px solid var(--marle-line);border-radius:var(--radius-sm);background:var(--marle-card);padding:13px 14px;resize:vertical;min-height:98px}
+.form textarea.form-control:focus{border-color:var(--marle-gold);box-shadow:0 0 0 .2rem rgba(195,138,69,.14)}
+.extension-btn{background:var(--marle-brown);border-radius:9px;padding:14px;width:96%;box-shadow:0 8px 18px rgba(38,52,49,.14)}
+.extension-btn:hover,.extension-btn:not(:disabled):hover{background:var(--marle-rust);box-shadow:0 10px 22px rgba(162,79,53,.18)}
+.ext-status-filter-btn{border-color:var(--marle-line);background:var(--marle-card);color:var(--marle-ink-soft);border-radius:8px}
+.ext-status-filter-btn:hover{border-color:var(--marle-gold);color:var(--marle-gold-deep)}
+.ext-status-filter-btn.active{background:var(--marle-brown);border-color:var(--marle-brown);color:#fff}
+.history-card{background:var(--marle-card);border:1px solid var(--marle-line);border-left:3px solid #5e9274;border-radius:var(--radius-sm);box-shadow:var(--portal-shadow-soft);padding:16px 17px}
+.history-card.denied{border-left-color:var(--marle-rust)}
+.history-card .text-muted{color:var(--marle-muted)!important}
+.badge-paid{background:#e3f1e8;color:#356548;border-radius:6px;padding:4px 9px}
+.badge-unpaid{background:#fff1d8;color:#8a5d22;border-radius:6px;padding:4px 9px}
+@media(min-width:768px){
+  .current-booking-area{margin-top:2rem}
+  .current-booking-area .row.align-items-center{padding:4px 8px}
+}
+@media(max-width:767.98px){
+  #home{min-height:25vh;padding:34px 20px 42px}
+  .current-booking-area{width:calc(100% - 28px);padding:1.1rem}
+  .current-booking-area .col-5,.current-booking-area .col-7{width:100%;padding-left:0!important}
+  .current-booking-area .col-7{margin-top:18px}
+  .current-booking-area .col-7 .d-flex{justify-content:flex-start!important}
+  .current-booking-area .col-7 .px-4{padding-inline:0 20px!important}
+  .current-booking-area .col-7 .border-start{padding-left:20px!important}
+  .preset-btn{padding-inline:14px!important}
+}
+
+/* Workflow composition */
+.portal-main{min-height:calc(100vh - 80px)}
+.extend-hero{justify-content:flex-start;text-align:left}
+.extend-hero .landing-text{width:min(100%,1080px);margin:0 auto}
+.extend-hero .landing-text .line{margin-left:0}
+.extend-workspace{display:grid;grid-template-columns:minmax(280px, .82fr) minmax(0, 1.18fr);gap:24px;max-width:1080px;margin:0 auto;padding:30px 24px 12px;align-items:start}
+.extend-page{background:linear-gradient(180deg,rgba(238,243,239,.4) 0 42%,transparent 42%)}
+.extend-workspace .current-booking-area{border-top:4px solid var(--marle-rust);}
+.extend-workspace .extend-step{background:rgba(255,253,249,.74);padding:22px 24px;border:1px solid var(--marle-line);border-radius:var(--radius-md);box-shadow:var(--portal-shadow-soft)}
+.extend-workspace .extend-step+.extend-step{margin-top:12px!important}
+.extend-workspace .extend-step:first-of-type{border-top:1px solid var(--marle-line);padding-top:22px}
+.extend-workspace .current-booking-area{width:100%;max-width:none;margin:0;position:sticky;top:24px}
+.extend-workspace .extend-step{width:100%;max-width:none;margin:0!important;padding:22px 0;border-top:1px solid var(--marle-line)}
+.extend-workspace .extend-step:first-of-type{border-top:0;padding-top:0}
+.extend-workspace .extend-step>.row{margin:0}
+.extend-workspace .extend-step .text-start{padding-left:0!important}
+.extend-workspace .extend-step .text-start p{margin-bottom:12px!important}
+.extend-submit{padding-bottom:4px!important}
+.extend-submit .row{display:block}
+.extend-submit .small{color:var(--marle-muted)!important}
+.extension-history{max-width:1080px;border-top:1px solid var(--marle-line);padding:28px 24px 48px;margin-top:18px!important}
+.extension-history{background:rgba(243,245,241,.7)}
+.extension-history #extPaymentFilterArea{padding-bottom:4px}
+.extension-history #extHistoryContainer{display:grid;gap:10px}
+.extension-history .history-card{margin-bottom:0}
+@media(max-width:767.98px){
+  .extend-workspace{display:block;padding:22px 14px 4px}
+  .extend-workspace .current-booking-area{position:static;margin-bottom:20px}
+  .extend-workspace .extend-step{padding:20px 0}
+  .extend-workspace .extend-step{padding:18px 16px}
+  .extension-history{padding-inline:14px;margin-top:14px!important}
+}

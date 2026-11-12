@@ -1,0 +1,18 @@
+# Uploads — browsable by the app, never listable by a visitor.
+#
+# Two different things live below this directory and they need different rules:
+#
+#   booking_proof/  a guest's GCash/bank receipt. Private financial data; it has
+#                   its own deny-all .htaccess and is streamed only through the
+#                   capability-gated viewer (…/view_deposit_proof.php). 403 on a
+#                   real file — do not weaken this.
+#   chat/           attachments in the guest ⇄ front desk chat, rendered by an
+#                   <img>/<a> in the chat widget. They must stay readable by a
+#                   signed-in guest, so this file only turns OFF the index.
+#
+# Until 2026-10-14 /uploads/ answered with an Apache index (1,012 bytes naming
+# the subdirectories). Nothing was leaked beyond folder names, but a listing is
+# a map, and the one folder that matters was already shut. Options -Indexes
+# removes the map without touching a single attachment.
+
+Options -Indexes

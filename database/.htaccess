@@ -1,0 +1,27 @@
+# Schema migrations and demo seeds — never served over HTTP.
+#
+# Everything in here is either a .sql migration (already denied at the app root)
+# or a .php script that talks to the database with its own mysqli handle. They
+# are run by hand from a terminal:
+#
+#     php database/phase5c_demo_seed.php --database=marlehoteldb_demo_test
+#
+# Until 2026-10-14 that was only a convention: a plain GET of
+# /MarleHotel/database/phase5c_demo_seed.php executed the seed for anyone who
+# asked and echoed its progress ("Demo seed already complete: 225 stays."). The
+# scripts now refuse to run outside the CLI as well (PHP_SAPI guard) — this file
+# is the same rule enforced at the door, so a future script that forgets the
+# guard still cannot be reached by a web request.
+#
+# Nothing in the app loads anything from this directory over HTTP; the seed
+# scripts are included by each other on the filesystem, which .htaccess does
+# not touch.
+
+Require all denied
+
+php_flag engine off
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .pl .py .cgi .sh
+<FilesMatch "\.(php|phtml|php[0-9]|pl|py|cgi|sh)$">
+    Require all denied
+</FilesMatch>
+Options -Indexes

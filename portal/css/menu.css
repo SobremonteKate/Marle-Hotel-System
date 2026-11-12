@@ -1,0 +1,106 @@
+/* Menu Page - Marle Hotel */
+
+/* Hero */
+#home{color:var(--marle-brown);padding:24px 20px 40px;text-align:left;align-items:flex-start;justify-content:flex-start}
+
+/* Search */
+.search-wrapper { position: relative; width: 90%; max-width: 500px; margin: 16px auto 8px; }
+.search-input { width: 100%; padding: 12px 50px 12px 20px; border: 2px solid var(--marle-gold); border-radius: 25px; background-color: #fff; outline: none; transition: all .3s ease; height: 48px; }
+.search-input:focus { box-shadow: 0 4px 12px rgba(255,182,10,.2); border-color: var(--marle-gold-deep); }
+.search-icon-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background-color: #faedd0cf; border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--marle-gold-deep); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color .2s; }
+.search-icon-btn:hover { background-color: var(--marle-gold-deep); color: white; }
+
+/* Chef Reco */
+.chef-reco h4 { font-weight: 700; color: #333; }
+
+/* Compact Menu Cards */
+.menu-card .card { background: #fff; border: 1px solid rgba(0,0,0,.04); }
+.menu-card .card-body { padding: 14px 16px; display: flex; align-items: center; gap: 14px; }
+.menu-icon-container { width: 50px; height: 50px; min-width: 50px; background-color: var(--marle-cream); color: var(--marle-gold-deep); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.menu-icon-container i { margin: 0 !important; padding: 0 !important; }
+.menu-card .card-title { font-size: .95rem; font-weight: 650; color: var(--marle-gold-deep); margin-bottom: 2px; }
+.menu-card .card-text { font-size: .8rem; color: #6c757d; line-height: 1.4; margin-bottom: 4px; }
+.menu-card .price { font-size: .95rem; }
+.add-menu-btn { font-size: 13px; padding: 7px 9px; background-color: var(--marle-brown); color: var(--marle-gold); border-radius: 10px; border: none; transition: transform .2s; cursor: pointer; flex-shrink: 0; }
+.add-menu-btn:active { transform: scale(.9); }
+
+/* Category Tags */
+.category { font-weight: 500; padding: 2px 8px; border-radius: 20px; font-size: .7rem; }
+.category.active { background: #faedd0cf; }
+
+/* Order Popup */
+.order-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.5); z-index: 1090; display: none; }
+.order-popup { position: fixed; bottom: -100%; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background: white; border-radius: 25px 25px 0 0; z-index: 1100; transition: bottom .4s ease-out; box-shadow: 0 -5px 20px rgba(0,0,0,.2); display: flex; flex-direction: column; height: auto; max-height: 85vh; }
+.order-popup.active { bottom: 0; }
+.popup-header { border-bottom: 1px solid #eee; }
+.popup-body { overflow-y: auto; -webkit-overflow-scrolling: touch; flex: 1; }
+.popup-footer { position: sticky; bottom: 0; width: 100%; background: white; z-index: 2; }
+.popup-body::-webkit-scrollbar-thumb { background: var(--marle-gold); border-radius: 10px; }
+.qty-number { min-width: 20px; text-align: center; font-size: .9rem; }
+#confirmOrderBtn { background: var(--marle-gold); color: #fff; border-radius: 20px; }
+#cancel:hover, #confirmOrderBtn:hover { background: transparent; color: var(--marle-gold-deep); border: solid 1px var(--marle-gold-deep); }
+.confirm-btn { background: var(--marle-gold); border-radius: 20px; }
+.confirm-btn:hover { background: transparent; color: var(--marle-gold-deep); border-color: var(--marle-gold-deep); }
+
+/* Hover Animations */
+.menu-card .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.menu-icon-container{transition:all .25s ease}
+.menu-card:hover .menu-icon-container{background:var(--marle-rust);color:#fff;transform:scale(1.05)}
+.add-menu-btn{transition:all .2s ease}
+.add-menu-btn:hover{background:var(--marle-rust);transform:scale(1.05)}
+.menu-card .card-title{transition:color .2s ease}
+.menu-card:hover .card-title{color:var(--marle-gold)}
+
+/* Desktop Card Sizing */
+@media(min-width:768px){
+  .menu-card .card{height:100%;display:flex;flex-direction:column}
+  .menu-card .card-body{flex-grow:1}
+  .row.g-3{row-gap:20px!important}
+}
+@media(max-width:767.98px){
+  .menu-card .card-body{padding:12px 14px}
+  .menu-icon-container{width:44px;height:44px;min-width:44px;font-size:20px}
+  .row.g-3{row-gap:14px!important}
+}
+
+/* Bottom Section Spacing */
+.content.p-4.mb-2{margin-bottom:16px!important}
+
+/* Card Filter Animation */
+@keyframes cardFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.menu-card.fade-in{animation:cardFadeIn .3s ease both}
+
+/* Modern concierge treatment */
+#home{min-height:26vh;padding:42px 24px 54px}
+.search-wrapper{margin:22px auto 12px;max-width:580px}
+.search-input{border:1px solid var(--marle-line);border-radius:10px;background:var(--marle-card);height:50px;padding-left:16px}
+.search-input:focus{border-color:var(--marle-gold);box-shadow:0 0 0 .2rem rgba(195,138,69,.14)}
+.search-icon-btn{background:#eef2ee;color:var(--marle-gold-deep);border-radius:8px;width:38px;height:38px}
+.menu-card .card{border-color:var(--marle-line);border-radius:var(--radius-md);box-shadow:var(--portal-shadow-soft)}
+.menu-card .card-body{padding:17px 18px;gap:15px}
+.menu-icon-container{background:#eef2ee;color:var(--marle-gold-deep);border-radius:11px}
+.menu-card .card-title{color:var(--marle-ink)}
+.menu-card .card-text{color:var(--marle-muted)}
+.add-menu-btn{background:var(--marle-brown);color:#fff;border-radius:8px}
+.add-menu-btn:hover{background:var(--marle-rust)}
+.order-popup{border:1px solid var(--marle-line);box-shadow:0 -14px 32px rgba(35,50,45,.14);border-radius:18px 18px 0 0}
+.popup-header,.popup-footer{border-color:var(--marle-line)}
+#confirmOrderBtn,.confirm-btn{background:var(--marle-brown);border-radius:8px}
+#confirmOrderBtn:hover,.confirm-btn:hover{background:var(--marle-rust);color:#fff;border-color:var(--marle-rust)}
+@media(max-width:767.98px){.menu-card .card-body{padding:14px}.menu-icon-container{width:44px;height:44px;min-width:44px}}
+
+/* Dining composition */
+.menu-page{max-width:1200px;margin:0 auto}
+.menu-hero .landing-text{text-align:left;margin-left:max(0px, calc((100% - 1080px) / 2))}
+.menu-hero .landing-text .line{margin-left:0}
+.menu-page .search-wrapper{width:min(calc(100% - 48px),1080px);margin:24px auto 8px}
+.menu-page .menu-category-area{max-width:1080px}
+.menu-page .menu-category-area{background:var(--marle-card);border:1px solid var(--marle-line);border-radius:var(--radius-md);padding:4px 12px;margin-top:14px}
+.menu-page .content.p-4{max-width:1080px;margin-inline:auto}
+.menu-page .chef-reco{padding:0;margin-bottom:20px!important}
+.menu-page .chef-reco h4{font-size:1.25rem;color:var(--marle-ink)}
+.menu-page .menu-card .card-body{min-height:170px}
+.menu-page .menu-card .card{overflow:hidden;position:relative}
+.menu-page .menu-card .card::before{content:"";display:block;height:5px;background:linear-gradient(90deg,var(--marle-rust),var(--marle-gold));position:absolute;inset:0 0 auto}
+.menu-page .chef-reco{border-left:4px solid var(--marle-rust);padding-left:16px!important}
+@media(max-width:767.98px){.menu-page .search-wrapper{width:calc(100% - 28px)}.menu-page .content.p-4{padding-inline:14px!important}.menu-page .menu-card .card-body{min-height:150px}}

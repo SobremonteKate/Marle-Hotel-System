@@ -1,0 +1,2471 @@
+/* ==========================================================================
+   Marle Hotel — staff console
+   ==========================================================================
+
+   One stylesheet for the Owner, Manager and Front Desk consoles.
+
+   It is loaded LAST in <head> by includes/staff_theme.php, after each page's
+   own family stylesheet and after the page-local <style> block that used to
+   win. That position is the point: the console now has one place that decides
+   the shell, and the page files above it carry only their own components.
+
+   The identity: the front desk's key rack and ledger. An ink rail on the left
+   holding the work, a pale paper field beside it, brass for the things the
+   desk touches (keys, rooms, money), hairline rules instead of drop shadows,
+   and every figure in a monospace face so columns of pesos and times line up.
+
+   Rules held throughout:
+     • no white text on brass (3.3:1) — primary actions are ink-filled (13:1)
+     • status is never colour alone: a dot or rule plus a word
+     • nothing here renames a class the page JavaScript reads
+   ========================================================================== */
+
+/* ── 1 · Tokens ─────────────────────────────────────────────────────────── */
+
+body.staff-page,
+body.login-page {
+    --ink: #1f2a2a;
+    --ink-2: #2b3a38;
+    --ink-3: #3c4b48;
+    --paper: #f4f7f5;
+    --surface: #ffffff;
+    --soft: #eef3f0;
+    --line: #dce5e1;
+    --rule: #c9d6d1;
+    --muted: #64716f;
+    --brass: #b97836;
+    --brass-ink: #855124;
+    --brass-wash: #f6ede2;
+    --ok: #2f6b4b;
+    --ok-wash: #e7f1ea;
+    --warn: #a8761c;
+    --warn-wash: #f8efdd;
+    --danger: #a03b28;
+    --danger-wash: #f8e8e4;
+    --slate: #4c5a63;
+    --slate-wash: #e9eef0;
+
+    --staff-rail: 248px;
+    --staff-rail-tablet: 208px;
+    /* The gutter between the rail and the first column of every screen. It is
+       the same number for the desk strip, the legacy headers and the content
+       column, so a title and the sheet beneath it share a left edge. */
+    --staff-pad: 52px;
+
+    /* The old names, remapped. Page-local CSS still says var(--amber); it now
+       resolves to brass, and --brown resolves to ink rather than maroon. */
+    --amber: #b97836;
+    --amber-dark: #855124;
+    --brown: #1f2a2a;
+    --bg: #f4f7f5;
+    --card-bg: #ffffff;
+    --text: #1f2a2a;
+    --border: #dce5e1;
+    --sidebar-w: 248px;
+    --staff-sidebar-w: 248px;
+
+    --r-xs: 4px;
+    --r-sm: 6px;
+    --r-md: 10px;
+    --r-lg: 14px;
+    --ring: 0 0 0 3px rgba(185, 120, 54, .34);
+    --shadow-sheet: 0 1px 2px rgba(31, 42, 42, .04);
+    --shadow-lift: 0 14px 34px rgba(31, 42, 42, .10);
+}
+
+/* ── 2 · Base ───────────────────────────────────────────────────────────── */
+
+body.staff-page {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--paper) !important;
+    color: var(--ink);
+    font-family: "DM Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+body.staff-page h1,
+body.staff-page h2,
+body.staff-page h3,
+body.staff-page h4,
+body.staff-page h5 {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+body.staff-page p {
+    color: var(--ink-3);
+}
+
+body.staff-page a {
+    color: var(--brass-ink);
+}
+
+body.staff-page a:hover {
+    color: var(--ink);
+}
+
+body.staff-page hr {
+    border-color: var(--line);
+    opacity: 1;
+}
+
+body.staff-page ::selection {
+    background: rgba(185, 120, 54, .22);
+    color: var(--ink);
+}
+
+body.staff-page :focus-visible {
+    outline: 2px solid var(--brass-ink);
+    outline-offset: 2px;
+    box-shadow: none !important;
+}
+
+body.staff-page .text-muted,
+body.staff-page small.text-muted {
+    color: var(--muted) !important;
+}
+
+body.staff-page .fw-semibold {
+    font-weight: 600 !important;
+}
+
+/* Figures: money, times, room numbers, tokens, counts. */
+body.staff-page .dashboard-metric-value,
+body.staff-page .dashboard-metric-delta,
+body.staff-page .stat-value,
+body.staff-page .attention-count,
+body.staff-page .rating-number,
+body.staff-page .token-code,
+body.staff-page .token-card-code,
+body.staff-page .room-number,
+body.staff-page .room-tile-num,
+body.staff-page .modal-room-number,
+body.staff-page .token-card-room-num,
+body.staff-page .countdown-value,
+body.staff-page #last-updated-text,
+body.staff-page table td,
+body.staff-page table th {
+    font-variant-numeric: tabular-nums;
+}
+
+body.staff-page .dashboard-metric-value,
+body.staff-page .stat-value,
+body.staff-page .attention-count,
+body.staff-page .rating-number,
+body.staff-page .token-code,
+body.staff-page .token-card-code,
+body.staff-page .countdown-value {
+    font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+    letter-spacing: -.02em;
+}
+
+/* ── 3 · The rail ───────────────────────────────────────────────────────── */
+
+body.staff-page .navbar.staff-rail {
+    background: var(--ink) !important;
+    border-right: 1px solid rgba(255, 255, 255, .06);
+    color: #d7e0db;
+}
+
+@media (min-width: 768px) {
+    body.staff-page .navbar.staff-rail {
+        width: var(--staff-rail) !important;
+        height: 100vh !important;
+        position: fixed !important;
+        inset: 0 auto 0 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        box-shadow: none;
+        z-index: 1030;
+    }
+
+    body.staff-page .navbar.staff-rail > .container-fluid {
+        height: 100%;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+    }
+
+    body.staff-page .navbar.staff-rail .navbar-collapse {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 auto !important;
+        padding: 0 0 12px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, .16) transparent;
+    }
+
+    /* The identity plate — language, Tour, Logout — stays put when the item
+       list is longer than the screen. The Owner rail is 10 items plus four
+       group headers, which is ~200px taller than a 768px laptop; without this
+       the plate scrolled below the fold and Logout looked missing. The nav
+       list scrolls underneath it. */
+    body.staff-page .navbar.staff-rail .staff-rail__foot {
+        position: sticky;
+        bottom: 0;
+        flex: 0 0 auto;
+        background: var(--ink);
+        box-shadow: 0 -12px 16px -6px rgba(0, 0, 0, .28);
+    }
+}
+
+.staff-rail__mobile {
+    background: var(--ink);
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.staff-rail__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: var(--r-sm);
+    background: transparent;
+    color: #f3e6d4;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.staff-rail__toggle:hover {
+    background: rgba(255, 255, 255, .08);
+}
+
+.staff-rail__mobile-logo {
+    height: auto;
+    filter: brightness(0) invert(1);
+    opacity: .92;
+}
+
+.staff-rail__mobile-role {
+    color: rgba(233, 240, 236, .7);
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Brass plate + wordmark */
+.staff-rail__brand {
+    align-items: center;
+    gap: 12px;
+    padding: 22px 20px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.staff-rail__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 28%, #e2c08d, var(--brass) 62%, #8a5a24);
+    color: #241a0d;
+    font-size: 16px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 2px 6px rgba(0, 0, 0, .28);
+}
+
+.staff-rail__wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.staff-rail__name {
+    color: #f6f1e7;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: .01em;
+}
+
+.staff-rail__console {
+    color: rgba(214, 226, 220, .62);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.staff-rail__group {
+    margin: 18px 20px 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+    color: rgba(226, 191, 142, .82);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+}
+
+.staff-rail__list {
+    list-style: none;
+    margin: 0;
+    padding: 0 12px !important;
+    gap: 2px !important;
+}
+
+.staff-rail__list .nav-item {
+    margin: 0 !important;
+}
+
+body.staff-page .staff-rail .staff-rail__link {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 40px;
+    padding: 9px 12px !important;
+    border-radius: var(--r-sm) !important;
+    color: rgba(219, 228, 223, .82) !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background-color .16s ease, color .16s ease, border-color .16s ease;
+}
+
+body.staff-page .staff-rail .staff-rail__link i {
+    font-size: 16px !important;
+    color: rgba(226, 191, 142, .78);
+    transition: color .16s ease;
+}
+
+body.staff-page .staff-rail .staff-rail__link:hover {
+    background: rgba(255, 255, 255, .06) !important;
+    color: #ffffff !important;
+}
+
+body.staff-page .staff-rail .staff-rail__link:hover i {
+    color: #e6c79a;
+}
+
+body.staff-page .staff-rail .staff-rail__link.active {
+    background: var(--brass-wash) !important;
+    border-color: rgba(185, 120, 54, .5);
+    color: var(--ink) !important;
+    font-weight: 600 !important;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .18);
+}
+
+body.staff-page .staff-rail .staff-rail__link.active::before {
+    width: 3px;
+    height: 18px;
+    border-radius: 0 3px 3px 0;
+    background: var(--brass);
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+body.staff-page .staff-rail .staff-rail__link.active i {
+    color: var(--brass-ink);
+}
+
+body.staff-page .staff-rail .staff-rail__label {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.staff-page .staff-rail .notification-badge {
+    min-width: 22px;
+    padding: 3px 7px !important;
+    border: 0;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, .12) !important;
+    color: rgba(240, 245, 241, .86) !important;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    text-align: center;
+}
+
+body.staff-page .staff-rail .notification-badge.is-on-active {
+    background: rgba(185, 120, 54, .18) !important;
+    color: var(--brass-ink) !important;
+}
+
+.staff-rail__foot {
+    margin-top: auto;
+    padding: 14px 12px 4px;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.staff-rail__who {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px 12px;
+}
+
+.staff-rail__initials {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border-radius: 50%;
+    background: rgba(185, 120, 54, .18);
+    border: 1px solid rgba(185, 120, 54, .42);
+    color: #ecd3b0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+
+.staff-rail__who-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.25;
+}
+
+.staff-rail__who-name {
+    color: #f1f5f2;
+    font-size: 12.8px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.staff-rail__who-role {
+    color: rgba(214, 226, 220, .58);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.staff-rail__lang {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 8px 10px;
+}
+
+body.staff-page .staff-rail__logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: var(--r-sm);
+    background: transparent;
+    color: rgba(233, 240, 236, .86);
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+}
+
+body.staff-page .staff-rail__logout:hover {
+    background: rgba(160, 59, 40, .16);
+    border-color: rgba(196, 118, 96, .5);
+    color: #f3ded9;
+}
+
+/* On phones the rail becomes a drawer panel under the top bar. */
+@media (max-width: 767.98px) {
+    body.staff-page .navbar.staff-rail {
+        position: sticky;
+        top: 0;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        z-index: 1040;
+        box-shadow: 0 6px 18px rgba(31, 42, 42, .18);
+    }
+
+    body.staff-page .navbar.staff-rail .navbar-collapse {
+        max-height: calc(100vh - 61px);
+        overflow-y: auto;
+        padding-bottom: 16px;
+        border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    body.staff-page .staff-rail__group {
+        margin-top: 14px;
+    }
+}
+
+/* ── 4 · Shell: content column and desk strip ───────────────────────────── */
+
+body.staff-page .content,
+body.staff-page .main-content {
+    margin-left: var(--staff-rail) !important;
+    width: auto !important;
+    max-width: none !important;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+body.staff-page .content > .container,
+body.staff-page .main-content > .container,
+body.staff-page .content > .container-fluid,
+body.staff-page .main-content > .container-fluid {
+    max-width: 1500px;
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body.staff-page .content,
+    body.staff-page .main-content {
+        margin-left: var(--staff-rail-tablet) !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    body.staff-page .content,
+    body.staff-page .main-content {
+        margin-left: 0 !important;
+    }
+
+    body.staff-page .content > .container,
+    body.staff-page .main-content > .container,
+    body.staff-page .content > .container-fluid,
+    body.staff-page .main-content > .container-fluid {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
+
+/* The desk strip — the shared page header partial. */
+/* A page that still wraps its header inside .content (Guest Tokens) must not
+   add the rail offset twice. */
+body.staff-page .content > .desk-strip {
+    margin-left: 0 !important;
+    /* Guest Tokens keeps its header inside .content, whose panels are inset 36
+       on the left and 24 on the right. Match those edges rather than the
+       outside-the-content gutter, or the bell and profile float inside the
+       cards they sit above. */
+    padding-left: 36px;
+    padding-right: 24px;
+}
+
+body.staff-page .desk-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    /* The settle animation near the end of this file animates transform, and an
+       animated transform makes every block that carries it its own stacking
+       context. The header and the panels under it each get one, so they paint in
+       DOM order — which put the notification panel (z-index 1000, but trapped
+       inside the header's context) *behind* the dashboard cards: its rows showed
+       through the tiles, and "Operations summary for the owner" printed on top of
+       its own heading. Lifting the header onto its own layer is what fixes it, and
+       it changes nothing else: the strip is not sticky, so nothing overlaps it. */
+    position: relative;
+    z-index: 30;
+    /* The rule under this header must reach the same right edge as the sheets
+       beneath it. A max-width cap made it stop in mid-air on wide screens. */
+    max-width: none;
+    margin: 0 0 0 var(--staff-rail);
+    padding: 24px var(--staff-pad) 16px;
+    border-bottom: 1px solid var(--line);
+}
+
+/* The bell and profile sit level with the page title, whatever else the lead
+   block carries (a note, breadcrumbs). Bottom-aligning them dropped the pair
+   onto the breadcrumb line on pages that have one. */
+body.staff-page .desk-strip__side {
+    margin-top: 20px;
+}
+
+/* The dashboard's tiles live in a 1500px column centred in the content area.
+   On a wide monitor the header stayed at the rail's gutter while the tiles
+   drifted inward, so the bell and profile no longer sat over the card grid.
+   Padding follows the same centring; the rule below is unaffected because
+   padding never shortens a border. */
+@media (min-width: 992px) {
+    body.staff-dashboard .desk-strip {
+        padding-left: max(var(--staff-pad), calc((100% - var(--staff-rail) - 1500px) / 2 + 28px));
+        padding-right: max(var(--staff-pad), calc((100% - var(--staff-rail) - 1500px) / 2 + 28px));
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body.staff-page {
+        --staff-pad: 34px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    body.staff-page {
+        --staff-pad: 14px;
+    }
+
+    body.staff-page .desk-strip {
+        margin-left: 0;
+        padding-top: 18px;
+    }
+
+    body.staff-page .desk-strip__side {
+        margin-top: 0;
+    }
+}
+
+.desk-strip__lead {
+    min-width: 0;
+}
+
+.desk-strip__eyebrow {
+    margin: 0 0 6px;
+    color: var(--brass-ink);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.desk-strip__titlerow {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+body.staff-page .desk-strip__title {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.65rem, 2.2vw, 2.15rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+}
+
+.desk-strip__meta {
+    color: var(--muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding-left: 12px;
+    border-left: 1px solid var(--rule);
+}
+
+.desk-strip__note {
+    margin: 7px 0 0;
+    max-width: 62ch;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.desk-strip__crumbs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 11.5px;
+}
+
+.desk-strip__crumbs a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.desk-strip__crumbs a:hover {
+    color: var(--brass-ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.desk-strip__crumbs span[aria-current="page"] {
+    color: var(--ink-3);
+    font-weight: 600;
+}
+
+.desk-strip__sep {
+    color: var(--rule);
+}
+
+.desk-strip__side,
+.desk-strip__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.desk-user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 5px 10px 5px 6px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+}
+
+.desk-user__initials {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #f1e8da;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+
+.desk-user__text {
+    display: none;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.desk-user__name {
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.desk-user__role {
+    color: var(--muted);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media (min-width: 1200px) {
+    .desk-user__text {
+        display: flex;
+    }
+}
+
+/* Legacy headers that have not been moved to the partial yet. They get the
+   same strip, so a half-migrated page never looks half-migrated. */
+/* The dashboard's outer sheet is a grouping device, not a card: the tiles and
+   figures inside are already cards. Flattening it removes the
+   cards-inside-cards stack and lets the ruled group labels do the work. */
+body.staff-page .dashboard-panel {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+/* The dashboard's sheet is padded by the page, not by Bootstrap, so its first
+   column must take the same gutter as the desk strip above it. */
+body.staff-page.staff-dashboard .content.p-4 > .container {
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+body.staff-page .content > .d-flex:first-child,
+body.staff-page .content.mb-4 > .d-flex,
+body.staff-page .content.mb-3 > .d-flex {
+    max-width: 1500px;
+    margin: 0 auto 0;
+    padding: 24px var(--staff-pad) 16px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--line) !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+}
+
+body.staff-page .content > .d-flex:first-child h2,
+body.staff-page .content.mb-4 > .d-flex h2,
+body.staff-page .content.mb-3 > .d-flex h2,
+body.staff-page .content > .d-flex:first-child h4,
+body.staff-page .topbar-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: var(--ink) !important;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.65rem, 2.2vw, 2.15rem) !important;
+    font-weight: 600 !important;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+}
+
+body.staff-page .content > .d-flex:first-child p,
+body.staff-page .content.mb-4 > .d-flex p,
+body.staff-page .content.mb-3 > .d-flex p,
+body.staff-page .breadcrumb-line {
+    margin: 8px 0 0 !important;
+    color: var(--muted) !important;
+    font-size: 11.5px !important;
+}
+
+body.staff-page .content > .d-flex:first-child p a,
+body.staff-page .content.mb-4 > .d-flex p a,
+body.staff-page .content.mb-3 > .d-flex p a,
+body.staff-page .breadcrumb-line a {
+    color: var(--muted) !important;
+    text-decoration: none;
+}
+
+body.staff-page .breadcrumb-line a:hover {
+    color: var(--brass-ink) !important;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+body.staff-page .breadcrumb-line {
+    letter-spacing: 0;
+}
+
+/* ── 5 · Sheets (cards, panels) ─────────────────────────────────────────── */
+
+body.staff-page .card,
+body.staff-page .table-card,
+body.staff-page .main-card,
+body.staff-page .dashboard-room-board,
+body.staff-page .settings-card,
+body.staff-page .settings-shell,
+body.staff-page .panel,
+body.staff-page .manual-shell,
+body.staff-page .review-card,
+body.staff-page .inventory-card {
+    background: var(--surface) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: var(--r-md) !important;
+    box-shadow: var(--shadow-sheet) !important;
+}
+
+body.staff-page .card {
+    padding: 0;
+    overflow: hidden;
+}
+
+body.staff-page .card-body {
+    padding: 18px 20px;
+}
+
+body.staff-page .card-header,
+body.staff-page .card-footer {
+    background: var(--soft) !important;
+    border-color: var(--line) !important;
+    padding: 12px 20px;
+    color: var(--ink);
+    font-weight: 600;
+}
+
+body.staff-page .section-title,
+body.staff-page .dashboard-section-title {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+body.staff-page .section-title {
+    font-size: 13px;
+    letter-spacing: .02em;
+}
+
+body.staff-page .dashboard-section-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.35rem;
+}
+
+body.staff-page .dashboard-section-kicker,
+body.staff-page .dashboard-section-pill {
+    letter-spacing: .1em;
+}
+
+body.staff-page .dashboard-section-kicker {
+    color: var(--brass-ink);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+body.staff-page .dashboard-section-pill {
+    border: 1px solid var(--line);
+    background: var(--soft);
+    color: var(--muted);
+}
+
+/* ── 6 · Tables ─────────────────────────────────────────────────────────── */
+
+body.staff-page .table {
+    margin-bottom: 0;
+    color: var(--ink);
+    font-size: 13px;
+    border-color: var(--line);
+}
+
+body.staff-page .table > thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 10px 10px;
+    background: var(--soft) !important;
+    border-bottom: 1px solid var(--rule) !important;
+    color: var(--muted) !important;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+body.staff-page .table > tbody > tr > td {
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+}
+
+body.staff-page .table > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+body.staff-page .table-hover > tbody > tr:hover > * {
+    --bs-table-accent-bg: var(--soft);
+    background: var(--soft) !important;
+}
+
+body.staff-page .table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: #fafcfb;
+}
+
+body.staff-page .table-responsive,
+body.staff-page .table-scroll-wrap {
+    border-radius: var(--r-md);
+    background: var(--surface);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Dense ledgers (archive, guest record) tighten their cells so the action
+   column stays on screen at a laptop width. */
+body.staff-page .table-scroll-wrap > table {
+    font-size: 12px;
+}
+
+body.staff-page .table-scroll-wrap > table > thead th {
+    padding: 8px 6px;
+    font-size: 9.5px;
+}
+
+body.staff-page .table-scroll-wrap > table > tbody td {
+    padding: 8px 6px;
+}
+
+/* Tables the pages never wrapped: they scroll inside their own panel instead
+   of pushing the whole console sideways on a phone. Dates and money stop
+   wrapping onto three lines, which is what made the guest table taller than
+   the screen and wider than the card. */
+body.staff-page .card-body > .table,
+body.staff-page .card-body > table,
+body.staff-page .main-card > .table,
+body.staff-page .main-card table.table,
+body.staff-page .settings-table {
+    width: 100%;
+    font-size: 12.5px;
+}
+
+/* A <table> set to display:block stops being a table: its columns shrink-wrap
+   to their content, so the header runs out halfway across the card and the
+   last column falls off the right edge. Table layout stays table layout; the
+   panel around it does the scrolling instead. */
+body.staff-page .settings-table {
+    white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+    body.staff-page .card-body,
+    body.staff-page .main-card {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* The archive and guest tables sit flush against the rail without this gutter,
+   which puts their first column under the sidebar. */
+body.staff-page .main-content > .table-card,
+body.staff-page .main-content > .table-scroll-wrap,
+body.staff-page .main-content > .table-responsive {
+    margin-left: 24px;
+    margin-right: 24px;
+    width: calc(100% - 48px);
+}
+
+@media (max-width: 767.98px) {
+    body.staff-page .main-content > .table-card,
+    body.staff-page .main-content > .table-scroll-wrap,
+    body.staff-page .main-content > .table-responsive {
+        margin-left: 10px;
+        margin-right: 10px;
+        width: calc(100% - 20px);
+    }
+}
+
+/* A Bootstrap row's negative gutter must not reach past the content column. */
+body.staff-page .content > .row,
+body.staff-page .main-content > .row,
+body.staff-page .main-card > .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Settings' chip strip and avatar block: wrap rather than overflow. */
+body.staff-page .settings-chip-row {
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+body.staff-page .settings-chip {
+    max-width: 100%;
+    white-space: normal;
+}
+
+body.staff-page .profile-pic-container,
+body.staff-page .settings-form,
+body.staff-page .settings-section {
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* ── 7 · Buttons ────────────────────────────────────────────────────────── */
+
+body.staff-page .btn {
+    --bs-btn-border-radius: var(--r-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 36px;
+    padding: 7px 14px;
+    border-radius: var(--r-sm);
+    font-family: inherit;
+    font-size: 12.8px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    text-decoration: none;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+
+body.staff-page .btn-sm {
+    min-height: 30px;
+    padding: 4px 10px;
+    font-size: 11.8px;
+}
+
+body.staff-page .btn-lg {
+    min-height: 44px;
+    padding: 11px 20px;
+    font-size: 14px;
+}
+
+body.staff-page .btn-primary {
+    --bs-btn-bg: var(--ink);
+    --bs-btn-border-color: var(--ink);
+    --bs-btn-hover-bg: var(--ink-2);
+    --bs-btn-hover-border-color: var(--ink-2);
+    --bs-btn-active-bg: var(--ink-2);
+    --bs-btn-active-border-color: var(--ink-2);
+    --bs-btn-color: #f7f3ea;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-disabled-bg: var(--muted);
+    --bs-btn-disabled-border-color: var(--muted);
+    --bs-btn-focus-shadow-rgb: 185, 120, 54;
+}
+
+body.staff-page .btn-success {
+    --bs-btn-bg: var(--ok);
+    --bs-btn-border-color: var(--ok);
+    --bs-btn-hover-bg: #26573d;
+    --bs-btn-hover-border-color: #26573d;
+    --bs-btn-active-bg: #26573d;
+    --bs-btn-color: #f4faf6;
+    --bs-btn-hover-color: #ffffff;
+}
+
+body.staff-page .btn-danger {
+    --bs-btn-bg: var(--danger);
+    --bs-btn-border-color: var(--danger);
+    --bs-btn-hover-bg: #872f1f;
+    --bs-btn-hover-border-color: #872f1f;
+    --bs-btn-color: #fdf3f0;
+}
+
+body.staff-page .btn-warning {
+    --bs-btn-bg: var(--warn);
+    --bs-btn-border-color: var(--warn);
+    --bs-btn-hover-bg: #8d6113;
+    --bs-btn-hover-border-color: #8d6113;
+    --bs-btn-color: #fffaf0;
+}
+
+body.staff-page .btn-secondary {
+    --bs-btn-bg: var(--soft);
+    --bs-btn-border-color: var(--rule);
+    --bs-btn-color: var(--ink-3);
+    --bs-btn-hover-bg: #e4ebe7;
+    --bs-btn-hover-border-color: var(--rule);
+    --bs-btn-hover-color: var(--ink);
+}
+
+body.staff-page .btn-light {
+    --bs-btn-bg: var(--surface);
+    --bs-btn-border-color: var(--line);
+    --bs-btn-color: var(--ink-3);
+    --bs-btn-hover-bg: var(--soft);
+    --bs-btn-hover-color: var(--ink);
+}
+
+body.staff-page .btn-outline-secondary,
+body.staff-page .btn-outline-dark {
+    --bs-btn-color: var(--ink-3);
+    --bs-btn-border-color: var(--rule);
+    --bs-btn-hover-bg: var(--soft);
+    --bs-btn-hover-border-color: var(--rule);
+    --bs-btn-hover-color: var(--ink);
+}
+
+body.staff-page .btn-outline-primary {
+    --bs-btn-color: var(--brass-ink);
+    --bs-btn-border-color: rgba(185, 120, 54, .55);
+    --bs-btn-hover-bg: var(--brass-wash);
+    --bs-btn-hover-border-color: var(--brass);
+    --bs-btn-hover-color: var(--brass-ink);
+}
+
+body.staff-page .btn-outline-danger {
+    --bs-btn-color: var(--danger);
+    --bs-btn-border-color: rgba(160, 59, 40, .38);
+    --bs-btn-hover-bg: var(--danger-wash);
+    --bs-btn-hover-color: var(--danger);
+}
+
+body.staff-page .btn-link {
+    color: var(--brass-ink);
+    min-height: 0;
+    padding: 0;
+}
+
+/* The console's own buttons, written before the system existed. */
+body.staff-page .back-btn,
+body.staff-page .btn-modal-cancel,
+body.staff-page .btn-modal-save,
+body.staff-page .btn-add-item,
+body.staff-page .btn-low-stock,
+body.staff-page .btn-export-csv,
+body.staff-page .collect-room-btn,
+body.staff-page .filter-icon {
+    border-radius: var(--r-sm) !important;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+body.staff-page .btn-add-item,
+body.staff-page .btn-modal-save {
+    background: var(--ink) !important;
+    border: 1px solid var(--ink) !important;
+    color: #f7f3ea !important;
+}
+
+body.staff-page .btn-add-item:hover,
+body.staff-page .btn-modal-save:hover {
+    background: var(--ink-2) !important;
+    border-color: var(--ink-2) !important;
+    color: #ffffff !important;
+}
+
+body.staff-page .back-btn,
+body.staff-page .btn-modal-cancel,
+body.staff-page .btn-low-stock,
+body.staff-page .btn-export-csv {
+    background: var(--surface) !important;
+    border: 1px solid var(--rule) !important;
+    color: var(--ink-3) !important;
+}
+
+body.staff-page .back-btn:hover,
+body.staff-page .btn-modal-cancel:hover,
+body.staff-page .btn-low-stock:hover,
+body.staff-page .btn-export-csv:hover {
+    background: var(--soft) !important;
+    color: var(--ink) !important;
+}
+
+/* ── 8 · Tabs, chips, badges ────────────────────────────────────────────── */
+
+body.staff-page .nav-tabs {
+    border-bottom: 1px solid var(--line);
+    gap: 2px;
+}
+
+body.staff-page .nav-tabs .nav-link {
+    margin-bottom: -1px;
+    padding: 9px 14px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--muted) !important;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+body.staff-page .nav-tabs .nav-link:hover {
+    color: var(--ink) !important;
+    border-bottom-color: var(--rule);
+}
+
+body.staff-page .nav-tabs .nav-link.active,
+body.staff-page .nav-tabs .nav-link.show.active,
+body.staff-page .nav-tabs .nav-link.active:focus,
+body.staff-page .nav-tabs .nav-link.active:hover {
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 2px solid var(--brass) !important;
+    color: var(--ink) !important;
+    font-weight: 700;
+    box-shadow: none !important;
+}
+
+body.staff-page .nav-tabs .nav-link .badge,
+body.staff-page .nav-tabs .nav-link.active .badge {
+    background: var(--soft) !important;
+    color: var(--ink-3) !important;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+}
+
+body.staff-page .chip,
+body.staff-page .cat-tab {
+    padding: 6px 13px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink-3);
+    font-size: 12px;
+    font-weight: 600;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+
+body.staff-page .chip:hover,
+body.staff-page .cat-tab:hover {
+    background: var(--basin, var(--soft));
+    border-color: var(--rule);
+    color: var(--ink);
+}
+
+body.staff-page .chip.active,
+body.staff-page .cat-tab.active {
+    background: var(--ink) !important;
+    border-color: var(--ink) !important;
+    color: #f7f3ea !important;
+}
+
+body.staff-page .cat-tab span[data-count-for] {
+    display: inline-block;
+    min-width: 18px;
+    margin-left: 6px;
+    padding: 1px 5px;
+    border-radius: 999px;
+    background: rgba(31, 42, 42, .08);
+    color: inherit;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+body.staff-page .cat-tab.active span[data-count-for] {
+    background: rgba(255, 255, 255, .16);
+}
+
+body.staff-page .badge {
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    padding: 4px 8px;
+}
+
+body.staff-page .badge.bg-danger,
+body.staff-page .badge.bg-warning,
+body.staff-page .badge.bg-success,
+body.staff-page .badge.bg-primary,
+body.staff-page .badge.bg-secondary {
+    background: var(--soft) !important;
+    color: var(--ink-3) !important;
+}
+
+body.staff-page .status-badge,
+body.staff-page .room-status-badge,
+body.staff-page .status {
+    border-radius: 999px !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 4px 9px !important;
+}
+
+body.staff-page .bg-custom-success {
+    background: var(--brass) !important;
+}
+
+/* ── 9 · Forms ──────────────────────────────────────────────────────────── */
+
+body.staff-page .form-label,
+body.staff-page label {
+    margin-bottom: 5px;
+    color: var(--ink-3);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .01em;
+}
+
+body.staff-page .form-control,
+body.staff-page .form-select,
+body.staff-page input[type="text"],
+body.staff-page input[type="email"],
+body.staff-page input[type="password"],
+body.staff-page input[type="number"],
+body.staff-page input[type="date"],
+body.staff-page input[type="time"],
+body.staff-page input[type="search"],
+body.staff-page textarea,
+body.staff-page select {
+    min-height: 38px;
+    padding: 8px 11px;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 13px;
+    box-shadow: none !important;
+}
+
+body.staff-page .form-control:focus,
+body.staff-page .form-select:focus,
+body.staff-page textarea:focus,
+body.staff-page select:focus {
+    border-color: var(--brass);
+    box-shadow: var(--ring) !important;
+}
+
+body.staff-page .form-control::placeholder,
+body.staff-page input::placeholder,
+body.staff-page textarea::placeholder {
+    color: #93a09b;
+}
+
+body.staff-page .form-check-input {
+    border-color: var(--rule);
+    accent-color: var(--brass-ink);
+}
+
+body.staff-page .form-check-input:checked {
+    background-color: var(--brass-ink);
+    border-color: var(--brass-ink);
+}
+
+body.staff-page .form-text {
+    color: var(--muted);
+    font-size: 11.5px;
+}
+
+body.staff-page .input-group-text {
+    border: 1px solid var(--rule);
+    background: var(--soft);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* The desk's search fields were 3px amber borders; a hairline reads better. */
+body.staff-page #myInput,
+body.staff-page .search-box,
+body.staff-page #myInputInventory {
+    border: 1px solid var(--rule) !important;
+    border-radius: var(--r-sm) !important;
+    background: var(--surface);
+    min-height: 38px;
+}
+
+body.staff-page #myInput:focus,
+body.staff-page .search-box:focus,
+body.staff-page #myInputInventory:focus {
+    border-color: var(--brass) !important;
+    box-shadow: var(--ring) !important;
+}
+
+/* ── 10 · Modals, dropdowns, alerts, toasts ─────────────────────────────── */
+
+body.staff-page .modal-content {
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lift);
+    background: var(--surface);
+}
+
+body.staff-page .modal-header,
+body.staff-page .modal-footer {
+    border-color: var(--line);
+    padding: 16px 20px;
+}
+
+body.staff-page .modal-header {
+    background: var(--soft);
+    border-top-left-radius: var(--r-lg);
+    border-top-right-radius: var(--r-lg);
+}
+
+body.staff-page .modal-body {
+    padding: 18px 20px;
+}
+
+body.staff-page .modal-title {
+    color: var(--ink);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+body.staff-page .btn-close {
+    opacity: .45;
+}
+
+body.staff-page .btn-close:hover {
+    opacity: .8;
+}
+
+body.staff-page .dropdown-menu {
+    padding: 6px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-lift);
+    font-size: 13px;
+}
+
+body.staff-page .dropdown-item {
+    padding: 8px 10px;
+    border-radius: var(--r-xs);
+    color: var(--ink-3);
+}
+
+body.staff-page .dropdown-item:hover,
+body.staff-page .dropdown-item:focus {
+    background: var(--soft);
+    color: var(--ink);
+}
+
+body.staff-page .notif-dropdown-menu {
+    width: min(380px, calc(100vw - 28px)) !important;
+}
+
+body.staff-page .notif-dropdown-widget > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--ink) !important;
+    position: relative;
+}
+
+body.staff-page .notif-dropdown-widget > a:hover {
+    border-color: var(--rule);
+    background: var(--soft);
+}
+
+body.staff-page .notif-dropdown-widget .bi-bell {
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 16px;
+}
+
+body.staff-page .notif-dropdown-widget .badge.bg-danger {
+    background: var(--danger) !important;
+    color: #fff !important;
+    font-family: "IBM Plex Mono", monospace;
+}
+
+body.staff-page .alert {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brass);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    color: var(--ink-3);
+    font-size: 13px;
+}
+
+body.staff-page .alert-success {
+    border-left-color: var(--ok);
+    background: var(--ok-wash);
+    color: #245239;
+}
+
+body.staff-page .alert-danger {
+    border-left-color: var(--danger);
+    background: var(--danger-wash);
+    color: #7c2d1e;
+}
+
+body.staff-page .alert-warning {
+    border-left-color: var(--warn);
+    background: var(--warn-wash);
+    color: #6d4b10;
+}
+
+body.staff-page .alert-info {
+    border-left-color: var(--slate);
+    background: var(--slate-wash);
+    color: #33454d;
+}
+
+body.staff-page .toast {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+}
+
+/* ── 11 · Key tags ──────────────────────────────────────────────────────── */
+
+/* The signature: a room number is a brass key tag wherever it appears. */
+body.staff-page .room-number,
+body.staff-page .room-tile-num,
+body.staff-page .token-card-room-num {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px 3px 18px !important;
+    border: 1px solid rgba(185, 120, 54, .55) !important;
+    border-radius: var(--r-xs) !important;
+    background:
+        linear-gradient(180deg, #fbf4e9 0%, var(--brass-wash) 100%) !important;
+    color: var(--brass-ink) !important;
+    font-family: "IBM Plex Mono", monospace !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: .01em;
+    line-height: 1.5;
+    position: relative;
+    text-transform: none;
+    white-space: nowrap;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8);
+}
+
+body.staff-page .room-number::before,
+body.staff-page .room-tile-num::before,
+body.staff-page .token-card-room-num::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    margin-top: -3px;
+    border-radius: 50%;
+    background: var(--surface);
+    box-shadow: inset 0 0 0 1px rgba(133, 81, 36, .5);
+}
+
+body.staff-page .modal-room-number {
+    color: var(--brass-ink) !important;
+    font-family: "IBM Plex Mono", monospace !important;
+    font-size: 1.7rem !important;
+    font-weight: 600 !important;
+    letter-spacing: -.01em;
+}
+
+body.staff-page .room-avatar {
+    border: 1px solid rgba(185, 120, 54, .55) !important;
+    border-radius: var(--r-sm) !important;
+    background: var(--brass-wash) !important;
+    color: var(--brass-ink) !important;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+}
+
+body.staff-page .message-item.active .room-avatar {
+    border-color: var(--brass) !important;
+    box-shadow: 0 0 0 2px rgba(185, 120, 54, .2);
+}
+
+/* ── 12 · Dashboard ─────────────────────────────────────────────────────── */
+
+body.staff-page .dashboard-attention-tile {
+    border: 1px solid var(--line) !important;
+    border-radius: var(--r-md) !important;
+    background: var(--surface) !important;
+    box-shadow: none !important;
+}
+
+body.staff-page .dashboard-attention-tile:hover {
+    border-color: var(--rule) !important;
+    background: var(--soft) !important;
+}
+
+body.staff-page .dashboard-attention-tile.is-active {
+    border-left: 3px solid var(--brass) !important;
+}
+
+body.staff-page .dashboard-attention-tile.is-clear {
+    border-left: 3px solid var(--ok) !important;
+}
+
+body.staff-page .attention-count {
+    color: var(--ink) !important;
+    font-size: 1.55rem !important;
+}
+
+body.staff-page .attention-label {
+    color: var(--ink-3);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+}
+
+body.staff-page .attention-hint {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+body.staff-page .attention-icon {
+    background: var(--brass-wash) !important;
+    color: var(--brass-ink) !important;
+    border-radius: var(--r-sm) !important;
+}
+
+body.staff-page .dashboard-kpi-group-head span,
+body.staff-page .dashboard-kpi-group-head {
+    color: var(--muted) !important;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+body.staff-page .dashboard-metric-card,
+body.staff-page .stat-card {
+    border: 1px solid var(--line) !important;
+    border-radius: var(--r-md) !important;
+    background: var(--surface) !important;
+    box-shadow: none !important;
+}
+
+body.staff-page .dashboard-metric-card:hover,
+body.staff-page .stat-card:hover {
+    border-color: var(--rule) !important;
+}
+
+body.staff-page .dashboard-metric-label,
+body.staff-page .stat-label {
+    color: var(--muted);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+body.staff-page .dashboard-metric-title {
+    color: var(--ink-3);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+body.staff-page .dashboard-metric-value,
+body.staff-page .stat-value {
+    color: var(--ink) !important;
+    font-size: clamp(1.5rem, 2vw, 1.9rem) !important;
+    font-weight: 600 !important;
+    line-height: 1.15;
+}
+
+body.staff-page .dashboard-stat-icon,
+body.staff-page .stat-icon {
+    border-radius: var(--r-sm) !important;
+    background: var(--soft) !important;
+    color: var(--ink-3) !important;
+}
+
+body.staff-page .dashboard-metric-card.metric-checkins .dashboard-stat-icon,
+body.staff-page .stat-icon.amber {
+    background: var(--brass-wash) !important;
+    color: var(--brass-ink) !important;
+}
+
+body.staff-page .stat-icon.green {
+    background: var(--ok-wash) !important;
+    color: var(--ok) !important;
+}
+
+body.staff-page .stat-icon.red {
+    background: var(--danger-wash) !important;
+    color: var(--danger) !important;
+}
+
+body.staff-page .dashboard-room-board .room-board-head,
+body.staff-page .room-board-head {
+    border-bottom: 1px solid var(--line);
+    padding: 16px 20px;
+    background: var(--surface);
+    border-radius: var(--r-md) var(--r-md) 0 0;
+}
+
+body.staff-page .room-board-head .section-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+body.staff-page .room-card {
+    border: 1px solid var(--line) !important;
+    border-radius: var(--r-sm) !important;
+    background: var(--surface) !important;
+    box-shadow: none !important;
+}
+
+body.staff-page .room-card:hover {
+    border-color: var(--brass) !important;
+}
+
+/* The room number and its status pill share the card's first line. On a narrow
+   tile that line is not wide enough for both, so it is allowed to wrap instead
+   of pushing "AVAILABLE" out over the neighbouring card. */
+body.staff-page .room-card-top {
+    flex-wrap: wrap;
+    row-gap: 6px;
+}
+
+body.staff-page .room-card .status-badge {
+    white-space: nowrap;
+}
+
+body.staff-page .room-card {
+    overflow: hidden;
+}
+
+body.staff-page #last-updated-text,
+body.staff-page #availLastUpdated,
+body.staff-page #availRefreshStatus {
+    color: var(--muted) !important;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+}
+
+/* ── 13 · Families ──────────────────────────────────────────────────────── */
+
+/* Requests — the three-pane workspace keeps its geometry; only the surfaces,
+   the rules and the bubbles change. */
+body.staff-page > .main-card,
+body.staff-page .main-card {
+    width: auto !important;
+    max-width: 1500px;
+    margin: 18px var(--staff-pad) 22px calc(var(--staff-rail) + var(--staff-pad)) !important;
+    transform: none !important;
+    padding: 18px !important;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body.staff-page .main-card {
+        margin-left: calc(var(--staff-rail-tablet) + var(--staff-pad)) !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    body.staff-page .main-card {
+        margin: 12px 10px 18px !important;
+        padding: 12px !important;
+    }
+}
+
+body.staff-page .message-item {
+    border-bottom: 1px solid var(--line);
+}
+
+body.staff-page .message-item:hover {
+    background: var(--soft);
+}
+
+body.staff-page .message-item.active {
+    background: var(--brass-wash);
+}
+
+body.staff-page .messages {
+    border-right: 1px solid var(--line);
+    min-width: 0;
+}
+
+body.staff-page .message-list-container {
+    min-width: 0;
+}
+
+body.staff-page .main-message {
+    min-width: 0;
+}
+
+body.staff-page .main-message {
+    background: var(--soft) !important;
+    border-radius: var(--r-md);
+}
+
+body.staff-page .guest-name {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    padding: 12px 14px;
+}
+
+body.staff-page .guest-message {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink-3);
+}
+
+body.staff-page .reply {
+    background: var(--ink) !important;
+    color: #f7f3ea !important;
+}
+
+body.staff-page .reply-box-area {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+}
+
+body.staff-page .ext-card,
+body.staff-page .svc-card,
+body.staff-page .svc-summary-card {
+    border: 1px solid var(--line) !important;
+    border-radius: var(--r-md) !important;
+    background: var(--surface) !important;
+}
+
+body.staff-page .ext-card.pending,
+body.staff-page .svc-card.pending {
+    border-left: 3px solid var(--brass) !important;
+}
+
+body.staff-page .ext-card.approved,
+body.staff-page .svc-card.approved {
+    border-left: 3px solid var(--ok) !important;
+}
+
+body.staff-page .ext-card.denied,
+body.staff-page .svc-card.denied {
+    border-left: 3px solid var(--danger) !important;
+}
+
+body.staff-page .svc-summary-card {
+    background: var(--brass-wash) !important;
+}
+
+body.staff-page .svc-summary-card .svc-sum-value.highlight {
+    color: var(--brass-ink) !important;
+}
+
+/* Tokens */
+body.staff-page .token-card {
+    border: 1px solid var(--line) !important;
+    border-radius: var(--r-md) !important;
+    box-shadow: none !important;
+}
+
+body.staff-page .token-card.expired,
+body.staff-page .token-card.is-expired {
+    opacity: .68;
+}
+
+body.staff-page .token-card-code,
+body.staff-page .token-code {
+    color: var(--ink) !important;
+    letter-spacing: .06em;
+    font-weight: 600;
+}
+
+/* Transactions and inventory */
+body.staff-page .toolbar,
+body.staff-page .stat-cards {
+    border-radius: var(--r-md);
+}
+
+body.staff-page .toolbar {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 10px 12px;
+}
+
+body.staff-page .per-page-wrap select {
+    min-height: 34px;
+}
+
+/* Calendar */
+body.staff-page .calendar-grid,
+body.staff-page .calendar-shell {
+    border-color: var(--line) !important;
+    background: var(--surface) !important;
+}
+
+body.staff-page .calendar-day,
+body.staff-page .fc-daygrid-day {
+    border-color: var(--line) !important;
+}
+
+body.staff-page .calendar-day.today,
+body.staff-page .fc-day-today {
+    background: var(--brass-wash) !important;
+}
+
+/* Only the event itself carries the brass edge. Matching every descendant
+   painted a 3px bar before the time and again before the title, which is what
+   read as calendar events overlapping their own text. */
+body.staff-page .calendar-event,
+body.staff-page .fc .fc-event {
+    border: 0 !important;
+    border-left: 3px solid var(--brass) !important;
+    border-radius: var(--r-xs) !important;
+    background: var(--soft) !important;
+    color: var(--ink-3) !important;
+    font-size: 11px;
+}
+
+/* FullCalendar paints time-grid titles white because it expects the inline
+   maroon background to survive. The console softens that background, so the
+   text has to be darkened all the way down — colour only, never the border. */
+body.staff-page .fc .fc-event .fc-event-main,
+body.staff-page .fc .fc-event .fc-event-main * {
+    color: var(--ink-3) !important;
+    background: transparent !important;
+}
+
+/* Reviews */
+body.staff-page .review-card,
+body.staff-page .review-item {
+    border: 1px solid var(--line) !important;
+    border-radius: var(--r-md) !important;
+    background: var(--surface) !important;
+    box-shadow: none !important;
+}
+
+body.staff-page .rating-number {
+    color: var(--ink) !important;
+}
+
+body.staff-page .star-filled,
+body.staff-page .bi-star-fill {
+    color: var(--brass) !important;
+}
+
+/* Settings */
+body.staff-page .settings-page,
+body.staff-page.settings-page {
+    background: var(--paper) !important;
+}
+
+body.staff-page .settings-shell {
+    width: auto !important;
+    max-width: 1500px;
+    margin-left: var(--staff-rail) !important;
+    padding-left: var(--staff-pad);
+    padding-right: var(--staff-pad);
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body.staff-page .settings-shell {
+        margin-left: var(--staff-rail-tablet) !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    body.staff-page .settings-shell {
+        margin-left: 0 !important;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+body.staff-page .settings-title {
+    font-family: "Playfair Display", Georgia, serif;
+}
+
+body.staff-page .settings-tab,
+body.staff-page .settings-nav .nav-link {
+    border-radius: var(--r-sm) !important;
+    color: var(--muted) !important;
+}
+
+body.staff-page .settings-tab.active,
+body.staff-page .settings-nav .nav-link.active {
+    background: var(--brass-wash) !important;
+    color: var(--brass-ink) !important;
+}
+
+/* Manual and long-form screens */
+body.staff-page .manual-shell,
+body.staff-page .manual-content {
+    background: var(--surface) !important;
+    color: var(--ink-3) !important;
+}
+
+body.staff-page .manual-title {
+    font-family: "Playfair Display", Georgia, serif;
+    color: var(--ink) !important;
+}
+
+/* Footer — a quiet rule, not a second card. */
+body.staff-page .staff-footer {
+    margin: 28px 0 22px;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+body.staff-page .staff-footer::before {
+    height: 1px;
+    background: var(--brass);
+    opacity: .5;
+}
+
+body.staff-page .staff-footer-inner {
+    padding: 14px 0 0;
+}
+
+body.staff-page .staff-footer-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: var(--soft);
+    padding: 3px;
+}
+
+body.staff-page .staff-footer-name {
+    color: var(--ink);
+    font-family: "Playfair Display", Georgia, serif;
+}
+
+body.staff-page .staff-footer-role {
+    color: var(--muted);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: 9.5px;
+}
+
+body.staff-page .staff-footer-links a,
+body.staff-page .staff-footer-copy {
+    color: var(--muted);
+    font-size: 11.5px;
+}
+
+body.staff-page .staff-footer-mark {
+    filter: none;
+}
+
+/* ── 14 · Empty states ──────────────────────────────────────────────────── */
+
+body.staff-page .staff-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 40px 24px;
+    border: 1px dashed var(--rule);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    text-align: center;
+}
+
+body.staff-page .staff-empty__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+    border-radius: 50%;
+    background: var(--soft);
+    color: var(--muted);
+    font-size: 18px;
+}
+
+body.staff-page .staff-empty__title {
+    margin: 0;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+body.staff-page .staff-empty__body {
+    margin: 0;
+    max-width: 46ch;
+    color: var(--muted);
+    font-size: 12.5px;
+}
+
+body.staff-page .staff-empty__action {
+    margin-top: 8px;
+}
+
+/* ── 15 · Contrast repairs ──────────────────────────────────────────────── */
+
+/* A bare <p> colour rule in section 2 beats a single-class component rule.
+   These carry the strip's small caps and must keep their own ink. */
+body.staff-page .desk-strip__eyebrow {
+    color: var(--brass-ink);
+}
+
+body.staff-page .desk-strip__note {
+    color: var(--muted);
+}
+
+body.staff-page .staff-rail .staff-rail__group {
+    color: rgba(232, 199, 152, .9);
+}
+
+/* Buttons the family sheets paint brass: white on brass is 3.3:1, so the fill
+   becomes ink and the label keeps its contrast. */
+body.staff-page .btn-add-guest,
+body.staff-page .cal-add-btn,
+body.staff-page .fc .fc-button-primary.fc-today-button,
+body.staff-page .sentimentAnalysisBtn,
+body.staff-page .settings-submit-btn,
+body.staff-page .upload-button {
+    background: var(--ink) !important;
+    border: 1px solid var(--ink) !important;
+    color: #f7f3ea !important;
+}
+
+body.staff-page .btn-add-guest:hover,
+body.staff-page .cal-add-btn:hover,
+body.staff-page .fc .fc-button-primary.fc-today-button:hover,
+body.staff-page .sentimentAnalysisBtn:hover,
+body.staff-page .settings-submit-btn:hover,
+body.staff-page .upload-button:hover {
+    background: var(--ink-2) !important;
+    border-color: var(--ink-2) !important;
+    color: #ffffff !important;
+}
+
+/* Warning actions are a quiet outline, not a solid amber block. */
+body.staff-page .btn-warning {
+    background: var(--warn-wash) !important;
+    border-color: rgba(168, 118, 28, .45) !important;
+    color: #6d4b10 !important;
+}
+
+body.staff-page .btn-warning:hover {
+    background: #f3e4c6 !important;
+    border-color: var(--warn) !important;
+    color: #553a0b !important;
+}
+
+body.staff-page .btn.fw-semibold {
+    background: var(--ink) !important;
+    border-color: var(--ink) !important;
+    color: #f7f3ea !important;
+}
+
+/* Room state: the legacy greens and reds were pastel-on-pastel. */
+body.staff-page .status-badge.badge-available {
+    background: var(--ok-wash) !important;
+    color: var(--ok) !important;
+}
+
+body.staff-page .status-badge.badge-occupied,
+body.staff-page .status-badge.badge-cancelled {
+    background: var(--danger-wash) !important;
+    color: var(--danger) !important;
+}
+
+body.staff-page .status-badge.badge-booked {
+    background: var(--slate-wash) !important;
+    color: var(--slate) !important;
+}
+
+body.staff-page .status-badge.badge-maintenance {
+    background: var(--warn-wash) !important;
+    color: #7a5510 !important;
+}
+
+body.staff-page .room-detail-empty {
+    color: var(--muted) !important;
+}
+
+/* FullCalendar suppresses its own focus shadow; keep a keyboard ring anyway. */
+body.staff-page .fc .fc-button:focus,
+body.staff-page .fc .fc-button:focus-visible,
+body.staff-page .fc .fc-button:active:focus {
+    outline: 2px solid var(--brass-ink) !important;
+    outline-offset: 2px !important;
+    box-shadow: none !important;
+}
+
+body.staff-page .badge.rounded-pill:not(.notification-badge):not(.bg-danger),
+body.staff-page .si-label {
+    color: var(--ink-3) !important;
+}
+
+/* The notification count is white on danger — readable, and still a count,
+   not a bare dot. */
+body.staff-page .badge.bg-danger {
+    background: var(--danger) !important;
+    color: #ffffff !important;
+    font-family: "IBM Plex Mono", monospace;
+}
+
+body.staff-page .stat-chip-val {
+    color: var(--danger) !important;
+}
+
+/* ── 16 · Motion, print, responsive guards ──────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+    body.staff-page .main-card,
+    body.staff-page .dashboard-panel,
+    body.staff-page .desk-strip,
+    body.staff-page .staff-footer {
+        animation: staff-settle .34s ease both;
+    }
+
+    body.staff-page .dashboard-panel { animation-delay: .04s; }
+    body.staff-page .main-card { animation-delay: .06s; }
+
+    @keyframes staff-settle {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: none; }
+    }
+
+    body.staff-page .staff-rail .staff-rail__link.active {
+        transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.staff-page *,
+    body.staff-page *::before,
+    body.staff-page *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    body.staff-page .desk-strip,
+    body.staff-page .content > .desk-strip {
+        padding: 14px 14px 12px;
+        gap: 12px;
+    }
+
+    body.staff-page .desk-strip__title {
+        font-size: 1.5rem;
+    }
+
+    body.staff-page .desk-strip__crumbs {
+        display: none;
+    }
+
+    body.staff-page .desk-strip__note {
+        font-size: 12.5px;
+    }
+
+    /* Bell and identity sit together on the right, not one at each edge. */
+    body.staff-page .desk-strip__side {
+        width: 100%;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    /* Two room tiles across a phone leave ~90px of text column. Tighten the
+       tile and the pill so the pair either fits on one line or wraps
+       cleanly, never spilling over the tile beside it. */
+    body.staff-page .room-card {
+        padding: 12px 10px 10px;
+    }
+
+    body.staff-page .room-card .status-badge {
+        padding: 2px 7px;
+        font-size: 9px;
+        letter-spacing: .02em;
+    }
+
+    body.staff-page .desk-user__text {
+        display: none;
+    }
+
+    body.staff-page .table-responsive {
+        border-radius: var(--r-sm);
+    }
+
+    /* Money at arm's length is wider than the tile: let it step down. */
+    body.staff-page .dashboard-attention-tile {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    body.staff-page .attention-count {
+        font-size: 1.3rem !important;
+        word-break: break-word;
+    }
+
+    body.staff-page .dashboard-panel {
+        padding: 0 !important;
+    }
+}
+
+/* The page must never scroll sideways: tables scroll inside their wrapper. */
+body.staff-page {
+    overflow-x: clip;
+}
+
+@media print {
+    body.staff-page .navbar.staff-rail,
+    body.staff-page .desk-strip__side,
+    body.staff-page .staff-footer {
+        display: none !important;
+    }
+
+    body.staff-page .content,
+    body.staff-page .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    body.staff-page {
+        background: #fff !important;
+    }
+}
+
+/* ── Touch floor — responsive audit, 2026-10-20 ─────────────────────────────
+   The audit measured every console screen at eleven widths and kept finding the
+   same shared chrome under the app's own 40×40 minimum: the rail's language
+   switch, the bell, the chips, the ± steppers, the toolbar buttons. They are
+   one component repeated across forty pages, so the floor is set once here
+   rather than in every page stylesheet. Visual weight is unchanged; only the
+   area a thumb has to hit grows. */
+body.staff-page .staff-rail__lang .marle-lang-option,
+body.staff-page #notificationBell,
+body.staff-page .cat-tab,
+body.staff-page .chip,
+body.staff-page .staff-rail__tour,
+body.staff-page .staff-rail__logout,
+body.staff-page .btn-export,
+body.staff-page .back-btn,
+body.staff-page .add-service-btn,
+body.staff-page .form-select-sm {
+    min-height: 40px;
+}
+
+body.staff-page .staff-rail__lang .marle-lang-option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+}
+
+body.staff-page #notificationBell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+}
+
+body.staff-page .cat-tab,
+body.staff-page .chip,
+body.staff-page .btn-export,
+body.staff-page .back-btn {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Breadcrumbs keep the strip's 17px type and its height; padding grows the
+   target and the negative margin keeps the strip from getting taller. */
+body.staff-page .desk-strip__crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    margin-block: -12px;
+    padding-block: 12px;
+}
+
+/* Second pass of the same audit: the inventory steppers (24px), row actions
+   (36px), the guest-token ± buttons and the compact filter inputs (38px). */
+body.staff-page .qty-adjust-btn,
+body.staff-page .btn-act,
+body.staff-page button[onclick^="stepPersons"],
+body.staff-page .hrs-preset {
+    min-width: 40px;
+    min-height: 40px;
+}
+
+body.staff-page .qty-adjust-btn,
+body.staff-page button[onclick^="stepPersons"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.staff-page .form-control-sm,
+body.staff-page .messages .btn-outline-secondary {
+    min-height: 40px;
+}
+
+/* Third pass: the remaining 36–38px controls — period filters, the email
+   test's input and send button, compact filter inputs, the password eye and
+   FullCalendar's prev/next arrows. */
+body.staff-page .btn-outline-secondary,
+body.staff-page .btn-brand,
+body.staff-page .form-control,
+body.staff-page .toggle-eye,
+body.staff-page .fc-button {
+    min-height: 40px;
+}
+
+body.staff-page .toggle-eye,
+body.staff-page .fc-button {
+    min-width: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Touch floor, fourth pass — 2026-10-21 ──────────────────────────────────
+   The console's field rule is `body.staff-page input[type="…"]`, which scores
+   (0,2,2) and so outranked the class-only floors added above: the activity
+   log's filter inputs and the requests reply box stayed 38px. Matching the
+   element itself makes the floor win, and the same block covers the email
+   test's send button and the settings submit. */
+body.staff-page input.form-control,
+body.staff-page select.form-select,
+body.staff-page textarea.form-control,
+body.staff-page .filter-bar .form-control-sm,
+body.staff-page .filter-bar .form-select,
+body.staff-page .reply-input-row input {
+    min-height: 40px;
+}
+
+body.staff-page .btn-outline-brand,
+body.staff-page .settings-submit-btn {
+    min-height: 40px;
+}

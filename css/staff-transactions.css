@@ -1,0 +1,438 @@
+/* Shared staff Transactions workspace */
+.staff-transactions-page {
+    --tx-ink: #1f2a2a;
+    --tx-muted: #65736f;
+    --tx-line: #dce5e1;
+    --tx-surface: #ffffff;
+    --tx-soft: #f2f6f3;
+    --tx-brass: #b97836;
+    --tx-brass-dark: #855124;
+    --tx-green: #397454;
+    --tx-red: #a94e43;
+}
+
+.staff-transactions-page > .content.mb-4 {
+    width: calc(100% - var(--staff-sidebar-w, 248px));
+    margin-left: var(--staff-sidebar-w, 248px);
+    padding: 18px 24px 0;
+}
+
+.staff-transactions-page > .content.mb-4 > .d-flex {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--tx-line);
+    border-radius: 14px;
+    background: rgba(255,255,255,.76);
+}
+
+.staff-transactions-page > .content.mb-4 h2 {
+    color: var(--tx-ink) !important;
+    font-size: clamp(1.45rem, 2vw, 2rem);
+    font-weight: 800;
+}
+
+.staff-transactions-page > .content.mb-4 p,
+.staff-transactions-page > .content.mb-4 p a {
+    color: var(--tx-muted) !important;
+}
+
+.staff-transactions-page > .main-card {
+    width: calc(100% - var(--staff-sidebar-w, 248px) - 48px) !important;
+    max-width: 1440px;
+    margin: 0 auto 24px !important;
+    transform: translateX(calc(var(--staff-sidebar-w, 248px) / 2));
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--tx-line);
+    border-radius: 16px;
+    background: var(--tx-surface);
+    box-shadow: 0 10px 26px rgba(31,49,45,.07);
+}
+
+/* Keep the view controls on the same inner rail as both transaction views. */
+.staff-transactions-page > .main-card > .d-flex.justify-content-between.align-items-center.mb-4 {
+    min-height: 76px;
+    margin: 0 !important;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--tx-line);
+    background: #fbfcfb;
+}
+
+.staff-transactions-page > .main-card > .d-flex.justify-content-between.align-items-center.mb-4 > .text-muted {
+    color: var(--tx-muted) !important;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.staff-transactions-page .view-toggle {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--tx-line);
+    border-radius: 9px;
+    background: var(--tx-soft);
+}
+
+.staff-transactions-page .view-toggle .btn {
+    min-height: 40px;
+    border: 0;
+    border-radius: 7px;
+    color: var(--tx-muted);
+    font-size: .82rem;
+    font-weight: 800;
+}
+
+.staff-transactions-page .view-toggle .btn.active {
+    background: var(--tx-ink);
+    border-color: var(--tx-ink);
+    color: #fff;
+    box-shadow: 0 3px 8px rgba(31,49,45,.12);
+}
+
+.staff-transactions-page #summaryView,
+.staff-transactions-page #detailView {
+    padding: 0 24px 28px;
+}
+
+.staff-transactions-page #summaryView > .d-flex:first-child,
+.staff-transactions-page #detailView > .filter-bar {
+    margin-inline: 0;
+}
+
+.staff-transactions-page .transaction-summary-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px 14px;
+    margin-bottom: 18px;
+    padding: 10px;
+    border: 1px solid var(--tx-line);
+    border-radius: 10px;
+    background: var(--tx-soft);
+}
+
+.staff-transactions-page .transaction-summary-controls > .d-flex:first-child {
+    margin-bottom: 0 !important;
+}
+
+.staff-transactions-page .transaction-summary-controls #periodFilter {
+    width: fit-content;
+}
+
+.staff-transactions-page .transaction-summary-controls .summary-actions {
+    margin-bottom: 0 !important;
+    justify-content: flex-end;
+}
+
+.staff-transactions-page #periodFilter,
+.staff-transactions-page .summary-actions,
+.staff-transactions-page .filter-bar,
+.staff-transactions-page .collection-panel {
+    border: 1px solid var(--tx-line);
+    border-radius: 10px;
+    background: var(--tx-soft);
+    padding: 10px;
+}
+
+.staff-transactions-page #periodFilter .btn {
+    min-height: 38px;
+    border: 0;
+    border-radius: 7px;
+    color: var(--tx-muted);
+    font-weight: 700;
+}
+
+.staff-transactions-page #periodFilter .btn.active {
+    background: var(--tx-ink);
+    color: #fff;
+}
+
+.staff-transactions-page .summary-actions {
+    display: flex;
+    justify-content: flex-end;
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.staff-transactions-page .summary-actions .btn,
+.staff-transactions-page .filter-bar .btn,
+.staff-transactions-page .collection-panel .btn {
+    min-height: 40px;
+    border-radius: 7px;
+    font-weight: 700;
+}
+
+.staff-transactions-page .summary-actions .btn-outline-secondary,
+.staff-transactions-page .filter-bar .btn-outline-secondary {
+    border-color: var(--tx-line);
+    color: var(--tx-ink);
+    background: #fff;
+}
+
+.staff-transactions-page .summary-actions .btn-outline-secondary:hover,
+.staff-transactions-page .filter-bar .btn-outline-secondary:hover {
+    background: var(--tx-ink);
+    border-color: var(--tx-ink);
+    color: #fff;
+}
+
+/* Summary */
+.staff-transactions-page #summaryPrintArea > div[style*="background:#933310"] {
+    background: linear-gradient(135deg, var(--tx-ink), #38504a) !important;
+    border: 1px solid #49665c;
+    border-radius: 14px !important;
+    padding: 22px 24px !important;
+    box-shadow: 0 8px 18px rgba(31,49,45,.12);
+}
+
+.staff-transactions-page #summaryPrintArea > div[style*="background:#933310"] > div:first-child > div:nth-child(2) {
+    font-size: clamp(1.7rem, 3vw, 2.35rem) !important;
+}
+
+.staff-transactions-page #summaryPrintArea .b-badge {
+    min-height: 72px;
+    flex: 1 1 calc(25% - 8px) !important;
+    border: 1px solid var(--tx-line);
+    border-radius: 10px;
+    background: #fff !important;
+    padding: 14px 16px !important;
+}
+
+.staff-transactions-page #summaryPrintArea .b-badge-name {
+    color: var(--tx-muted) !important;
+    font-size: .75rem;
+    font-weight: 800;
+}
+
+.staff-transactions-page #summaryPrintArea .b-badge-val {
+    color: var(--tx-ink) !important;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.staff-transactions-page #summaryPrintArea .section-head {
+    color: var(--tx-ink);
+    border-bottom: 1px solid var(--tx-line);
+    padding-bottom: 10px;
+    font-size: .82rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.staff-transactions-page #summaryPrintArea .room-row {
+    min-height: 42px;
+    border-bottom-color: var(--tx-line);
+    color: var(--tx-ink);
+}
+
+.staff-transactions-page #summaryPrintArea .room-row span:last-child {
+    color: var(--tx-brass-dark) !important;
+}
+
+/* Detailed view and collections */
+.staff-transactions-page #detailView {
+    padding-top: 0;
+}
+
+.staff-transactions-page .collection-panel {
+    background: #fff8ec;
+    border-color: #e8c99f;
+    padding: 16px;
+}
+
+.staff-transactions-page .collection-panel h6 {
+    color: var(--tx-ink) !important;
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.staff-transactions-page .collection-panel .badge {
+    border-radius: 6px;
+    padding: 6px 9px;
+}
+
+.staff-transactions-page .collection-row {
+    min-height: 76px;
+    margin-top: 10px;
+    border: 1px solid var(--tx-line);
+    border-radius: 9px;
+    background: #fff;
+    padding: 13px 15px;
+}
+
+.staff-transactions-page .collection-row .fw-bold {
+    color: var(--tx-ink);
+}
+
+.staff-transactions-page .collection-row .btn,
+.staff-transactions-page .collect-room-btn {
+    background: var(--tx-green) !important;
+    border-color: var(--tx-green) !important;
+    color: #fff !important;
+}
+
+.staff-transactions-page .collection-row .btn:hover,
+.staff-transactions-page .collect-room-btn:hover {
+    background: #2f6045 !important;
+}
+
+.staff-transactions-page .filter-bar {
+    margin-bottom: 16px;
+    background: #fff;
+}
+
+.staff-transactions-page .filter-bar .form-label {
+    color: var(--tx-ink);
+    font-size: .73rem;
+    font-weight: 800 !important;
+}
+
+.staff-transactions-page .filter-bar .form-control,
+.staff-transactions-page .filter-bar .form-select {
+    min-height: 40px;
+    border-color: var(--tx-line);
+    border-radius: 7px;
+    color: var(--tx-ink);
+}
+
+.staff-transactions-page .filter-bar .btn-warning,
+.staff-transactions-page #yesBtn {
+    background: var(--tx-ink) !important;
+    border-color: var(--tx-ink) !important;
+    color: #fff !important;
+}
+
+.staff-transactions-page .table-responsive {
+    border: 1px solid var(--tx-line);
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.staff-transactions-page .table {
+    min-width: 980px;
+    margin-bottom: 0;
+    background: #fff;
+}
+
+.staff-transactions-page .table th {
+    background: var(--tx-soft) !important;
+    border-bottom: 1px solid var(--tx-line);
+    color: var(--tx-ink) !important;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .06em;
+}
+
+.staff-transactions-page .table td {
+    border-color: #e8eeeb;
+    color: var(--tx-muted);
+    font-size: .82rem;
+}
+
+.staff-transactions-page .table tbody tr:hover {
+    background: #f7faf8 !important;
+}
+
+.staff-transactions-page .table .badge {
+    border-radius: 6px;
+    font-weight: 800;
+    padding: 5px 8px;
+}
+
+.staff-transactions-page .modal-content {
+    border: 1px solid var(--tx-line);
+    border-radius: 14px;
+    box-shadow: 0 18px 42px rgba(31,49,45,.16);
+}
+
+.staff-transactions-page .modal-header,
+.staff-transactions-page .modal-footer {
+    border-color: var(--tx-line);
+    background: #fbfcfb;
+}
+
+.staff-transactions-page .modal-title {
+    color: var(--tx-ink);
+    font-weight: 800;
+}
+
+.staff-transactions-page .editBtn,
+.staff-transactions-page .archiveBtn {
+    min-width: 38px;
+    min-height: 36px;
+    border-radius: 7px;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .staff-transactions-page > .content.mb-4 { width: calc(100% - 204px); margin-left: 204px; padding-inline: 14px; }
+    .staff-transactions-page > .main-card { width: calc(100% - 204px - 28px) !important; transform: translateX(102px); }
+    .staff-transactions-page #summaryView,
+    .staff-transactions-page #detailView { padding-inline: 14px; }
+    .staff-transactions-page > .main-card > .d-flex.justify-content-between.align-items-center.mb-4 { padding-inline: 14px; }
+    .staff-transactions-page #summaryPrintArea .b-badge { flex-basis: calc(50% - 5px) !important; }
+    .staff-transactions-page .table-responsive .tx-description,
+    .staff-transactions-page .table-responsive .tx-note { display: none !important; }
+    .staff-transactions-page .table-responsive .table th { font-size: .55rem; }
+    .staff-transactions-page .table-responsive .table td { font-size: .6rem; padding-inline: .15rem; }
+}
+
+@media (max-width: 767.98px) {
+    .staff-transactions-page > .content.mb-4 { width: 100%; margin-left: 0; padding: 10px 10px 0; }
+    .staff-transactions-page > .main-card { width: calc(100% - 20px) !important; margin: 0 10px 14px !important; transform: none; }
+    .staff-transactions-page #summaryView,
+    .staff-transactions-page #detailView { padding-inline: 10px; }
+    .staff-transactions-page > .main-card > .d-flex.justify-content-between.align-items-center.mb-4 { min-height: 68px; padding: 14px 10px; }
+    .staff-transactions-page #summaryPrintArea .b-badge { flex-basis: 100% !important; }
+    .staff-transactions-page .summary-actions { justify-content: stretch; }
+    .staff-transactions-page .transaction-summary-controls { display: block; padding: 8px; }
+    .staff-transactions-page .transaction-summary-controls > .d-flex:first-child { margin-bottom: 8px !important; }
+    .staff-transactions-page .transaction-summary-controls #periodFilter { width: 100%; overflow-x: auto; }
+    .staff-transactions-page .transaction-summary-controls .summary-actions { margin-top: 8px; }
+    .staff-transactions-page .summary-actions .btn { flex: 1; }
+    .staff-transactions-page .collection-row { align-items: flex-start; flex-direction: column; }
+    .staff-transactions-page .collection-row .text-end { width: 100%; text-align: left !important; }
+    .staff-transactions-page .filter-bar { padding: 10px; }
+}
+
+/* ── Detailed-view pagination — themed to match the ledger palette ─────────
+   Bootstrap's default blue page links clashed with the warm brass/ink theme.
+   Scoped to .staff-transactions-page so no other page is affected. */
+.staff-transactions-page .pagination { --bs-pagination-border-radius: 10px; }
+.staff-transactions-page .page-link {
+    color: var(--tx-ink);
+    background-color: var(--tx-surface);
+    border: 1px solid var(--tx-line);
+    font-weight: 600;
+    font-size: .8rem;
+    padding: .35rem .7rem;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.staff-transactions-page .page-link:hover {
+    color: var(--tx-brass-dark);
+    background-color: var(--tx-soft);
+    border-color: var(--tx-brass);
+}
+.staff-transactions-page .page-link:focus {
+    box-shadow: 0 0 0 .2rem rgba(185, 120, 54, .18);
+    border-color: var(--tx-brass);
+}
+.staff-transactions-page .page-item.active .page-link {
+    color: #fff;
+    background-color: var(--tx-brass);
+    border-color: var(--tx-brass-dark);
+}
+.staff-transactions-page .page-item.disabled .page-link {
+    color: var(--tx-muted);
+    background-color: var(--tx-soft);
+    border-color: var(--tx-line);
+    opacity: .65;
+}
+
+/* ── Touch floor — responsive audit, 2026-10-21 ─────────────────────────────
+   The period filter is four adjacent buttons; at 38px they were the only
+   controls on the page under the app's 40px minimum. */
+.staff-transactions-page #periodFilter .btn { min-height: 40px; }

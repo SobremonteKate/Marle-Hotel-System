@@ -1,0 +1,288 @@
+        body {
+            overflow-x: hidden;
+            /* display: flex; */
+            background-color: #f2ece9;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: #933310;
+        }
+
+        .btn-update,
+        .btn-add,
+        .btn-save {
+            background-color: #ffb60a;
+            color: #fff;
+        }
+
+        .btn-update:hover,
+        .btn-add:hover,
+        .btn-save:hover {
+            background-color: transparent;
+            color: #933310;
+            border-color: #933310;
+        }
+
+        #yesBtn:hover,
+        #noBtn:hover, #archiveYesBtn:hover {
+            background-color: transparent;
+            border-color: #933310;
+            color: #933310;
+        }
+
+        #yesBtn,
+        #archiveYesBtn {
+            background-color: #ffb60a;
+            color: #fff;
+        }
+
+        #noBtn {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .table-responsive {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e9d7c4;
+            box-shadow: 0 5px 22px rgba(0, 0, 0, 0.06);
+            overflow: auto;
+            max-height: 520px;
+        }
+
+        .table {
+            font-size: 0.95rem;
+            min-width: 1000px;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table th {
+            background: #f8f2e7;
+            color: #422a14;
+            border-bottom: 2px solid #f1d9b2;
+            font-weight: 600;
+            padding: 0.75rem 0.85rem;
+            white-space: nowrap;
+        }
+
+        .table td {
+            border-top: 1px solid #f2e7d3;
+            padding: 0.7rem 0.85rem;
+            vertical-align: middle;
+        }
+
+        .table-hover tbody tr:hover {
+            background: #fff8e8;
+        }
+
+        .main-content {
+            margin-left: 230px;
+            width: calc(100% - 240px);
+            padding: 22px;
+        }
+
+        .content {
+            margin-left: 230px;
+            padding: 12px 20px 20px;
+        }
+
+        .page-title {
+            margin-bottom: 0.4rem;
+            font-size: 1.55rem;
+            color: #2c1d14;
+        }
+
+        .breadcrumb-link {
+            color: #6a5136;
+            text-decoration: none;
+        }
+
+        .breadcrumb-link:hover {
+            text-decoration: underline;
+        }
+        /* Desktop Sidebar Layout */
+        @media (min-width: 768px) {
+
+            .navbar {
+                width: 230px;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: #f8f9fa;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .navbar>.container-fluid {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .navbar-collapse {
+                display: flex !important;
+                flex-direction: column;
+                /* height: 100%; */
+                flex: 1;
+            }
+
+            .content {
+                margin-top: 1.5rem;
+                margin-left: 250px;
+            }
+
+            .main-content {
+                margin-left: 230px;
+                width: calc(100% - 230px);
+                padding: 30px;
+            }
+        }
+
+        .nav-link {
+            padding: 12px 18px;
+            color: #555;
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #ffb60a;
+            color: #fff;
+        }
+
+        .nav-link.active {
+            background-color: #ffb60a;
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        /* Left Accent Bar */
+        .nav-link.active::before {
+            content: "";
+            position: absolute;
+            left: -12px;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            border-radius: 4px;
+            background-color: #ffb60a;
+        }
+
+        .nav-link i {
+            font-size: 18px;
+        }
+
+        .notification-badge {
+            background-color: #ffb60a;
+            color: #fff;
+            font-size: 12px;
+            padding: 5px 8px;
+        }
+
+        .logout-btn {
+            background-color: #933310;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: transparent;
+            border-color: #933310;
+            color: #933310;
+        }
+
+        #myInput,
+        #searchAnything {
+            border: solid #ffb60a 3px;
+            height: 45px;
+            /* margin-bottom: 20px */
+        }
+
+        .bi-bell {
+            font-size: 20px;
+            /* margin: 10px; */
+            padding: 7px;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #000;
+            margin-right: 0;
+        }
+
+        a {
+            color: #ffb60a;
+        }
+
+        .dropdown-toggle {
+            background-color: #fff;
+            color: #ffb60a;
+            border: solid 2px #ffb60a;
+        }
+
+        .dropdown-toggle:hover {
+            background-color: transparent;
+            border: solid 2px #933310;
+            color: #933310;
+        }
+
+        .btn-secondary:hover {
+            border: solid 2px #933310;
+        }
+
+        /* Table */
+        tr {
+            /* border: solid 2px #933310; */
+            border: solid 2px #f7eee9;
+        }
+
+        th,
+        td {
+            /* border: solid 1px #933310; */
+            border: solid 2px #f7eee9;
+        }
+
+        .table-striped {
+            --bs-table-striped-bg: rgba(255, 182, 10, 0.7);
+        }
+
+        .small-input {
+            width: 50px;
+            height: 38px;
+            padding: 0 8px;
+            font-size: 0.9rem;
+        }
+
+        .additional-item {
+            gap: 10px;
+        }
+
+        .bg-custom-success {
+            background-color: #ffb60a !important;
+        }
+
+        .table {
+            font-size: 14px;
+        }
+
+        .table th {
+            white-space: nowrap;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        .lni {
+            transition: transform 0.3s ease;
+        }
+
+        .lni:hover {
+            color: #933310;
+            transform: scale(1.1);
+        }

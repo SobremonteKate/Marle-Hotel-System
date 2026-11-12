@@ -1,0 +1,36 @@
+{
+  "name": "Marle Hotel & Restaurant",
+  "short_name": "Marle Hotel",
+  "description": "Rooms by the night or by the hour and a kitchen open with the front desk, in Sabutan Ibayo, Silang, Cavite.",
+  "start_url": "home.php",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#FBF7EF",
+  "theme_color": "#7A2A15",
+  "icons": [
+    {
+      "src": "pics/marle-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "pics/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pics/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pics/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

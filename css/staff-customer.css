@@ -1,0 +1,487 @@
+/* Guest Record operations workspace */
+.staff-customer-page {
+    --customer-ink: #1f2a2a;
+    --customer-muted: #64716f;
+    --customer-bg: #f2f5f3;
+    --customer-surface: #ffffff;
+    --customer-soft: #f7faf8;
+    --customer-border: #dce5e1;
+    --customer-accent: #b97836;
+    --customer-accent-dark: #855124;
+    --customer-sidebar-w: 248px;
+    background:
+        linear-gradient(135deg, rgba(218, 232, 225, .42), transparent 36rem),
+        var(--customer-bg) !important;
+    color: var(--customer-ink) !important;
+    min-height: 100vh;
+}
+
+.staff-customer-page .content,
+.staff-customer-page .main-content {
+    max-width: 1440px;
+}
+
+@media (min-width: 992px) {
+    .staff-customer-page .content {
+        width: min(calc(100% - var(--customer-sidebar-w)), 1440px);
+        margin-left: max(var(--customer-sidebar-w), calc(var(--customer-sidebar-w) + (100% - var(--customer-sidebar-w) - 1440px) / 2)) !important;
+        margin-right: auto !important;
+        padding: 22px 24px 0 !important;
+    }
+
+    .staff-customer-page .content > div,
+    .staff-customer-page .main-content {
+        width: 100%;
+        max-width: 1440px;
+        margin-inline: auto;
+    }
+
+    .staff-customer-page .main-content {
+        width: min(calc(100% - var(--customer-sidebar-w)), 1440px) !important;
+        margin-left: max(var(--customer-sidebar-w), calc(var(--customer-sidebar-w) + (100% - var(--customer-sidebar-w) - 1440px) / 2)) !important;
+        margin-right: auto !important;
+        padding: 0 24px 38px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .staff-customer-page .content {
+        margin-left: 204px !important;
+        padding: 16px 14px 0 !important;
+    }
+
+    .staff-customer-page .main-content {
+        padding: 0 14px 28px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .staff-customer-page .content {
+        padding: 12px 12px 0 !important;
+    }
+
+    .staff-customer-page .main-content {
+        padding: 0 12px 24px !important;
+    }
+
+    /* Header behaves like the other page-header cards on mobile */
+    .staff-customer-page .content > div {
+        padding: .9rem 1rem !important;
+        border: 1px solid var(--customer-border);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, .78);
+    }
+
+    .staff-customer-page .topbar-title {
+        font-size: 1.45rem !important;
+    }
+
+    .staff-customer-page .content .ms-auto {
+        margin-left: 0 !important;
+        margin-right: auto;
+        padding-top: 0 !important;
+    }
+}
+
+.staff-customer-page .navbar {
+    background: #253634 !important;
+    border-right: 0 !important;
+    box-shadow: 8px 0 24px rgba(28, 45, 41, .1) !important;
+}
+
+.staff-customer-page .navbar .bg-light,
+.staff-customer-page .navbar .bg-white,
+.staff-customer-page .navbar .d-md-none {
+    background: #253634 !important;
+    border-color: rgba(255, 255, 255, .1) !important;
+}
+
+.staff-customer-page .navbar .d-none.d-md-block.text-center.py-4 {
+    padding: 24px 16px 30px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    margin-bottom: 14px;
+}
+
+.staff-customer-page .navbar .d-none.d-md-block.text-center.py-4 img {
+    filter: brightness(0) invert(1);
+    opacity: .94;
+}
+
+.staff-customer-page .navbar .nav-link {
+    min-height: 48px;
+    color: #b9c7c1 !important;
+    border-radius: 9px !important;
+    font-size: .91rem !important;
+    font-weight: 600 !important;
+}
+
+.staff-customer-page .navbar .nav-link:hover {
+    background: rgba(255, 255, 255, .1) !important;
+    color: #fff !important;
+}
+
+.staff-customer-page .navbar .nav-link.active {
+    background: #d99a51 !important;
+    color: #fff !important;
+}
+
+.staff-customer-page .navbar .nav-link.active::before {
+    background: #e6b36f !important;
+}
+
+.staff-customer-page .navbar .notification-badge {
+    background: #d99a51 !important;
+}
+
+.staff-customer-page .navbar .logout-btn {
+    background: #d99a51 !important;
+    border: 1px solid #d99a51 !important;
+}
+
+.staff-customer-page .navbar .logout-btn:hover {
+    background: transparent !important;
+    border-color: #e6b36f !important;
+    color: #fff !important;
+}
+
+.staff-customer-page .topbar-title {
+    color: var(--customer-ink) !important;
+    font-size: clamp(1.5rem, 2vw, 2rem) !important;
+    font-weight: 800 !important;
+}
+
+.staff-customer-page .breadcrumb-line,
+.staff-customer-page .breadcrumb-line a {
+    color: var(--customer-muted) !important;
+}
+
+.staff-customer-page .breadcrumb-line a:hover {
+    color: var(--customer-accent-dark) !important;
+}
+
+.staff-customer-page .stat-cards-row {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px !important;
+    margin-bottom: 18px !important;
+}
+
+.staff-customer-page .stat-card {
+    min-width: 0 !important;
+    min-height: 96px;
+    padding: 16px !important;
+    gap: 12px !important;
+    border: 1px solid var(--customer-border) !important;
+    border-radius: 12px !important;
+    background: var(--customer-surface) !important;
+    box-shadow: 0 8px 20px rgba(31, 49, 45, .05) !important;
+}
+
+.staff-customer-page .stat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+}
+
+.staff-customer-page .stat-label {
+    color: var(--customer-muted) !important;
+    letter-spacing: .08em !important;
+}
+
+.staff-customer-page .stat-value {
+    color: var(--customer-ink) !important;
+}
+
+.staff-customer-page .toolbar {
+    margin-bottom: 12px !important;
+    padding: 12px;
+    border: 1px solid var(--customer-border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .72);
+}
+
+.staff-customer-page #myInputGuest,
+.staff-customer-page #guestDateFilter,
+.staff-customer-page .form-control,
+.staff-customer-page .form-select {
+    min-height: 42px;
+    height: 42px;
+    border: 1px solid var(--customer-border) !important;
+    border-radius: 8px !important;
+    color: var(--customer-ink);
+    background: #fff;
+    box-shadow: none !important;
+}
+
+.staff-customer-page #myInputGuest:focus,
+.staff-customer-page #guestDateFilter:focus,
+.staff-customer-page .form-control:focus,
+.staff-customer-page .form-select:focus {
+    border-color: var(--customer-accent) !important;
+    box-shadow: 0 0 0 3px rgba(185, 120, 54, .14) !important;
+}
+
+.staff-customer-page .back-btn,
+.staff-customer-page .btn-export,
+.staff-customer-page .btn-add-guest {
+    min-height: 42px;
+    border-radius: 8px !important;
+    padding: 9px 14px !important;
+    font-weight: 700 !important;
+}
+
+.staff-customer-page .back-btn,
+.staff-customer-page .btn-export {
+    color: var(--customer-muted) !important;
+    border: 1px solid var(--customer-border) !important;
+    background: #fff !important;
+}
+
+.staff-customer-page .back-btn:hover,
+.staff-customer-page .btn-export:hover {
+    color: var(--customer-accent-dark) !important;
+    border-color: var(--customer-accent) !important;
+    background: #fbf5ed !important;
+}
+
+.staff-customer-page .btn-add-guest {
+    color: #fff !important;
+    border: 1px solid var(--customer-accent) !important;
+    background: var(--customer-accent) !important;
+}
+
+.staff-customer-page .btn-add-guest:hover {
+    background: var(--customer-accent-dark) !important;
+}
+
+.staff-customer-page .cat-tabs {
+    gap: 6px !important;
+    margin-bottom: 12px !important;
+}
+
+.staff-customer-page .cat-tab {
+    min-height: 34px;
+    padding: 8px 12px !important;
+    border: 1px solid var(--customer-border) !important;
+    border-radius: 8px !important;
+    color: var(--customer-muted) !important;
+    background: #fff !important;
+}
+
+.staff-customer-page .cat-tab:hover,
+.staff-customer-page .cat-tab.active {
+    color: #fff !important;
+    border-color: var(--customer-ink) !important;
+    background: var(--customer-ink) !important;
+}
+
+.staff-customer-page #resultCount {
+    color: var(--customer-muted) !important;
+    margin-bottom: 10px !important;
+}
+
+/* Guest record pagination — compact page list that wraps on small screens */
+.staff-customer-page #guestPagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.staff-customer-page #guestPagination button {
+    flex: 0 0 auto;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    font-weight: 600;
+}
+
+.staff-customer-page #guestPagination button.active {
+    background: var(--customer-ink) !important;
+    border-color: var(--customer-ink) !important;
+    color: #fff !important;
+}
+
+.staff-customer-page #guestPagination .guest-pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 36px;
+    color: var(--customer-muted);
+    font-weight: 700;
+    user-select: none;
+}
+
+@media (max-width: 767.98px) {
+    .staff-customer-page #guestPagination .guest-pagination-ellipsis {
+        min-width: 18px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .staff-customer-page #guestPagination {
+        justify-content: center;
+        gap: 4px;
+        margin: 10px 0 18px;
+    }
+
+    .staff-customer-page #guestPagination button {
+        min-width: 34px;
+        height: 34px;
+        padding: 0 8px;
+        font-size: .78rem;
+    }
+}
+
+.staff-customer-page .table-card {
+    border: 1px solid var(--customer-border) !important;
+    border-radius: 12px !important;
+    background: var(--customer-surface) !important;
+    box-shadow: 0 10px 26px rgba(31, 49, 45, .06) !important;
+}
+
+.staff-customer-page .table-card thead th {
+    padding: 13px 14px !important;
+    color: var(--customer-muted) !important;
+    background: #f7faf8 !important;
+    border-bottom: 1px solid var(--customer-border) !important;
+}
+
+.staff-customer-page .table-card tbody tr {
+    border-bottom-color: #edf2ef !important;
+}
+
+.staff-customer-page .table-card tbody tr:hover {
+    background: #f8fbf9 !important;
+}
+
+.staff-customer-page .table-card tbody td {
+    padding: 13px 14px !important;
+    color: var(--customer-ink) !important;
+}
+
+.staff-customer-page .btn-act {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px !important;
+}
+
+.staff-customer-page .status-menu,
+.staff-customer-page .modal-content {
+    border: 1px solid var(--customer-border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 18px 44px rgba(31, 49, 45, .14) !important;
+}
+
+.staff-customer-page .status-menu button:hover {
+    background: #eef4f0 !important;
+    color: var(--customer-accent-dark) !important;
+}
+
+.staff-customer-page .room-board-head {
+    padding: 18px 18px 0 !important;
+}
+
+.staff-customer-page .room-board-body {
+    padding: 14px 18px 18px !important;
+}
+
+.staff-customer-page .section-title,
+.staff-customer-page .modal-title {
+    color: var(--customer-ink) !important;
+}
+
+.staff-customer-page .room-card {
+    min-height: 124px;
+    border-color: var(--customer-border) !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+}
+
+.staff-customer-page .room-card:hover {
+    box-shadow: 0 8px 18px rgba(31, 49, 45, .08) !important;
+    transform: translateY(-1px);
+}
+
+.staff-customer-page .detail-block {
+    background: #f7faf8 !important;
+    border-color: var(--customer-border) !important;
+}
+
+.staff-customer-page .btn-modal-save {
+    background: var(--customer-accent) !important;
+}
+
+.staff-customer-page .btn-modal-save:hover {
+    background: var(--customer-accent-dark) !important;
+}
+
+.staff-customer-page .toast {
+    border-radius: 10px !important;
+}
+
+@media (max-width: 991.98px) {
+    .staff-customer-page .stat-cards-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 575.98px) {
+    .staff-customer-page .stat-cards-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px !important;
+    }
+
+    .staff-customer-page .stat-card {
+        min-height: 84px;
+        padding: 12px !important;
+    }
+
+    .staff-customer-page .stat-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+
+    .staff-customer-page .stat-label {
+        font-size: .64rem;
+    }
+
+    .staff-customer-page .stat-value {
+        font-size: 1.25rem;
+    }
+
+    .staff-customer-page .toolbar-left,
+    .staff-customer-page .toolbar-right {
+        width: 100%;
+    }
+
+    .staff-customer-page #myInputGuest,
+    .staff-customer-page #guestDateFilter,
+    .staff-customer-page .toolbar-right > * {
+        width: 100%;
+    }
+
+    .staff-customer-page .table-card table {
+        min-width: 980px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .staff-customer-page *,
+    .staff-customer-page *::before,
+    .staff-customer-page *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* ── Touch floor — responsive audit, 2026-10-21 ─────────────────────────────
+   The status dropdown in the guest table is a 26px pill. It keeps its pill
+   shape but grows to the 40px target so it can be changed on a tablet. */
+.staff-customer-page .status-pill-btn {
+    min-height: 40px;
+    padding-block: 4px;
+}

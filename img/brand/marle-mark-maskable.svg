@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Marle Hotel &amp; Restaurant">
+  <rect width="64" height="64" fill="#7A2A15"/>
+  <g transform="translate(32 32) scale(0.74) translate(-32 -32)">
+    <path d="M14 49V17l18 23 18-23v32" fill="none" stroke="#E8B33F" stroke-width="8" stroke-linecap="square"/>
+  </g>
+</svg>

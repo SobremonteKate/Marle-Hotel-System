@@ -1,0 +1,755 @@
+/* Shared Requests workspace */
+.staff-requests-page {
+    --request-ink: #1f2a2a;
+    --request-muted: #65736f;
+    --request-line: #dce5e1;
+    --request-surface: #ffffff;
+    --request-soft: #f2f6f3;
+    --request-accent: #b97836;
+}
+
+.staff-requests-page .content.mb-4 > .d-flex,
+.staff-requests-page .main-card {
+    max-width: 1440px;
+    margin-inline: auto;
+}
+
+/* One shared content rail for the page header and the request workspace */
+@media (min-width: 992px) {
+    .staff-requests-page > .content.mb-4 {
+        width: calc(100% - var(--staff-sidebar-w, 248px));
+        margin-left: var(--staff-sidebar-w, 248px);
+        padding: 18px 24px 0;
+    }
+
+    .staff-requests-page > .content.mb-4 > .d-flex {
+        width: 100%;
+        max-width: 1440px;
+    }
+
+    .staff-requests-page > .main-card {
+        width: calc(100% - var(--staff-sidebar-w, 248px) - 48px) !important;
+        max-width: 1440px;
+        margin: 0 auto 24px !important;
+        transform: translateX(calc(var(--staff-sidebar-w, 248px) / 2));
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .staff-requests-page > .content.mb-4 {
+        width: calc(100% - 204px);
+        margin-left: 204px;
+        padding: 14px 14px 0;
+    }
+
+    .staff-requests-page > .content.mb-4 > .d-flex {
+        width: 100%;
+    }
+
+    .staff-requests-page > .main-card {
+        width: calc(100% - 204px - 28px) !important;
+        max-width: none;
+        margin: 0 auto 18px !important;
+        transform: translateX(102px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .staff-requests-page > .content.mb-4 {
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 10px 0;
+    }
+
+    .staff-requests-page > .main-card {
+        width: calc(100% - 20px) !important;
+        max-width: none;
+        margin: 0 10px 14px !important;
+        transform: none;
+    }
+}
+
+.staff-requests-page .content.mb-4 > .d-flex {
+    background: rgba(255,255,255,.76);
+    border: 1px solid var(--request-line);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+}
+
+.staff-requests-page .content.mb-4 h2 {
+    color: var(--request-ink) !important;
+    font-size: clamp(1.45rem, 2vw, 2rem);
+    font-weight: 800;
+}
+
+.staff-requests-page .content.mb-4 p,
+.staff-requests-page .content.mb-4 p a {
+    color: var(--request-muted) !important;
+}
+
+.staff-requests-page .main-card {
+    background: var(--request-surface);
+    border: 1px solid var(--request-line);
+    border-radius: 16px;
+    box-shadow: 0 10px 26px rgba(31,49,45,.07);
+    padding: 0;
+    overflow: hidden;
+}
+
+.staff-requests-page .main-card > .nav-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 12px 14px 0;
+    border-bottom: 1px solid var(--request-line);
+    background: #fbfcfb;
+}
+
+/* This page's own inline sheet sizes .bi-bell for the sidebar (20px type inside
+   7px of padding), which is a 34px box — taller than the tab label and enough to
+   make the Services tab 59px while its neighbours stayed 45. Inside the tab strip
+   every icon is just a glyph. */
+.staff-requests-page .main-card > .nav-tabs .nav-link i {
+    font-size: 1em;
+    line-height: 1;
+    padding: 0;
+    background: transparent;
+}
+
+.staff-requests-page .main-card > .nav-tabs .nav-link {
+    min-height: 44px;
+    padding: 10px 15px;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    border-radius: 8px 8px 0 0;
+    color: var(--request-muted);
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.staff-requests-page .main-card > .nav-tabs .nav-link:hover {
+    background: #eef3f0;
+    color: var(--request-ink);
+}
+
+.staff-requests-page .main-card > .nav-tabs .nav-link.active,
+.staff-requests-page .main-card > .nav-tabs .nav-link.active:hover {
+    background: #f8ead8 !important;
+    border-bottom-color: var(--request-accent) !important;
+    color: #855124 !important;
+}
+
+.staff-requests-page .tab-content {
+    padding: 18px;
+}
+
+.staff-requests-page .request-layout {
+    min-height: 620px;
+    height: min(77vh, 760px);
+    gap: 18px;
+}
+
+.staff-requests-page .messages {
+    width: 34%;
+    min-width: 270px;
+    border-right: 0;
+    padding: 14px;
+    border: 1px solid var(--request-line);
+    border-radius: 12px;
+    background: var(--request-soft);
+}
+
+.staff-requests-page .search-filter {
+    margin-bottom: 12px;
+}
+
+.staff-requests-page .search-filter .form-control,
+.staff-requests-page #myInput,
+.staff-requests-page .search-box {
+    min-height: 42px;
+    border: 1px solid var(--request-line) !important;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: none;
+}
+
+.staff-requests-page .filter-icon,
+.staff-requests-page .icon-btn {
+    min-width: 42px;
+    min-height: 42px;
+    border-radius: 8px;
+    background: var(--request-ink);
+    border-color: var(--request-ink);
+    color: #fff;
+}
+
+.staff-requests-page .filter-chips {
+    gap: 6px !important;
+}
+
+.staff-requests-page .chip {
+    min-height: 36px;
+    padding: 8px 12px;
+    border-color: var(--request-line);
+    border-radius: 8px;
+    color: var(--request-muted);
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.staff-requests-page .chip.active,
+.staff-requests-page .chip:hover {
+    background: var(--request-ink);
+    border-color: var(--request-ink);
+    color: #fff;
+}
+
+.staff-requests-page .message-list-container {
+    height: auto;
+    padding-right: 2px;
+}
+
+.staff-requests-page .message-item {
+    gap: 11px;
+    padding: 12px 8px;
+    margin-bottom: 4px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    border-radius: 9px;
+}
+
+.staff-requests-page .message-item:hover,
+.staff-requests-page .message-item.active {
+    background: #fff;
+    border-color: var(--request-line);
+    box-shadow: 0 4px 12px rgba(31,49,45,.06);
+}
+
+.staff-requests-page .room-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+}
+
+.staff-requests-page .message-peek,
+.staff-requests-page .time {
+    color: var(--request-muted);
+}
+
+.staff-requests-page .main-message {
+    width: auto;
+    flex: 1;
+    min-width: 0;
+    margin-left: 0;
+    border: 1px solid var(--request-line);
+    border-radius: 12px;
+    background: #fbfcfb;
+    padding: 14px;
+}
+
+.staff-requests-page .guest-name {
+    margin-bottom: 14px;
+    border: 1px solid var(--request-line);
+    border-radius: 10px;
+    background: #fff;
+    padding: 13px;
+}
+
+.staff-requests-page .reply-input-row {
+    min-height: 48px;
+    padding: 5px;
+    border: 1px solid var(--request-line);
+    border-radius: 9px;
+    background: #fff;
+}
+
+.staff-requests-page .reply-input-row input {
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+}
+
+.staff-requests-page .reply-input-row .send {
+    min-width: 40px;
+    min-height: 38px;
+    border-radius: 7px;
+    background: var(--request-ink);
+    color: #fff;
+}
+
+.staff-requests-page .reply-input-row .send:hover {
+    background: var(--request-accent);
+}
+
+.staff-requests-page .tab-pane > .d-flex .form-select,
+.staff-requests-page .tab-pane .form-select {
+    min-height: 40px;
+    border-color: var(--request-line);
+    border-radius: 8px;
+}
+
+.staff-requests-page .svc-card,
+.staff-requests-page .ext-card,
+.staff-requests-page .booking-card {
+    border: 1px solid var(--request-line);
+    border-left: 4px solid var(--request-accent);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(31,49,45,.04);
+}
+
+.staff-requests-page .svc-card:hover,
+.staff-requests-page .ext-card:hover,
+.staff-requests-page .booking-card:hover {
+    box-shadow: 0 8px 18px rgba(31,49,45,.08);
+}
+
+.staff-requests-page .modal-content {
+    border: 1px solid var(--request-line);
+    border-radius: 14px;
+    box-shadow: 0 18px 42px rgba(31,49,45,.16);
+}
+
+/* All request tabs */
+.staff-requests-page .tab-pane > .d-flex.gap-2 {
+    padding: 12px;
+    border: 1px solid var(--request-line);
+    border-radius: 10px;
+    background: var(--request-soft);
+}
+
+.staff-requests-page .svc-summary-card {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--request-line);
+    border-radius: 10px;
+    background: var(--request-line);
+}
+
+.staff-requests-page .svc-sum-item {
+    min-height: 88px;
+    padding: 14px 15px;
+    background: #fff;
+}
+
+.staff-requests-page .svc-sum-label {
+    color: var(--request-muted);
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
+
+.staff-requests-page .svc-sum-value {
+    margin-top: 8px;
+    color: var(--request-ink);
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.staff-requests-page .svc-sum-value.highlight {
+    color: var(--request-accent);
+}
+
+.staff-requests-page .ext-card,
+.staff-requests-page .svc-card {
+    margin-bottom: 12px;
+    padding: 17px 18px;
+}
+
+/* Normalize every request-card anatomy so each request type aligns */
+.staff-requests-page .ext-card > .d-flex:first-child,
+.staff-requests-page .svc-card > .d-flex:first-child {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start !important;
+    gap: 14px !important;
+    min-height: 38px;
+}
+
+.staff-requests-page .ext-card > .d-flex:first-child > div:first-child,
+.staff-requests-page .svc-card > .d-flex:first-child > div:first-child {
+    min-width: 0;
+    line-height: 1.45;
+}
+
+.staff-requests-page .ext-card > .d-flex:first-child > div:last-child,
+.staff-requests-page .svc-card > .d-flex:first-child > div:last-child {
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+    max-width: 100%;
+}
+
+.staff-requests-page .ext-card > p,
+.staff-requests-page .svc-card > p {
+    line-height: 1.45;
+}
+
+.staff-requests-page .ext-card > .d-flex.flex-wrap.mt-2,
+.staff-requests-page .svc-card > .d-flex.flex-wrap.mt-2 {
+    min-height: 38px;
+    align-items: flex-start;
+}
+
+.staff-requests-page .ext-card > .mt-2.text-end,
+.staff-requests-page .svc-card > .mt-2.text-end {
+    min-height: 38px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.staff-requests-page .svc-card > .row.mb-2 {
+    min-height: 28px;
+    align-items: center;
+    margin-inline: 0;
+}
+
+.staff-requests-page .svc-card > .row.mb-2 > [class*="col-"] {
+    padding-inline: 0 14px;
+}
+
+.staff-requests-page .ext-card .text-muted.small,
+.staff-requests-page .svc-card .text-muted.small {
+    color: var(--request-muted) !important;
+}
+
+.staff-requests-page .ext-card .badge,
+.staff-requests-page .svc-card .badge {
+    border-radius: 6px;
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 5px 8px;
+}
+
+.staff-requests-page .ext-card .btn,
+.staff-requests-page .svc-card .btn,
+.staff-requests-page .tab-pane .btn {
+    min-height: 38px;
+    border-radius: 7px;
+    font-weight: 700;
+}
+
+.staff-requests-page .btn-success {
+    background: #397454;
+    border-color: #397454;
+}
+
+.staff-requests-page .btn-success:hover {
+    background: #2f6045;
+    border-color: #2f6045;
+}
+
+.staff-requests-page .btn-outline-danger {
+    color: #a94e43;
+    border-color: #e3b7b0;
+}
+
+.staff-requests-page .btn-outline-danger:hover {
+    background: #f9e1de;
+    border-color: #c8796d;
+    color: #873b33;
+}
+
+.staff-requests-page #archiveList .ext-card {
+    border-left-color: #879791;
+}
+
+/* Archive tab and old-conversation detail */
+.staff-requests-page #tabArchive {
+    min-height: 520px;
+}
+
+.staff-requests-page #tabArchive > .d-flex {
+    align-items: stretch !important;
+}
+
+.staff-requests-page #tabArchive .form-select,
+.staff-requests-page #tabArchive input[type="date"] {
+    min-width: 150px;
+}
+
+.staff-requests-page #tabArchive .text-muted.small {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding-inline: 4px;
+}
+
+.staff-requests-page #archiveList {
+    display: grid;
+    gap: 10px;
+}
+
+.staff-requests-page #archiveList .ext-card,
+.staff-requests-page #oldConvList .ext-card {
+    position: relative;
+    margin-bottom: 0;
+    border: 1px solid var(--request-line) !important;
+    border-left: 4px solid #879791 !important;
+    border-radius: 10px;
+    background: #fff;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.staff-requests-page #archiveList .ext-card:hover,
+.staff-requests-page #oldConvList .ext-card:hover {
+    border-color: #c4d4cc !important;
+    box-shadow: 0 8px 18px rgba(31,49,45,.08);
+    transform: translateY(-1px);
+}
+
+.staff-requests-page #archiveList .ext-card .badge,
+.staff-requests-page #oldConvList .ext-card .badge {
+    border-radius: 6px;
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 5px 8px;
+}
+
+.staff-requests-page #oldConversationsModal .modal-dialog {
+    max-width: 980px;
+}
+
+.staff-requests-page #oldConversationsModal .modal-header {
+    background: var(--request-ink) !important;
+    border-bottom: 0;
+    padding: 16px 20px;
+}
+
+.staff-requests-page #oldConversationsModal .modal-title {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.staff-requests-page #oldConversationsModal .modal-body {
+    min-height: 430px !important;
+    padding: 20px;
+    background: #fbfcfb;
+}
+
+.staff-requests-page #oldConversationsModal .modal-body > .d-flex {
+    padding: 12px;
+    border: 1px solid var(--request-line);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.staff-requests-page #oldConvRoomFilter,
+.staff-requests-page #oldConvDateFrom,
+.staff-requests-page #oldConvDateTo {
+    min-height: 40px;
+    border-color: var(--request-line);
+    border-radius: 8px;
+}
+
+.staff-requests-page #oldConvMessages > button {
+    min-height: 40px;
+    border-radius: 8px;
+}
+
+.staff-requests-page #oldConvRoomTitle {
+    color: var(--request-ink);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.staff-requests-page #oldConvMsgContent {
+    max-height: 52vh !important;
+    padding: 18px !important;
+    border: 1px solid var(--request-line);
+    border-radius: 10px !important;
+    background: #eef3f0 !important;
+}
+
+.staff-requests-page #oldConvMsgContent .guest-request {
+    max-width: 78%;
+    margin-bottom: 14px;
+}
+
+.staff-requests-page #oldConvMsgContent .guest-message,
+.staff-requests-page #oldConvMsgContent .reply {
+    border: 1px solid var(--request-line);
+    border-radius: 10px;
+    box-shadow: 0 3px 9px rgba(31,49,45,.05);
+}
+
+.staff-requests-page #oldConvMsgContent .guest-message {
+    background: #fff;
+    color: var(--request-ink);
+}
+
+.staff-requests-page #oldConvMsgContent .reply {
+    background: var(--request-ink);
+    color: #fff;
+    margin-left: auto;
+}
+
+.staff-requests-page #oldConvMsgContent .chat-ts {
+    color: var(--request-muted);
+    font-size: .68rem;
+    margin-top: 5px;
+}
+
+.staff-requests-page #oldConvMsgContent .admin-bubble {
+    color: #d4dfda;
+}
+
+.staff-requests-page #oldConvMsgContent > .ext-card {
+    border-left-color: var(--request-accent) !important;
+    cursor: default;
+}
+
+@media (max-width: 767.98px) {
+    .staff-requests-page #tabArchive > .d-flex { display: grid !important; grid-template-columns: 1fr 1fr; }
+    .staff-requests-page #tabArchive > .d-flex .text-muted.small { grid-column: 1 / -1; }
+    .staff-requests-page #tabArchive .form-select,
+    .staff-requests-page #tabArchive input[type="date"] { min-width: 0; max-width: none !important; }
+    .staff-requests-page #oldConversationsModal .modal-body { padding: 12px; }
+    .staff-requests-page #oldConversationsModal .modal-body > .d-flex { display: grid !important; grid-template-columns: 1fr 1fr; }
+    .staff-requests-page #oldConvRoomFilter { grid-column: 1 / -1; max-width: none !important; }
+    .staff-requests-page #oldConvDateFrom,
+    .staff-requests-page #oldConvDateTo { max-width: none !important; }
+    .staff-requests-page #oldConvMsgContent .guest-request { max-width: 90%; }
+}
+
+.staff-requests-page .tab-pane .alert {
+    border-radius: 8px;
+}
+
+@media (max-width: 991.98px) {
+    .staff-requests-page .svc-summary-card { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 575.98px) {
+    .staff-requests-page .svc-summary-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .staff-requests-page .svc-sum-item { min-height: 76px; padding: 11px 12px; }
+    .staff-requests-page .svc-sum-value { margin-top: 5px; font-size: 1.12rem; }
+    .staff-requests-page .ext-card,
+    .staff-requests-page .svc-card { padding: 14px; }
+    .staff-requests-page .ext-card > .d-flex:first-child,
+    .staff-requests-page .svc-card > .d-flex:first-child {
+        grid-template-columns: 1fr;
+        gap: 8px !important;
+    }
+    .staff-requests-page .ext-card > .d-flex:first-child > div:last-child,
+    .staff-requests-page .svc-card > .d-flex:first-child > div:last-child {
+        justify-content: flex-start !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .staff-requests-page .request-layout { height: auto; min-height: 580px; }
+    .staff-requests-page .messages { min-width: 230px; width: 37%; padding: 10px; }
+    .staff-requests-page .tab-content { padding: 12px; }
+    /* At this width the six labels do not always fit, and a sideways scroller hid
+       whichever tab fell off the end — on a 820px tablet the last one was outside
+       the card with no scrollbar to say so. The row wraps instead. */
+    .staff-requests-page .main-card > .nav-tabs { flex-wrap: wrap; overflow: visible; row-gap: 4px; }
+    .staff-requests-page .main-card > .nav-tabs .nav-link { white-space: nowrap; padding-inline: 11px; }
+}
+
+@media (max-width: 767.98px) {
+    .staff-requests-page .main-card { margin-inline: 10px; }
+
+    /* Six tabs cannot fit across a phone. This used to scroll sideways with the
+       last two (Bookings, Archive) off-screen and no sign they existed — and
+       because the flex items were shrinkable, the visible ones were squeezed
+       until their labels wrapped, giving 69–91px buttons inside a 103px strip of
+       mostly empty white. They now wrap into two rows of pills: every tab is on
+       screen, nothing scrolls, and no label breaks across lines. */
+    /* Two even columns. The six labels need ~700px of type, so no phone can show
+       them in one row; a grid makes that read as a deliberate keypad instead of
+       tabs that got squeezed and clipped. Every tab is visible without swiping. */
+    .staff-requests-page .main-card > .nav-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+        padding: 10px 10px 12px;
+        overflow: visible;
+    }
+
+    .staff-requests-page .main-card > .nav-tabs .nav-item {
+        min-width: 0;
+    }
+
+    .staff-requests-page .main-card > .nav-tabs .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        width: 100%;
+        min-height: 40px;
+        padding: 8px 10px;
+        border: 1px solid var(--request-line);
+        border-bottom-width: 1px;
+        border-radius: 999px;
+        font-size: .8rem;
+        white-space: nowrap;
+    }
+
+    .staff-requests-page .main-card > .nav-tabs .nav-link.active,
+    .staff-requests-page .main-card > .nav-tabs .nav-link.active:hover {
+        border-color: var(--request-accent) !important;
+    }
+
+    .staff-requests-page .tab-content { padding: 10px; }
+    .staff-requests-page .request-layout { display: block !important; height: auto; min-height: 0; }
+    .staff-requests-page .messages,
+    .staff-requests-page .main-message { width: 100%; min-width: 0; }
+    .staff-requests-page .messages { max-height: 360px; margin-bottom: 12px; }
+    .staff-requests-page .main-message { min-height: 470px; }
+
+    /* Chat scrolls inside its panel instead of stretching the whole page */
+    .staff-requests-page .main-message {
+        display: flex;
+        flex-direction: column;
+        height: min(78vh, 640px);
+        min-height: 0;
+    }
+    .staff-requests-page .main-message-content {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .staff-requests-page .reply-box-area { flex-shrink: 0; }
+
+    /* The room list keeps its own scroll as well */
+    .staff-requests-page .messages {
+        display: flex;
+        flex-direction: column;
+    }
+    .staff-requests-page .messages .message-list-container {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        height: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .staff-requests-page .messages .search-filter { flex-shrink: 0; }
+}
+
+/* ── Touch floor — responsive audit, 2026-10-21 ─────────────────────────────
+   The reply bar's text field (38px), paperclip (25×38) and send button (38px)
+   were all under the floor. The paperclip is an <i> with a click handler, so
+   it needs its own box rather than a taller line. */
+.staff-requests-page .reply-input-row input { min-height: 40px; }
+
+.staff-requests-page .reply-input-row #attachBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+    margin-inline: 4px;
+    cursor: pointer;
+}
+
+.staff-requests-page .reply-input-row .send { min-height: 40px; }

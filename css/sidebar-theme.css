@@ -1,0 +1,461 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap");
+
+:root {
+    --amber: #ffb60a;
+    --amber-dark: #e6a308;
+    --brown: #933310;
+    --bg: #f5ede6;
+    --card-bg: #ffffff;
+    --text: #1e1108;
+    --muted: #7a6455;
+    --border: #ecddd3;
+    --sidebar-w: 230px;
+}
+
+body {
+    font-family: "DM Sans", "Segoe UI", sans-serif;
+    background-color: var(--bg) !important;
+    color: var(--text);
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        width: var(--sidebar-w) !important;
+        height: 100vh !important;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        background: var(--card-bg) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        border-right: 1px solid var(--border);
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .navbar > .container-fluid {
+        height: 100%;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .navbar-collapse {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+    }
+
+    .content,
+    .main-content {
+        margin-left: var(--sidebar-w) !important;
+        width: calc(100% - var(--sidebar-w));
+        max-width: none;
+    }
+}
+
+.navbar .bg-light {
+    background: var(--card-bg) !important;
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar .navbar-nav {
+    gap: 0.25rem !important;
+}
+
+.navbar .nav-item {
+    margin: 0 !important;
+}
+
+.navbar .navbar-nav.w-100.px-3 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+.navbar .d-none.d-md-block.text-center.py-4 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+.navbar .d-none.d-md-block.text-center.py-4 img {
+    width: 150px !important;
+}
+
+.navbar .nav-link {
+    padding: 10px 16px !important;
+    color: var(--muted) !important;
+    border-radius: 10px !important;
+    position: relative;
+    transition: all 0.2s !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+}
+
+.navbar .nav-link:hover {
+    background: #fff7e6 !important;
+    color: var(--amber-dark) !important;
+}
+
+.navbar .nav-link.active {
+    background: var(--amber) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+}
+
+.navbar .nav-link.active::before {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: 10px;
+    bottom: 10px;
+    width: 4px;
+    border-radius: 4px;
+    background: var(--amber);
+}
+
+.navbar .nav-link i {
+    font-size: 17px !important;
+}
+
+.navbar .nav-link span,
+.navbar .nav-link div,
+.navbar .nav-link small {
+    font-family: "DM Sans", "Segoe UI", sans-serif !important;
+    font-weight: inherit !important;
+    letter-spacing: 0 !important;
+}
+
+.navbar .notification-badge {
+    background: var(--amber) !important;
+    color: #fff !important;
+    font-size: 11px !important;
+    padding: 4px 7px !important;
+    font-weight: 600 !important;
+    line-height: 1.1 !important;
+    min-width: 24px;
+    text-align: center;
+    border-radius: 999px !important;
+}
+
+.navbar .mt-auto.p-3 {
+    padding: 1rem !important;
+}
+
+.navbar .logout-btn {
+    background: var(--brown) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    transition: 0.2s !important;
+    font-size: 0.9rem !important;
+}
+
+.navbar .logout-btn:hover {
+    background: transparent !important;
+    border: 1px solid var(--brown) !important;
+    color: var(--brown) !important;
+}
+
+/* ── Sidebar reachability on short screens ────────────────────────────────
+   The fixed sidebar is 100vh tall, but a laptop window can be much shorter
+   than the menu: with 9–10 items plus the logo and Logout, the last entries
+   used to fall off the bottom edge with no way to scroll to them. The sidebar
+   itself now scrolls, and short viewports get a compact density so everything
+   fits without scrolling in the common 768px-high case. */
+@media (min-width: 768px) {
+    .navbar {
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, .28) transparent;
+    }
+
+    .navbar > .container-fluid {
+        /* Grow past 100% instead of clipping the menu. */
+        height: auto !important;
+        min-height: 100%;
+    }
+
+    .navbar::-webkit-scrollbar { width: 8px; }
+    .navbar::-webkit-scrollbar-track { background: transparent; }
+    .navbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, .22);
+        border-radius: 8px;
+    }
+}
+
+/* Short laptop windows (e.g. 1366×768 with browser chrome): tighten it up. */
+@media (min-width: 768px) and (max-height: 820px) {
+    .navbar .d-none.d-md-block.text-center.py-4 {
+        padding: 12px 12px 14px !important;
+        margin-bottom: 8px;
+    }
+    .navbar .d-none.d-md-block.text-center.py-4 img { width: 112px !important; }
+    .navbar .navbar-nav.w-100.px-3 { gap: 2px !important; }
+    .navbar .nav-link {
+        min-height: 40px;
+        padding: 7px 12px !important;
+        font-size: .84rem !important;
+    }
+    .navbar .nav-link i { font-size: 16px !important; }
+    .navbar .mt-auto.p-3 { padding: 10px !important; }
+    .navbar .mt-auto.p-3::before {
+        margin-bottom: 6px;
+        padding: 4px 8px;
+        font-size: .68rem;
+    }
+    .navbar .logout-btn { min-height: 40px; }
+}
+
+/* Very short windows (900×600, projector mirroring): drop the logo rather
+   than hide navigation. */
+@media (min-width: 768px) and (max-height: 660px) {
+    .navbar .d-none.d-md-block.text-center.py-4 { display: none !important; }
+    .navbar .nav-link {
+        min-height: 36px;
+        font-size: .8rem !important;
+        padding: 5px 11px !important;
+    }
+    .navbar .navbar-nav.w-100.px-3 { gap: 1px !important; }
+    .navbar .mt-auto.p-3 { padding: 8px !important; }
+}
+
+/* Phones: the opened menu gets its own scroll area, so the last item and the
+   Logout button are always reachable on a small screen. */
+@media (max-width: 767.98px) {
+    #sidebarMenu.collapse.show {
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+}
+
+/* Staff operations shell */
+:root {
+    --staff-ink: #1f2a2a;
+    --staff-muted: #64716f;
+    --staff-bg: #f2f5f3;
+    --staff-surface: #ffffff;
+    --staff-border: #dce5e1;
+    --staff-accent: #b97836;
+    --staff-accent-dark: #855124;
+    --staff-sidebar: #253634;
+    --staff-sidebar-muted: #b9c7c1;
+    --staff-sidebar-active: #d99a51;
+    --staff-sidebar-w: 248px;
+}
+
+body {
+    background:
+        linear-gradient(135deg, rgba(218, 232, 225, .38), transparent 38rem),
+        var(--staff-bg) !important;
+    color: var(--staff-ink);
+}
+
+.navbar {
+    background: var(--staff-sidebar) !important;
+    border-right: 0 !important;
+    box-shadow: 8px 0 24px rgba(28, 45, 41, .1) !important;
+}
+
+.navbar .bg-light {
+    background: var(--staff-sidebar) !important;
+    border-bottom-color: rgba(255,255,255,.1);
+}
+
+/* Mobile top bar variant used by inventory/guest record (bg-white) */
+.navbar .bg-white {
+    background: var(--staff-sidebar) !important;
+    border-bottom-color: rgba(255,255,255,.1) !important;
+}
+
+.navbar .d-none.d-md-block.text-center.py-4 {
+    padding: 24px 16px 30px !important;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 14px;
+}
+
+.navbar .d-none.d-md-block.text-center.py-4 img {
+    width: 148px !important;
+    filter: brightness(0) invert(1);
+    opacity: .94;
+}
+
+.navbar .navbar-nav.w-100.px-3 {
+    padding-inline: 14px !important;
+    gap: 5px !important;
+}
+
+.navbar .nav-link {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    color: var(--staff-sidebar-muted) !important;
+    border-radius: 9px !important;
+    font-size: .91rem !important;
+    font-weight: 600 !important;
+}
+
+.navbar .nav-link:hover {
+    background: rgba(255,255,255,.1) !important;
+    color: #fff !important;
+}
+
+.navbar .nav-link.active {
+    background: var(--staff-sidebar-active) !important;
+    color: #1f2a2a !important;
+    box-shadow: 0 6px 14px rgba(217,154,81,.18);
+}
+
+.navbar .nav-link.active::before {
+    left: -14px;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    background: #f4d3a3;
+}
+
+.navbar .nav-link i {
+    width: 22px;
+    font-size: 18px !important;
+    text-align: center;
+}
+
+.navbar .notification-badge {
+    background: #df765d !important;
+    color: #fff !important;
+}
+
+.navbar .mt-auto.p-3 {
+    padding: 14px !important;
+}
+
+/* ── Signed-in role chip (quick "who am I" cue above Logout) ── */
+.navbar .mt-auto.p-3::before {
+    content: "Staff";
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, .18);
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+body.staff-superadmin .navbar .mt-auto.p-3::before {
+    content: "Superadmin";
+    border-color: rgba(255, 182, 10, .5);
+    background: rgba(255, 182, 10, .14);
+    color: #ffcf5c;
+}
+
+body.staff-admin .navbar .mt-auto.p-3::before {
+    content: "Admin";
+    border-color: rgba(217, 154, 81, .5);
+    background: rgba(217, 154, 81, .14);
+    color: #e8b87d;
+}
+
+body.staff-employee .navbar .mt-auto.p-3::before {
+    content: "Employee";
+    border-color: rgba(127, 184, 164, .5);
+    background: rgba(127, 184, 164, .14);
+    color: #9fd2bf;
+}
+
+.navbar .logout-btn {
+    min-height: 46px;
+    background: rgba(255,255,255,.1) !important;
+    border: 1px solid rgba(255,255,255,.15) !important;
+    color: #fff !important;
+}
+
+.navbar .logout-btn:hover {
+    background: #fff !important;
+    border-color: #fff !important;
+    color: var(--staff-sidebar) !important;
+}
+
+.content,
+.main-content {
+    padding-right: 26px;
+}
+
+.content > .container,
+.main-content > .container {
+    max-width: 1440px;
+}
+
+.dropdown-menu {
+    border: 1px solid var(--staff-border);
+    border-radius: 12px;
+    box-shadow: 0 14px 34px rgba(28,45,41,.14);
+}
+
+.notification-badge,
+.status,
+.room-number {
+    font-weight: 700;
+}
+
+@media (min-width: 992px) {
+    .navbar { width: var(--staff-sidebar-w) !important; }
+    .content, .main-content { margin-left: var(--staff-sidebar-w) !important; width: calc(100% - var(--staff-sidebar-w)); }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .navbar { width: 204px !important; }
+    .content, .main-content { margin-left: 204px !important; width: calc(100% - 204px); padding-right: 14px; }
+    .navbar .d-none.d-md-block.text-center.py-4 img { width: 126px !important; }
+    .navbar .nav-link { padding: 9px 11px !important; font-size: .8rem !important; }
+    .navbar .nav-link i { font-size: 16px !important; }
+    .navbar .navbar-nav.w-100.px-3 { padding-inline: 10px !important; }
+    .dashboard-panel { padding: 1.1rem !important; border-radius: 16px !important; }
+}
+
+@media (max-width: 767.98px) {
+    .content, .main-content { margin-top: 0; margin-left: 0 !important; padding-inline: 10px; }
+    .navbar .bg-light, .navbar .bg-white { min-height: 62px; }
+
+    /* Page header: keep the title and the bell on one line on phones.
+       (The profile avatar was removed from staff top bars.) */
+    .content.mb-4 > .d-flex,
+    .content.mb-3 > .d-flex {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 10px;
+    }
+
+    .content.mb-4 > .d-flex .pt-2,
+    .content.mb-3 > .d-flex .pt-2 { padding-top: 0 !important; }
+
+    .content.mb-4 > .d-flex h2 { padding-top: 0 !important; }
+
+    .content.mb-4 > .d-flex h2,
+    .content.mb-4 > .d-flex p,
+    .content.mb-3 .topbar-title,
+    .content.mb-3 .breadcrumb-line {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    /* Keep the bell right beside the header title, page-title sized */
+    .content.mb-4 > .d-flex > .ms-auto,
+    .content.mb-3 > .d-flex > .ms-auto {
+        margin-left: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .notif-dropdown-widget { flex-shrink: 0; }
+
+    .notif-dropdown-widget .bi-bell {
+        font-size: 1.35rem;
+        vertical-align: middle;
+    }
+}

@@ -1,0 +1,402 @@
+/* Shared staff Settings workspace */
+.staff-settings-page {
+    --settings-ink: #1f2a2a;
+    --settings-muted: #64716f;
+    --settings-bg: #f2f5f3;
+    --settings-surface: #ffffff;
+    --settings-soft: #f7faf8;
+    --settings-line: #dce5e1;
+    --settings-brass: #b97836;
+    --settings-brass-dark: #855124;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+        linear-gradient(135deg, rgba(218, 232, 225, .42), transparent 36rem),
+        var(--settings-bg) !important;
+    color: var(--settings-ink) !important;
+}
+
+@media (min-width: 992px) {
+    .staff-settings-page .settings-header-wrap,
+    .staff-settings-page .settings-shell,
+    .staff-settings-page .settings-footer {
+        width: min(calc(100% - 248px), 1440px) !important;
+        margin-left: max(248px, calc(248px + (100% - 248px - 1440px) / 2)) !important;
+        margin-right: auto !important;
+    }
+
+    .staff-settings-page .settings-header-wrap {
+        padding: 22px 24px 0 !important;
+    }
+
+    .staff-settings-page .settings-shell {
+        padding: 18px 24px 36px !important;
+    }
+
+    .staff-settings-page .settings-footer {
+        padding: 0 24px 24px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .staff-settings-page .settings-header-wrap,
+    .staff-settings-page .settings-shell,
+    .staff-settings-page .settings-footer {
+        width: calc(100% - 204px) !important;
+        margin-left: 204px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .staff-settings-page .settings-header-wrap,
+    .staff-settings-page .settings-shell,
+    .staff-settings-page .settings-footer {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+}
+
+.staff-settings-page .navbar {
+    background: #253634 !important;
+    border-right: 0 !important;
+    box-shadow: 8px 0 24px rgba(28, 45, 41, .1) !important;
+}
+
+.staff-settings-page .navbar .bg-light,
+.staff-settings-page .navbar .d-md-none {
+    background: #253634 !important;
+    border-color: rgba(255, 255, 255, .1) !important;
+}
+
+.staff-settings-page .navbar .d-none.d-md-block.text-center.py-4 {
+    padding: 24px 16px 30px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    margin-bottom: 14px;
+}
+
+.staff-settings-page .navbar .d-none.d-md-block.text-center.py-4 img {
+    filter: brightness(0) invert(1);
+    opacity: .94;
+}
+
+.staff-settings-page .navbar .nav-link {
+    min-height: 48px;
+    color: #b9c7c1 !important;
+    border-radius: 9px !important;
+    font-size: .91rem !important;
+    font-weight: 600 !important;
+}
+
+.staff-settings-page .navbar .nav-link:hover {
+    background: rgba(255, 255, 255, .1) !important;
+    color: #fff !important;
+}
+
+.staff-settings-page .navbar .nav-link.active {
+    background: #d99a51 !important;
+    color: #fff !important;
+}
+
+.staff-settings-page .navbar .nav-link.active::before {
+    background: #e6b36f !important;
+}
+
+.staff-settings-page .navbar .notification-badge {
+    background: #d99a51 !important;
+}
+
+.staff-settings-page .logout-btn {
+    background: #d99a51 !important;
+    border: 1px solid #d99a51 !important;
+}
+
+.staff-settings-page .logout-btn:hover {
+    background: transparent !important;
+    border-color: #e6b36f !important;
+    color: #fff !important;
+}
+
+.staff-settings-page .settings-topbar {
+    padding: 18px 20px !important;
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 14px !important;
+    background: rgba(255, 255, 255, .78) !important;
+    box-shadow: 0 10px 26px rgba(31, 49, 45, .06) !important;
+}
+
+.staff-settings-page .settings-eyebrow,
+.staff-settings-page .settings-section-kicker {
+    color: var(--settings-brass-dark) !important;
+}
+
+.staff-settings-page .settings-title,
+.staff-settings-page .settings-section-title,
+.staff-settings-page .settings-intro-card h3 {
+    color: var(--settings-ink) !important;
+}
+
+.staff-settings-page .settings-title {
+    font-size: clamp(1.5rem, 2vw, 2rem) !important;
+    font-weight: 800 !important;
+}
+
+.staff-settings-page .settings-subtitle,
+.staff-settings-page .settings-breadcrumb,
+.staff-settings-page .settings-section-text,
+.staff-settings-page .settings-muted,
+.staff-settings-page .text-muted {
+    color: var(--settings-muted) !important;
+}
+
+.staff-settings-page .settings-search-wrap {
+    min-width: min(100%, 22rem);
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+}
+
+.staff-settings-page .settings-search-wrap i {
+    color: var(--settings-brass) !important;
+}
+
+.staff-settings-page #myInput {
+    height: 42px !important;
+    color: var(--settings-ink) !important;
+}
+
+.staff-settings-page .settings-avatar {
+    width: 42px;
+    height: 42px;
+    border: 2px solid var(--settings-line) !important;
+    border-radius: 9px !important;
+    box-shadow: none !important;
+}
+
+.staff-settings-page .settings-intro-card,
+.staff-settings-page .settings-card {
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 12px !important;
+    background: var(--settings-surface) !important;
+    box-shadow: 0 10px 26px rgba(31, 49, 45, .06) !important;
+}
+
+.staff-settings-page .settings-intro-card {
+    padding: 20px !important;
+    background: linear-gradient(135deg, #f8fbf9, #fff) !important;
+}
+
+.staff-settings-page .settings-card {
+    padding: 20px !important;
+}
+
+.staff-settings-page .settings-section-header {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--settings-line);
+}
+
+.staff-settings-page .settings-section-kicker {
+    font-size: .7rem !important;
+    letter-spacing: .1em !important;
+}
+
+.staff-settings-page .settings-section-title {
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
+}
+
+.staff-settings-page .settings-note {
+    border: 1px solid #e8c99f !important;
+    border-radius: 9px !important;
+    background: #fff8ec !important;
+    color: #76552c !important;
+}
+
+.staff-settings-page .settings-profile-panel {
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 10px !important;
+    background: var(--settings-soft) !important;
+}
+
+.staff-settings-page .profile-pic-container {
+    border-color: rgba(185, 120, 54, .42) !important;
+    box-shadow: 0 10px 24px rgba(31, 49, 45, .1) !important;
+}
+
+.staff-settings-page .upload-button {
+    background: var(--settings-brass) !important;
+    border-radius: 7px !important;
+    box-shadow: none !important;
+}
+
+.staff-settings-page .upload-button:hover {
+    background: var(--settings-brass-dark) !important;
+}
+
+.staff-settings-page .settings-form .form-label,
+.staff-settings-page .modal .form-label,
+.staff-settings-page .modal label {
+    color: var(--settings-ink) !important;
+    font-weight: 800 !important;
+}
+
+.staff-settings-page .settings-form .form-control,
+.staff-settings-page .settings-form .form-select,
+.staff-settings-page .modal .form-control,
+.staff-settings-page .modal .form-select {
+    min-height: 42px !important;
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    color: var(--settings-ink) !important;
+}
+
+.staff-settings-page .settings-form .form-control:focus,
+.staff-settings-page .settings-form .form-select:focus,
+.staff-settings-page .modal .form-control:focus,
+.staff-settings-page .modal .form-select:focus {
+    border-color: var(--settings-brass) !important;
+    box-shadow: 0 0 0 3px rgba(185, 120, 54, .14) !important;
+}
+
+.staff-settings-page .settings-submit-btn,
+.staff-settings-page .settings-accent-btn,
+.staff-settings-page #yesBtn {
+    min-height: 42px;
+    border: 1px solid var(--settings-brass) !important;
+    border-radius: 8px !important;
+    background: var(--settings-brass) !important;
+    box-shadow: none !important;
+}
+
+.staff-settings-page .settings-submit-btn:hover,
+.staff-settings-page .settings-accent-btn:hover,
+.staff-settings-page #yesBtn:hover {
+    background: var(--settings-brass-dark) !important;
+}
+
+.staff-settings-page .settings-role-badge {
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 6px !important;
+    background: #eef4f0 !important;
+    color: var(--settings-ink) !important;
+}
+
+.staff-settings-page .settings-tool-card {
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 10px !important;
+    background: var(--settings-soft) !important;
+    color: var(--settings-ink) !important;
+}
+
+.staff-settings-page .settings-tool-card:hover {
+    border-color: var(--settings-brass) !important;
+    background: #fff !important;
+    color: var(--settings-ink) !important;
+    box-shadow: 0 8px 18px rgba(31, 49, 45, .08) !important;
+}
+
+.staff-settings-page .settings-tool-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 9px !important;
+    background: #f8ead8 !important;
+    color: var(--settings-brass-dark) !important;
+}
+
+.staff-settings-page .settings-tool-text,
+.staff-settings-page .settings-manual-section p,
+.staff-settings-page .settings-manual-body {
+    color: var(--settings-muted) !important;
+}
+
+.staff-settings-page .table-responsive {
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 10px !important;
+    background: #fff !important;
+}
+
+.staff-settings-page .settings-table thead th {
+    padding: 12px 14px !important;
+    background: var(--settings-soft) !important;
+    color: var(--settings-muted) !important;
+    border-bottom: 1px solid var(--settings-line) !important;
+}
+
+.staff-settings-page .settings-table tbody td {
+    padding: 12px 14px !important;
+    color: var(--settings-ink) !important;
+    border-color: #edf2ef !important;
+}
+
+.staff-settings-page .settings-table tbody tr:hover td {
+    background: #f8fbf9 !important;
+}
+
+.staff-settings-page .settings-thumb {
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+.staff-settings-page .settings-icon-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 7px !important;
+    background: #fff !important;
+    color: var(--settings-brass-dark) !important;
+}
+
+.staff-settings-page .settings-icon-btn:hover {
+    background: var(--settings-brass) !important;
+    border-color: var(--settings-brass) !important;
+    color: #fff !important;
+    transform: none;
+}
+
+.staff-settings-page .settings-footer-bar {
+    border-top-color: var(--settings-line) !important;
+}
+
+.staff-settings-page .footer {
+    color: var(--settings-muted) !important;
+}
+
+.staff-settings-page .modal-content {
+    border: 1px solid var(--settings-line) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 18px 44px rgba(31, 49, 45, .14) !important;
+}
+
+.staff-settings-page .modal-header,
+.staff-settings-page .modal-footer {
+    border-color: var(--settings-line) !important;
+    background: var(--settings-soft) !important;
+}
+
+@media (max-width: 767.98px) {
+    .staff-settings-page .settings-topbar,
+    .staff-settings-page .settings-intro-card,
+    .staff-settings-page .settings-card {
+        padding: 16px !important;
+        border-radius: 10px !important;
+    }
+
+    .staff-settings-page .settings-toolbar,
+    .staff-settings-page .settings-search-wrap {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .staff-settings-page *,
+    .staff-settings-page *::before,
+    .staff-settings-page *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}

@@ -1,0 +1,70 @@
+/* Review Page - Marle Hotel */
+
+/* Hero */
+#home{color:var(--marle-brown);padding:24px 20px 40px;text-align:left;align-items:flex-start;justify-content:flex-start}
+
+/* Review Meta Strip */
+.review-meta-strip { display: flex; flex-wrap: wrap; gap: 16px; background: #fff; border-radius: 14px; padding: 14px 18px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.review-meta-strip span { display: flex; align-items: center; gap: 6px; font-size: .88rem; }
+
+/* Section Labels */
+.section-label { font-size: .85rem; font-weight: 700; color: var(--marle-brown); margin-bottom: 10px; }
+
+/* Star Rating */
+.star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; }
+.star-rating input { display: none; }
+.star-rating label { font-size: 2rem; color: #ddd; cursor: pointer; transition: color .15s ease; }
+.star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: var(--marle-gold); }
+
+/* Category Group */
+.category-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.category-group input { display: none; }
+.category-group label { padding: 8px 18px; border-radius: 50px; border: 1px solid var(--marle-gold-deep); color: var(--marle-gold-deep); font-size: .85rem; font-weight: 500; cursor: pointer; transition: all .2s ease; }
+.category-group input:checked + label { background: var(--marle-gold-deep); color: var(--marle-gold); border-color: var(--marle-gold-deep); }
+
+/* Review Textarea */
+.form-control { border: 1px solid var(--marle-beige,#ccc); border-radius: 14px; padding: 12px 16px; font-size: .9rem; }
+.form-control:focus { border-color: var(--marle-gold); box-shadow: 0 0 0 .2rem rgba(255,182,10,.2); }
+
+/* Submit Button */
+.submit-btn { background: var(--marle-gold); border: none; color: #fff; font-weight: 600; border-radius: 12px; padding: 12px 24px; width: 100%; }
+.submit-btn:hover { background: #d99600; transform: translateY(-1px); }
+
+/* Alert Custom */
+.alert-success-custom { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; }
+.alert-danger-custom { background: #fef2f2; border: 1px solid #fecaca; border-radius: 14px; }
+
+/* Extension Button (reuse) */
+.extension-btn { background-color: var(--marle-gold); font-weight: 500; border-radius: 12px; padding: 15px; }
+.extension-btn:hover { background-color: transparent; border-color: var(--marle-gold-deep); color: var(--marle-gold-deep); }
+
+/* Hover Animations */
+.category-group label{transition:all .2s ease}
+.category-group label:hover{border-color:var(--marle-gold);color:var(--marle-gold);transform:translateY(-1px)}
+.submit-btn{transition:all .2s ease}
+.submit-btn:hover{box-shadow:0 4px 12px rgba(255,182,10,.3)}
+.review-meta-strip{transition:all .2s ease}
+.review-meta-strip:hover{box-shadow:0 2px 10px rgba(0,0,0,.06)}
+
+/* Modern concierge treatment */
+#home{min-height:26vh;padding:42px 24px 54px}
+.review-meta-strip{background:var(--marle-card);border:1px solid var(--marle-line);border-radius:var(--radius-md);box-shadow:var(--portal-shadow-soft)}
+.review-meta-strip span{color:var(--marle-ink-soft)}
+.section-label{color:var(--marle-ink)}
+.star-rating label{color:#d7dfda}
+.star-rating label:hover,.star-rating label:hover~label,.star-rating input:checked~label{color:var(--marle-gold)}
+.category-group label{border-color:var(--marle-line);color:var(--marle-ink-soft);border-radius:8px}
+.category-group input:checked+label{background:var(--marle-brown);border-color:var(--marle-brown);color:#fff}
+.form-control{border-color:var(--marle-line);border-radius:var(--radius-sm);background:var(--marle-card)}
+.form-control:focus{border-color:var(--marle-gold);box-shadow:0 0 0 .2rem rgba(195,138,69,.14)}
+.submit-btn{background:var(--marle-brown);border-radius:8px}
+.submit-btn:hover{background:var(--marle-rust)}
+.alert-success-custom,.alert-danger-custom{border-radius:var(--radius-sm)}
+
+/* Review composition */
+.review-page{max-width:1200px;margin:0 auto}
+.review-page>.container.mt-4{max-width:760px;margin-inline:auto!important;padding-inline:24px}
+.review-page .review-meta-strip{gap:10px 22px;padding:16px 18px}
+.review-page form{background:var(--marle-card);border:1px solid var(--marle-line);border-radius:var(--radius-md);padding:24px;box-shadow:var(--portal-shadow-soft)}
+.review-page .star-rating{padding:8px 0}
+@media(max-width:767.98px){.review-page>.container.mt-4{padding-inline:14px}.review-page form{padding:18px}}

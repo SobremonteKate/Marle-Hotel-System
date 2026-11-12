@@ -1,0 +1,90 @@
+/* Services Page - Marle Hotel */
+
+/* Hero */
+#home{color:var(--marle-brown);padding:24px 20px 40px;text-align:left;align-items:flex-start;justify-content:flex-start}
+
+/* Compact Service Cards */
+.service-card .card { background: #fff; border: 1px solid rgba(0,0,0,.04); }
+.service-card .card-body { padding: 14px 16px; display: flex; align-items: center; gap: 14px; }
+.service-card .card-icon { width: 50px; height: 50px; min-width: 50px; background: var(--marle-cream); color: var(--marle-gold-deep); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.service-card .card-icon i { margin: 0 !important; padding: 0 !important; }
+.service-card .card-title { font-size: .95rem; font-weight: 650; color: var(--marle-gold-deep); margin-bottom: 2px; }
+.service-card .card-text { font-size: .8rem; color: #6c757d; line-height: 1.4; margin-bottom: 4px; }
+.service-card .price { font-size: .95rem; }
+.service-card .add-service-btn { font-size: 13px; padding: 7px 9px; background-color: var(--marle-brown); color: var(--marle-gold); border-radius: 10px; border: none; transition: transform .2s; cursor: pointer; flex-shrink: 0; }
+.service-card .add-service-btn:active { transform: scale(.9); }
+
+/* See More Button */
+.see-more-btn { background: #fff; border: 2px solid var(--marle-gold-deep); color: var(--marle-gold-deep); border-radius: 14px; padding: 10px 28px; font-weight: 600; font-size: .9rem; transition: all .2s ease; }
+.see-more-btn:hover { background: var(--marle-gold-deep); color: #fff; }
+
+/* Request Filter Buttons */
+.status-filter-btn { border-radius: 50px; padding: 6px 16px; border: 1px solid var(--marle-gold-deep); background: #fff; color: var(--marle-gold-deep); font-size: .8rem; font-weight: 500; transition: all .2s ease; }
+.status-filter-btn:hover { border-color: var(--marle-gold); color: var(--marle-gold); }
+.status-filter-btn.active { background: var(--marle-gold-deep); border-color: var(--marle-gold-deep); color: var(--marle-gold); }
+
+/* Payment Badges */
+.badge-paid { background: #d4edda; color: #155724; padding: 3px 10px; border-radius: 20px; font-size: .75rem; font-weight: 600; }
+.badge-unpaid { background: #fff3cd; color: #856404; padding: 3px 10px; border-radius: 20px; font-size: .75rem; font-weight: 600; }
+
+/* Hide old card-img-top emoji blocks */
+.service-card .card-img-top { display: none !important; }
+
+/* Hover Animations */
+.service-card .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.service-card .card-icon{transition:all .25s ease}
+.service-card:hover .card-icon{background:var(--marle-rust);color:#fff;transform:scale(1.05)}
+.service-card .add-service-btn{transition:all .2s ease}
+.service-card .add-service-btn:hover{background:var(--marle-rust);transform:scale(1.05)}
+.service-card .card-title{transition:color .2s ease}
+.service-card:hover .card-title{color:var(--marle-gold)}
+
+/* Desktop Card Sizing */
+@media(min-width:768px){
+  .service-card .card{height:100%;display:flex;flex-direction:column}
+  .service-card .card-body{flex-grow:1}
+  #services-grid{row-gap:20px!important}
+}
+
+/* Mobile Spacing */
+@media(max-width:767.98px){
+  .service-card .card-body{padding:12px 14px}
+  .service-card .card-icon{width:44px;height:44px;min-width:44px;font-size:20px}
+  #services-grid{row-gap:14px!important}
+}
+
+/* Category to Cards Spacing */
+.services-category-area{margin-bottom:8px}
+
+/* Bottom Section Spacing */
+.content.p-4.mb-2{margin-bottom:16px!important}
+
+/* Card Filter Animation */
+@keyframes cardFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.service-card.fade-in{animation:cardFadeIn .3s ease both}
+
+/* Modern concierge treatment */
+#home{min-height:26vh;padding:42px 24px 54px}
+.service-card .card{border-color:var(--marle-line);border-radius:var(--radius-md);box-shadow:var(--portal-shadow-soft)}
+.service-card .card-body{padding:17px 18px;gap:15px}
+.service-card .card-icon{background:#eef2ee;color:var(--marle-gold-deep);border-radius:11px}
+.service-card .card-title{color:var(--marle-ink)}
+.service-card .card-text{color:var(--marle-muted)}
+.service-card .add-service-btn{background:var(--marle-brown);color:#fff;border-radius:8px}
+.service-card .add-service-btn:hover{background:var(--marle-rust)}
+.see-more-btn{border:1px solid var(--marle-line);color:var(--marle-ink-soft);border-radius:8px;background:var(--marle-card)}
+.see-more-btn:hover{background:var(--marle-brown);border-color:var(--marle-brown);color:#fff}
+.status-filter-btn{border-color:var(--marle-line);background:var(--marle-card);color:var(--marle-ink-soft);border-radius:8px}
+.status-filter-btn.active{background:var(--marle-brown);border-color:var(--marle-brown);color:#fff}
+@media(max-width:767.98px){.service-card .card-body{padding:14px}.service-card .card-icon{width:44px;height:44px;min-width:44px}}
+
+/* Services composition */
+.services-page{max-width:1200px;margin:0 auto}
+.services-hero .landing-text{text-align:left;margin-left:max(0px, calc((100% - 1080px) / 2))}
+.services-hero .landing-text .line{margin-left:0}
+.services-page .services-category-area{max-width:1080px;padding-top:22px}
+.services-page .content.p-4{max-width:1080px;margin-inline:auto}
+.services-page #services-grid{margin-top:4px}
+.services-page .service-card .card-body{min-height:148px}
+.services-page .content.p-4.mb-2:last-of-type{border-top:1px solid var(--marle-line);margin-top:24px;padding-top:28px}
+@media(max-width:767.98px){.services-page .services-category-area{padding-inline:14px}.services-page .content.p-4{padding-inline:14px!important}.services-page .service-card .card-body{min-height:132px}}

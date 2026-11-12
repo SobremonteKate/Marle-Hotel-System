@@ -1,0 +1,64 @@
+/* Hotel Guide - Marle Hotel */
+
+.guide-header { background: var(--marle-brown); color: #fff; padding: 28px 20px 32px; text-align: center; }
+.guide-header h2 { font-weight: 700; font-size: 1.3rem; color: var(--marle-gold); }
+.guide-header p { color: var(--marle-beige,#ccc) !important; font-size: .9rem; }
+
+.guide-content { margin-top: -12px; padding-bottom: 20px; }
+
+.guide-section { background: #fff; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.05); margin-bottom: 14px; overflow: hidden; }
+.guide-section-header { display: flex; align-items: center; gap: 10px; padding: 14px 18px 0; color: var(--marle-gold-deep); }
+.guide-section-header i { font-size: 1.2rem; }
+.guide-section-header h5 { font-weight: 700; font-size: .95rem; color: var(--marle-gold-deep); }
+.guide-section-body { padding: 10px 18px 16px; font-size: .88rem; color: #555; line-height: 1.6; }
+
+.amenity-item { display: flex; align-items: center; gap: 10px; background: var(--marle-cream); border-radius: 12px; padding: 10px 12px; font-size: .85rem; font-weight: 500; color: var(--marle-brown); }
+.amenity-item i { font-size: 1.1rem; color: var(--marle-gold-deep); width: 24px; text-align: center; }
+
+.guide-rules-list { list-style: none; padding-left: 0; margin-bottom: 0; }
+.guide-rules-list li { padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; font-size: .88rem; }
+.guide-rules-list li i { margin-top: 3px; font-size: .85rem; }
+
+.info-box { background: var(--marle-cream); border-radius: 12px; padding: 14px 10px; }
+.info-box-label { font-size: .72rem; text-transform: uppercase; color: #6c757d; margin-bottom: 4px; }
+.info-box-value { font-size: 1.1rem; font-weight: 700; color: var(--marle-gold-deep); }
+
+.service-row { display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: var(--marle-cream); border-radius: 10px; font-size: .85rem; font-weight: 500; color: var(--marle-brown); }
+.service-row i { font-size: 1rem; color: var(--marle-gold-deep); width: 24px; text-align: center; }
+
+.contact-item { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--marle-cream); }
+.contact-item:last-child { border-bottom: none; padding-bottom: 0; }
+.contact-item>i { font-size: 1.1rem; color: var(--marle-gold); margin-top: 3px; width: 24px; text-align: center; }
+
+/* Modern concierge treatment */
+.guide-header{background:linear-gradient(135deg,var(--marle-brown),#38504a);padding:38px 20px 44px;text-align:left}
+.guide-header h2{color:#f4d8ac;font-size:1.5rem;letter-spacing:-.02em}
+.guide-header p{color:#d2ddd7!important}
+.guide-content{margin-top:-20px}
+.guide-section{background:var(--marle-card);border:1px solid var(--marle-line);border-radius:var(--radius-md);box-shadow:var(--portal-shadow-soft)}
+.guide-section-header{padding:17px 19px 0;color:var(--marle-gold-deep)}
+.guide-section-header h5{color:var(--marle-ink)}
+.guide-section-body{color:var(--marle-ink-soft)}
+.amenity-item,.info-box,.service-row{background:#eef2ee;color:var(--marle-ink)}
+.amenity-item i,.service-row i{color:var(--marle-gold-deep)}
+.info-box-label{color:var(--marle-muted)}
+.info-box-value{color:var(--marle-rust)}
+
+/* Guide composition */
+.guide-page{max-width:1200px;margin:0 auto}
+.guide-page .guide-content{max-width:860px;padding-inline:24px}
+.guide-page .guide-content{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:1080px}
+.guide-page .guide-section:first-child{grid-column:1 / -1}
+.guide-page .guide-section{margin-bottom:0}
+.guide-page .guide-section-body{padding:14px 20px 20px}
+.guide-page .guide-section-header{padding:19px 20px 0}
+.guide-page .guide-section-header i{display:grid;place-items:center;width:34px;height:34px;background:#eef2ee;border-radius:9px}
+@media(max-width:767.98px){.guide-page .guide-content{display:block;padding-inline:14px}.guide-page .guide-section{margin-bottom:14px}.guide-page .guide-section-body{padding-inline:16px}.guide-page .guide-section-header{padding-inline:16px}}
+
+/* Hover Animations */
+.guide-section{transition:all .2s ease}
+.guide-section:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.07)}
+.amenity-item{transition:all .2s ease;cursor:default}
+.amenity-item:hover{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.service-row{transition:all .2s ease;cursor:default}
+.service-row:hover{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}

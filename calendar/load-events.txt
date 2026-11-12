@@ -1,0 +1,20 @@
+<?php
+include "dbconnect.php";
+
+$result = $conn->query("SELECT * FROM calendartbl");
+$events = [];
+
+while ($row = $result->fetch_assoc()) {
+    $events[] = [
+        'id' => $row['id'],
+        'title' => $row['title'],
+        'start' => $row['event_date'] . 'T' . $row['event_time'],
+        // 'start' => $row['start'],
+        'end' => $row['end'],
+        'backgroundColor' => $row['color'],
+        'description' => $row['description']
+    ];
+}
+
+echo json_encode($events);
+?>

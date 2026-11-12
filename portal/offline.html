@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#263431">
+<meta name="robots" content="noindex">
+<title data-en="Offline — Marle Guest Portal" data-tl="Walang koneksyon — Marle Guest Portal">Offline — Marle Guest Portal</title>
+
+<!--
+  offline.html — what a guest sees when the portal cannot be reached.
+
+  Cached by sw.js at install time, so it opens with no network at all: every
+  style and the mark are inline, and no web font is requested (Fraunces would
+  not arrive offline, so the display face falls back to Georgia). It reads the
+  same marle_lang cookie the rest of the site uses — English and Tagalog are
+  both in the markup, the script shows one — so a Tagalog guest is not handed
+  an English dead end.
+-->
+<style>
+    :root {
+        --m-green: #263431;
+        --m-brass: #c38a45;
+        --m-brass-deep: #936126;
+        --m-ink: #1d2525;
+        --m-ink-soft: #53605d;
+        --m-muted: #71807a;
+        --m-cream: #f3f5f1;
+        --m-card: #fffdf9;
+        --m-line: #dde4df;
+        --m-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        --m-display: Georgia, "Times New Roman", serif;
+        --m-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: radial-gradient(circle at 12% -10%, rgba(195, 138, 69, 0.12), transparent 30rem), var(--m-cream);
+        color: var(--m-ink);
+        font-family: var(--m-body);
+        -webkit-text-size-adjust: 100%;
+    }
+
+    .offline {
+        width: 100%;
+        max-width: 27rem;
+        padding: 28px 24px 24px;
+        border: 1px solid var(--m-line);
+        border-radius: 22px;
+        background: var(--m-card);
+        box-shadow: 0 18px 44px rgba(35, 50, 45, 0.1);
+        text-align: center;
+    }
+
+    .mark {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 18px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--m-green);
+        box-shadow: 0 0 0 1px rgba(195, 138, 69, 0.45) inset;
+    }
+
+    .mark span {
+        font-family: var(--m-display);
+        font-size: 2.5rem;
+        line-height: 1;
+        color: var(--m-brass);
+        transform: translateY(-2px);
+    }
+
+    .eyebrow {
+        margin: 0;
+        color: var(--m-brass-deep);
+        font-family: var(--m-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        margin: 8px 0 0;
+        font-family: var(--m-display);
+        font-size: 1.75rem;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.1;
+    }
+
+    .lead {
+        margin: 10px 0 0;
+        color: var(--m-ink-soft);
+        font-size: 0.92rem;
+        line-height: 1.6;
+    }
+
+    .retry {
+        width: 100%;
+        min-height: 52px;
+        margin-top: 22px;
+        border: 0;
+        border-radius: 13px;
+        background: var(--m-green);
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    .retry:hover { background: #33473f; }
+    .retry:focus-visible { outline: 3px solid rgba(195, 138, 69, 0.55); outline-offset: 3px; }
+
+    .note {
+        margin: 12px 0 0;
+        color: var(--m-muted);
+        font-size: 0.76rem;
+        line-height: 1.5;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+    }
+</style>
+</head>
+<body>
+
+<main class="offline">
+    <div class="mark" aria-hidden="true"><span>M</span></div>
+
+    <p class="eyebrow" data-en="No connection" data-tl="Walang koneksyon">No connection</p>
+    <h1 data-en="You're offline" data-tl="Wala kang koneksyon">You're offline</h1>
+    <p class="lead"
+       data-en="The portal comes from the hotel's own system, so it needs the network. Nothing has been lost."
+       data-tl="Ang portal ay galing sa sistema ng hotel, kaya kailangan ng koneksyon. Walang nawala sa iyo.">The portal comes from the hotel's own system, so it needs the network. Nothing has been lost.</p>
+
+    <button class="retry" type="button" onclick="location.reload()"
+            data-en="Try again" data-tl="Subukan muli">Try again</button>
+
+    <p class="note"
+       data-en="Still stuck? The front desk can take your order in person."
+       data-tl="Hindi pa rin? Puwede kang mag-order sa front desk.">Still stuck? The front desk can take your order in person.</p>
+</main>
+
+<script>
+(function () {
+    // Same cookie the rest of the site reads (includes/site_i18n.php), so the
+    // fallback speaks the language the guest chose on the pages before this one.
+    var match = document.cookie.match(/(?:^|;\s*)marle_lang=([^;]+)/);
+    var isTagalog = !!match && decodeURIComponent(match[1]).toLowerCase() === 'tl';
+    if (!isTagalog) return;
+
+    document.documentElement.lang = 'tl';
+    var nodes = document.querySelectorAll('[data-tl]');
+    for (var i = 0; i < nodes.length; i++) {
+        var copy = nodes[i].getAttribute('data-tl');
+        if (copy) nodes[i].textContent = copy;
+    }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+/* Shared Guest Tokens workspace */
+.staff-tokens-page {
+    --token-ink: #1f2a2a;
+    --token-muted: #65736f;
+    --token-line: #dce5e1;
+    --token-surface: #ffffff;
+    --token-soft: #f2f6f3;
+    --token-accent: #b97836;
+    --token-success: #397454;
+    --token-danger: #a94e43;
+}
+
+.staff-tokens-page .content {
+    max-width: 1440px;
+    margin-inline: auto;
+}
+
+/* Center the token manager inside the content area beside the sidebar */
+@media (min-width: 992px) {
+    .staff-tokens-page > .content {
+        width: min(calc(100vw - var(--staff-sidebar-w, 248px) - 48px), 1440px) !important;
+        margin-left: max(calc(var(--staff-sidebar-w, 248px) + 24px), calc((100vw - 1440px) / 2 + 24px)) !important;
+        margin-right: 24px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .staff-tokens-page > .content {
+        width: calc(100vw - 204px - 28px) !important;
+        margin-left: 218px !important;
+        margin-right: 14px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .staff-tokens-page > .content {
+        width: calc(100vw - 20px) !important;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+}
+
+.staff-tokens-page .content > .d-flex:first-child {
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--token-line);
+    border-radius: 14px;
+    background: rgba(255,255,255,.76);
+}
+
+.staff-tokens-page .content > .d-flex:first-child h4 {
+    color: var(--token-ink);
+    font-size: clamp(1.35rem, 2vw, 1.85rem);
+    font-weight: 800;
+}
+
+.staff-tokens-page .content > .d-flex:first-child small {
+    color: var(--token-muted) !important;
+}
+
+.staff-tokens-page .alert {
+    border: 1px solid var(--token-line);
+    border-radius: 10px;
+}
+
+.staff-tokens-page .row.g-4 > [class*="col-"] > .card {
+    height: auto;
+    border: 1px solid var(--token-line) !important;
+    border-radius: 14px !important;
+    background: var(--token-surface);
+    box-shadow: 0 8px 22px rgba(31,49,45,.06) !important;
+}
+
+/* The active-token column should end with its content, not match the form column. */
+.staff-tokens-page .row.g-4 > [class*="col-lg-8"] > .card {
+    height: auto !important;
+}
+
+.staff-tokens-page .row.g-4 > [class*="col-lg-8"] > .card + .card {
+    margin-top: 16px;
+}
+
+.staff-tokens-page .card-body {
+    padding: 20px;
+}
+
+.staff-tokens-page .section-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--token-ink) !important;
+    border-bottom: 1px solid var(--token-line);
+    padding-bottom: 12px;
+    font-size: .82rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.staff-tokens-page .section-title i {
+    color: var(--token-accent);
+    font-size: 1rem;
+}
+
+.staff-tokens-page .form-label {
+    color: var(--token-ink);
+    font-size: .82rem;
+    font-weight: 800 !important;
+}
+
+.staff-tokens-page .form-text,
+.staff-tokens-page .text-muted,
+.staff-tokens-page #personsLabel,
+.staff-tokens-page #plateHint {
+    color: var(--token-muted) !important;
+}
+
+.staff-tokens-page .room-picker-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid var(--token-line);
+    border-radius: 10px;
+    background: var(--token-soft);
+}
+
+.staff-tokens-page .room-tile {
+    min-height: 62px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 9px 4px 7px;
+}
+
+.staff-tokens-page .room-tile-available {
+    background: #e5f1e9;
+    border-color: #b7d8c2;
+    color: #356548;
+}
+
+.staff-tokens-page .room-tile-available:hover {
+    background: #d7eadf;
+    border-color: #7eb58e;
+    box-shadow: 0 5px 12px rgba(57,116,84,.13);
+}
+
+.staff-tokens-page .room-tile-available.selected {
+    background: var(--token-success);
+    border-color: #2f6045;
+    box-shadow: 0 5px 14px rgba(57,116,84,.2);
+}
+
+.staff-tokens-page .room-tile-occupied {
+    background: #edf0ef;
+    border-color: #d6dfdb;
+    color: #899692;
+}
+
+.staff-tokens-page .room-tile-maintenance {
+    background: #f8ead8;
+    border-color: #e5c89b;
+    color: #855124;
+}
+
+.staff-tokens-page .room-tile:focus-visible,
+.staff-tokens-page .hrs-preset:focus-visible,
+.staff-tokens-page button:focus-visible,
+.staff-tokens-page input:focus-visible,
+.staff-tokens-page select:focus-visible {
+    outline: 3px solid rgba(185,120,54,.35);
+    outline-offset: 2px;
+}
+
+.staff-tokens-page .hrs-preset {
+    min-height: 38px;
+    border: 1px solid var(--token-line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--token-muted);
+    font-weight: 700;
+}
+
+.staff-tokens-page .hrs-preset:hover {
+    background: #f8ead8;
+    border-color: #e2bd87;
+    color: #855124;
+}
+
+.staff-tokens-page #hoursInput,
+.staff-tokens-page .plate-input,
+.staff-tokens-page .form-control {
+    min-height: 42px;
+    border-color: var(--token-line) !important;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.staff-tokens-page #hoursInput:focus,
+.staff-tokens-page .plate-input:focus,
+.staff-tokens-page .form-control:focus {
+    border-color: var(--token-accent) !important;
+    box-shadow: 0 0 0 .2rem rgba(185,120,54,.14);
+}
+
+.staff-tokens-page .card-body > form button[type="submit"] {
+    min-height: 46px;
+    border: 0 !important;
+    border-radius: 8px;
+    background: var(--token-ink) !important;
+    color: #fff !important;
+    box-shadow: 0 7px 16px rgba(31,49,45,.14);
+}
+
+.staff-tokens-page .card-body > form button[type="submit"]:hover {
+    background: var(--token-accent-dark, #855124) !important;
+}
+
+.staff-tokens-page .token-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+/* Keep a small active-token set compact instead of stretching one card across the panel. */
+.staff-tokens-page .token-cards-grid.token-count-1 {
+    grid-template-columns: minmax(0, 360px);
+}
+
+.staff-tokens-page .token-cards-grid.token-count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 760px;
+}
+
+.staff-tokens-page .token-cards-grid.token-count-3,
+.staff-tokens-page .token-cards-grid.token-count-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 760px;
+}
+
+.staff-tokens-page .token-cards-grid.token-count-5 {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.staff-tokens-page .token-card-b {
+    min-height: 270px;
+    border: 1px solid var(--token-line);
+    border-left: 4px solid var(--token-success);
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 4px 13px rgba(31,49,45,.05);
+    padding: 16px;
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.staff-tokens-page .token-card-b:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(31,49,45,.1);
+}
+
+.staff-tokens-page .token-card-b.urgency-warn { border-left-color: #c58a34; }
+.staff-tokens-page .token-card-b.urgency-danger { border-left-color: var(--token-danger); }
+.staff-tokens-page .token-card-room-num { color: var(--token-ink); font-size: 1.7rem; font-weight: 800; }
+.staff-tokens-page .token-card-b.urgency-danger .token-card-room-num { color: var(--token-danger); }
+.staff-tokens-page .token-card-room-sub,
+.staff-tokens-page .token-card-meta-label,
+.staff-tokens-page .token-card-issued { color: var(--token-muted); }
+.staff-tokens-page .token-mono-b,
+.staff-tokens-page .token-badge { background: #f8ead8; border-color: #e5c89b; color: #855124; border-radius: 6px; }
+.staff-tokens-page .token-card-divider { border-color: var(--token-line); }
+.staff-tokens-page .token-card-meta-val { color: var(--token-ink); }
+.staff-tokens-page .token-card-bar-bg { background: #e7eeea; }
+.staff-tokens-page .token-card-countdown-text { color: var(--token-success); }
+.staff-tokens-page .token-card-countdown-text.warn { color: #a16b1e; }
+.staff-tokens-page .token-card-countdown-text.urgent { color: var(--token-danger); }
+.staff-tokens-page .token-card-copy-btn,
+.staff-tokens-page .token-card-revoke-btn { min-height: 38px; border-radius: 7px; font-weight: 700; }
+.staff-tokens-page .token-card-copy-btn { border-color: var(--token-line); background: #f2f6f3; color: var(--token-ink); }
+.staff-tokens-page .token-card-copy-btn:hover { background: #e4ede8; }
+.staff-tokens-page .token-card-revoke-btn { border-color: #e3b7b0; color: var(--token-danger); }
+.staff-tokens-page .token-card-revoke-btn:hover { background: #f9e1de; }
+
+.staff-tokens-page .table-responsive {
+    border: 1px solid var(--token-line);
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.staff-tokens-page .table { min-width: 620px; margin-bottom: 0; }
+.staff-tokens-page .table th { background: var(--token-soft); border-bottom-color: var(--token-line); color: var(--token-ink); }
+.staff-tokens-page .table td { border-color: #e8eeeb; color: var(--token-muted); }
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .staff-tokens-page .content { padding-inline: 12px; }
+    .staff-tokens-page .row.g-4 { --bs-gutter-x: 1rem; }
+    .staff-tokens-page .room-picker-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .staff-tokens-page .token-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .staff-tokens-page .token-cards-grid.token-count-1 { grid-template-columns: minmax(0, 320px); }
+    .staff-tokens-page .token-card-b { min-height: 250px; padding: 13px; }
+}
+
+@media (max-width: 767.98px) {
+    .staff-tokens-page .content { padding-inline: 10px; }
+    .staff-tokens-page .content > .d-flex:first-child { align-items: stretch !important; }
+    .staff-tokens-page .room-picker-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .staff-tokens-page .token-cards-grid { grid-template-columns: 1fr; }
+    .staff-tokens-page .token-cards-grid.token-count-1,
+    .staff-tokens-page .token-cards-grid.token-count-2,
+    .staff-tokens-page .token-cards-grid.token-count-3,
+    .staff-tokens-page .token-cards-grid.token-count-4 { grid-template-columns: 1fr; max-width: none; }
+    .staff-tokens-page .token-card-b { min-height: 0; }
+}
+
+/* ── Touch floor — responsive audit, 2026-10-21 ─────────────────────────────
+   The token card is the densest control cluster in the console: Copy / Print /
+   Revoke sat at 38px, the transactions expander at 23px, and at 1024 the room
+   picker's tiles were only 35px wide. Every one gets the app's 40×40 floor.
+   Print had no rule of its own, so it is dressed to match its neighbours. */
+.staff-tokens-page .token-card-copy-btn,
+.staff-tokens-page .token-card-print-btn,
+.staff-tokens-page .token-card-revoke-btn,
+.staff-tokens-page .token-card-tx-toggle {
+    min-height: 40px;
+}
+
+.staff-tokens-page .token-card-print-btn {
+    padding: 0 12px;
+    border: 1px solid var(--token-line);
+    border-radius: 7px;
+    background: #fff;
+    color: var(--token-ink);
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.staff-tokens-page .token-card-print-btn:hover { background: var(--token-soft); }
+
+.staff-tokens-page .token-card-tx-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding-inline: 4px;
+}
+
+.staff-tokens-page .room-picker-grid .room-tile { min-width: 40px; }

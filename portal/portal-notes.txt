@@ -1,0 +1,11 @@
+General notes:
+ > I added the message btn to all pages
+ > Added a notification badge to notify guests of new messages
+ > Made some adjustments to the colors (instead of completely following the mockup) to match the overall palette
+
+menu.php notes:
+ > Removed the gear icon thingy beside the search bar bc there are filter buttons below it already
+
+ > Added special requests text area for specific requests like allergies or preferences
+
+ > Added a popup similar to chat when Review Order btn is clicked. I didn't see a design for it in the mockup so I took the initiative

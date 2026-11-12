@@ -1,0 +1,228 @@
+/* Shared Stylesheet - Marle Hotel Portal */
+:root{--marle-gold:#d4a574;--marle-gold-deep:#b8892e;--marle-brown:#3d3020;--marle-text:#3d3020;--marle-muted:#8c8279;--marle-cream:#faf8f5;--marle-card:#fff;--radius-sm:10px;--radius-md:16px;--radius-lg:22px}
+*,*::before,*::after{box-sizing:border-box}
+body{font-family:"DM Sans",sans-serif;background:var(--marle-cream);color:var(--marle-text);padding-bottom:72px;margin:0}
+.portal-navbar{padding:10px 16px;margin:0;background:var(--marle-card)!important;border-bottom:2px solid var(--marle-gold)}
+.portal-navbar>.container-fluid{min-height:48px}
+.portal-logo img{height:40px;width:auto}
+.navbar-left-group{display:flex;align-items:center;gap:.75rem;flex-wrap:nowrap;min-width:0}
+.navbar-left-group h5{font-weight:700;color:var(--marle-brown);margin-bottom:0}
+.navbar-left-group p{margin-bottom:0}
+.navbar-brand i{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background:var(--marle-cream);border-radius:10px;color:var(--marle-gold-deep);font-size:1rem}
+.desktop-nav-link{color:#6b6259;text-decoration:none;font-weight:600;font-size:.92rem;padding:8px 2px;border-bottom:2px solid transparent;transition:color .2s ease,border-color .2s ease;white-space:nowrap}
+.desktop-nav-link:hover,.desktop-nav-link.active{color:var(--marle-gold-deep);border-bottom-color:var(--marle-gold-deep)}
+.token-countdown-card{background:var(--marle-cream);border:1px solid rgba(61,48,32,.08);border-radius:var(--radius-sm);padding:8px 14px;display:flex;align-items:center;gap:12px;margin-left:auto}
+.token-countdown-card>i{font-size:1.2rem;color:var(--marle-gold-deep)}
+.countdown-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.04em;color:var(--marle-muted);margin-bottom:2px}
+.countdown-value{font-size:1rem;font-weight:700;color:var(--marle-text);font-variant-numeric:tabular-nums}
+.countdown-value.urgent{color:#dc3545}
+.countdown-bar-bg{height:3px;border-radius:3px;background:#e9ecef;overflow:hidden;width:110px;margin-top:4px}
+.countdown-bar{height:100%;border-radius:inherit;transition:width 1s linear,background-color .3s ease;background:var(--marle-gold)}
+.btn,button{transition:transform .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease}
+.btn:active,button:active{transform:scale(.97)}
+.btn-primary{background:var(--marle-gold-deep);border-color:var(--marle-gold-deep);color:#fff;border-radius:var(--radius-sm);font-weight:600}
+.btn-primary:hover{background:#a07820;border-color:#a07820;color:#fff;transform:translateY(-1px)}
+.card{border-radius:var(--radius-md);box-shadow:0 1px 6px rgba(0,0,0,.04);border:none;background:var(--marle-card);transition:transform .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.card-title{font-weight:650;color:var(--marle-brown)}
+.price{font-size:1rem;font-weight:700;color:var(--marle-gold-deep)}
+#home{min-height:42vh;background:var(--marle-card);border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;text-align:center;padding:32px 24px 40px}
+
+.landing-text{max-width:580px;animation:portalFade .5s ease both}
+.landing-text h1{font-weight:700;font-size:1.8rem;line-height:1.25;color:var(--marle-brown)}
+.landing-text p{font-size:.95rem;line-height:1.5;color:#5c4a32}
+.landing-text .line,.line{width:48px;border-top:3px solid var(--marle-gold-deep);margin:14px auto}
+.landing-text>p:last-child{color:#7a6b52!important}
+.content{animation:portalFade .5s ease both}
+.section-padding{padding:0 20px}
+.section-title{font-size:1.1rem;font-weight:700;color:var(--marle-text);margin-bottom:14px}
+.section-title-link{font-size:.85rem;color:var(--marle-gold-deep);text-decoration:none;font-weight:500}
+.section-title-link:hover{text-decoration:underline;color:#a07820}
+.category-btn{flex:0 0 auto;border-radius:50px;padding:8px 20px;border:1.5px solid var(--marle-gold);background-color:#fff;color:var(--marle-gold-deep);font-weight:500;font-size:.85rem;transition:all .2s ease}
+.category-btn:hover{border-color:var(--marle-gold-deep);color:var(--marle-gold-deep);background:rgba(212,165,116,.08)}
+.category-btn.active{background-color:var(--marle-gold-deep);border-color:var(--marle-gold-deep);color:#fff}
+.scroll-wrapper::-webkit-scrollbar{display:none}
+.scroll-wrapper{-ms-overflow-style:none;scrollbar-width:none}
+
+
+.navbar-bottom-mobile{height:64px!important;background:var(--marle-card)!important;border-top:1px solid rgba(0,0,0,.08);z-index:1040}
+.navbar-bottom-mobile>.container-fluid{display:flex!important;padding:0!important;margin:0!important;width:100%!important;max-width:none!important}
+.nav-link-icon{position:relative;display:flex;flex:1 1 20%;min-width:20%;max-width:20%;flex-direction:column;align-items:center;justify-content:center;color:var(--marle-muted);text-decoration:none;transition:color .2s ease;height:100%}
+.nav-link-icon i{font-size:20px;line-height:1}
+.nav-link-text{font-size:.65rem;margin-top:4px;font-weight:500}
+.nav-link-icon.active{color:var(--marle-gold-deep)}
+.nav-link-icon.active .nav-link-text{color:var(--marle-gold-deep)}
+.nav-link-icon.active::after{content:"";position:absolute;bottom:5px;width:4px;height:4px;border-radius:50%;background:var(--marle-gold-deep)}
+#expiredOverlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.75);align-items:center;justify-content:center;padding:20px}
+#expiredOverlay.show{display:flex}
+.expired-card{background:#fff;border-radius:var(--radius-lg);padding:40px;text-align:center;max-width:380px}
+@keyframes slideDown{from{transform:translateX(-50%) translateY(-30px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+@keyframes portalFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.portal-footer{padding:20px 0 10px;text-align:center;border-top:1px solid rgba(0,0,0,.06);margin-top:8px}
+.portal-footer a{text-decoration:none;color:var(--marle-brown);font-size:.85rem}
+.portal-footer a:hover{color:var(--marle-gold-deep);text-decoration:underline}
+.portal-footer .copyright{font-size:.75rem;color:var(--marle-muted);margin-top:8px}
+.portal-footer .social-links{display:flex;gap:16px;justify-content:center;margin-top:12px}
+.portal-footer .social-links a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.03);color:var(--marle-muted);transition:all .2s ease}
+.portal-footer .social-links a:hover{color:var(--marle-gold-deep);background:rgba(212,165,116,.12);transform:translateY(-1px)}
+
+
+#sessionExpiryToast{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:2000;background:#dc3545;color:#fff;border-radius:var(--radius-sm);padding:14px 18px;box-shadow:0 6px 24px rgba(220,53,69,.25);display:none!important;align-items:center;gap:12px;max-width:420px;width:90%;animation:slideDown .4s ease-out}
+#sessionExpiryToast.show{display:flex!important}
+#sessionExpiryToast .toast-icon{font-size:1.5rem}
+#sessionExpiryToast .toast-body{flex:1}
+#sessionExpiryToast .toast-title{font-weight:700;font-size:.95rem}
+#sessionExpiryToast .toast-msg{font-size:.82rem;opacity:.9;margin:0}
+#sessionExpiryToast .toast-close{background:none;border:0;color:#fff;opacity:.75;font-size:1.2rem;cursor:pointer}
+#expiredOverlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.75);align-items:center;justify-content:center;padding:20px}
+#expiredOverlay.show{display:flex}
+.expired-card{background:#fff;border-radius:var(--radius-lg);padding:40px;text-align:center;max-width:380px}
+.portal-footer{padding:20px 0 10px;text-align:center;border-top:1px solid rgba(0,0,0,.06);margin-top:8px}
+.portal-footer a{text-decoration:none;color:var(--marle-brown);font-size:.85rem}
+.portal-footer a:hover{color:var(--marle-gold-deep);text-decoration:underline}
+.portal-footer .copyright{font-size:.75rem;color:var(--marle-muted);margin-top:8px}
+.portal-footer .social-links{display:flex;gap:16px;justify-content:center;margin-top:12px}
+.portal-footer .social-links a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.03);color:var(--marle-muted);transition:all .2s ease}
+.portal-footer .social-links a:hover{color:var(--marle-gold-deep);background:rgba(212,165,116,.12);transform:translateY(-1px)}
+@media(min-width:768px){body{padding-bottom:0}.portal-navbar>.container-fluid{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:1rem}.navbar-left-group{justify-self:start}.desktop-nav-links{justify-self:center}.navbar-right-group{justify-self:end}.navbar-bottom-mobile{display:none!important}.landing-text h1{font-size:2.2rem}}
+@media(max-width:767.98px){#home{min-height:32vh;padding:24px 20px 40px}.landing-text h1{font-size:1.5rem}.navbar-right-group .btn{font-size:0;padding:8px}.navbar-right-group .btn i{font-size:1rem;margin:0!important}.portal-navbar{padding-inline:10px}.navbar-left-group h5{font-size:1rem}.navbar-left-group p{font-size:.7rem!important}}
+.text-gold{color:var(--marle-gold-deep)}
+.bg-cream{background:var(--marle-cream)}
+.border-gold{border:2px solid var(--marle-gold)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Modern concierge theme */
+:root{
+	--marle-ink:#1d2525;
+	--marle-ink-soft:#53605d;
+	--marle-gold:#c38a45;
+	--marle-gold-deep:#936126;
+	--marle-rust:#a24f35;
+	--marle-brown:#263431;
+	--marle-text:#263431;
+	--marle-muted:#71807a;
+	--marle-cream:#f3f5f1;
+	--marle-card:#fffdf9;
+	--marle-line:#dde4df;
+	--radius-sm:10px;
+	--radius-md:14px;
+	--radius-lg:20px;
+	--portal-shadow:0 14px 34px rgba(35,50,45,.08);
+	--portal-shadow-soft:0 4px 16px rgba(35,50,45,.06);
+}
+
+body{
+	color:var(--marle-ink);
+	background:
+		radial-gradient(circle at 8% 0%, rgba(195,138,69,.09), transparent 28rem),
+		var(--marle-cream);
+	letter-spacing:0;
+}
+
+a{color:var(--marle-gold-deep)}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+	outline:3px solid rgba(195,138,69,.38);
+	outline-offset:3px;
+}
+
+.portal-navbar{
+	padding:14px 22px;
+	background:rgba(255,253,249,.94)!important;
+	border-bottom:1px solid var(--marle-line);
+	box-shadow:0 2px 16px rgba(35,50,45,.04);
+	backdrop-filter:blur(14px);
+}
+.portal-navbar>.container-fluid{min-height:52px}
+.portal-logo img{height:42px}
+.navbar-left-group{gap:14px}
+.navbar-brand i{
+	width:40px;height:40px;border:1px solid var(--marle-line);
+	background:var(--marle-cream);color:var(--marle-gold-deep);
+}
+.navbar-left-group h5{color:var(--marle-ink);font-size:.98rem;letter-spacing:.01em}
+.navbar-left-group p{color:var(--marle-muted)!important}
+.desktop-nav-links{gap:22px!important}
+.desktop-nav-link{color:var(--marle-ink-soft);font-size:.82rem;letter-spacing:.03em;padding:10px 1px}
+.desktop-nav-link:hover,.desktop-nav-link.active{color:var(--marle-gold-deep);border-bottom-color:var(--marle-gold)}
+.navbar-right-group{gap:12px!important}
+.token-countdown-card{background:var(--marle-cream);border-color:var(--marle-line);padding:9px 13px}
+.token-countdown-card>i{color:var(--marle-gold-deep)}
+.countdown-label{color:var(--marle-muted)}
+.countdown-value{color:var(--marle-ink)}
+.btn-primary{background:var(--marle-brown);border-color:var(--marle-brown)}
+.btn-primary:hover{background:var(--marle-gold-deep);border-color:var(--marle-gold-deep)}
+.navbar-right-group .btn-outline-secondary{border-color:var(--marle-line);color:var(--marle-ink-soft)}
+.navbar-right-group .btn-outline-secondary:hover{background:var(--marle-brown);border-color:var(--marle-brown);color:#fff}
+
+#home{
+	min-height:34vh;
+	background:linear-gradient(135deg,rgba(255,253,249,.98),rgba(232,239,234,.82));
+	border-bottom:1px solid var(--marle-line);
+	padding:52px 24px 64px;
+}
+.landing-text{max-width:640px}
+.landing-text h1{color:var(--marle-ink);font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.03em}
+.landing-text p{color:var(--marle-ink-soft)}
+.landing-text .line,.line{width:56px;border-top-width:2px;border-color:var(--marle-gold)}
+.card{background:var(--marle-card);border:1px solid rgba(221,228,223,.85);box-shadow:var(--portal-shadow-soft)}
+.card:hover{box-shadow:var(--portal-shadow);transform:translateY(-3px)}
+.section-title,.card-title{color:var(--marle-ink)}
+.price,.text-gold{color:var(--marle-gold-deep)!important}
+.category-btn{border-color:var(--marle-line);background:var(--marle-card);color:var(--marle-ink-soft)}
+.category-btn:hover{border-color:var(--marle-gold);background:rgba(195,138,69,.08);color:var(--marle-gold-deep)}
+.category-btn.active{background:var(--marle-brown);border-color:var(--marle-brown);color:#fff}
+
+.navbar-bottom-mobile{height:68px!important;background:rgba(255,253,249,.96)!important;border-top:1px solid var(--marle-line);box-shadow:0 -4px 18px rgba(35,50,45,.06)}
+.nav-link-icon{color:var(--marle-muted)}
+.nav-link-icon.active,.nav-link-icon.active .nav-link-text{color:var(--marle-gold-deep)}
+.nav-link-icon.active::after{background:var(--marle-gold);width:18px;height:3px;border-radius:3px}
+.expired-card{background:var(--marle-card);border:1px solid var(--marle-line);box-shadow:var(--portal-shadow);padding:36px}
+.modal-content{background:var(--marle-card);border:1px solid var(--marle-line);border-radius:var(--radius-md);box-shadow:var(--portal-shadow)}
+.modal-header,.modal-footer{border-color:var(--marle-line)}
+
+@media(max-width:767.98px){
+	.portal-navbar{padding:10px 12px}
+	#home{min-height:30vh;padding:36px 20px 48px}
+	.landing-text h1{font-size:1.9rem}
+}
+
+/* ── Persistent review invitation (all portal pages) ──
+   Dismissible for this browser session; see includes/review_prompt.php. */
+.portal-review-prompt{position:fixed;right:22px;bottom:22px;z-index:1040;display:flex;align-items:center;gap:12px;max-width:430px;padding:14px 16px;background:var(--marle-brown);border:1px solid var(--marle-gold-deep);border-radius:var(--radius-md);box-shadow:0 14px 34px rgba(35,25,15,.2);color:#fff;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+.portal-review-prompt.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.portal-review-prompt-icon{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border-radius:50%;background:var(--marle-gold);color:var(--marle-brown)}
+.portal-review-prompt-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.portal-review-prompt-copy strong{font-size:.95rem}
+.portal-review-prompt-copy span{font-size:.76rem;line-height:1.35;color:#eadfce}
+.portal-review-prompt-action{flex:0 0 auto;background:var(--marle-gold);border-color:var(--marle-gold);color:var(--marle-brown);font-size:.78rem;font-weight:700;white-space:nowrap}
+.portal-review-prompt-action:hover{background:#fff;border-color:#fff;color:var(--marle-brown)}
+.portal-review-prompt-close{position:absolute;top:5px;right:7px;padding:0;border:0;background:transparent;color:#eadfce;font-size:1.25rem;line-height:1;cursor:pointer}
+@media(max-width:767.98px){.portal-review-prompt{left:14px;right:14px;bottom:186px;max-width:none;padding:13px 14px}.portal-review-prompt-action{font-size:.74rem}.portal-review-prompt-copy span{font-size:.72rem}}
+
+/* Subtle attention wiggle each time the prompt reappears.
+   Small (±3px) translate + micro rotation keeps it polite; a scale bump
+   on the star icon sells the nudge without the whole card jumping. */
+@keyframes portal-prompt-wiggle {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  20%      { transform: translateX(-3px) rotate(-.6deg); }
+  40%      { transform: translateX(3px) rotate(.6deg); }
+  60%      { transform: translateX(-2px) rotate(-.4deg); }
+  80%      { transform: translateX(2px) rotate(.4deg); }
+}
+.portal-review-prompt.is-attention { animation: portal-prompt-wiggle .45s ease-in-out; }
+.portal-review-prompt.is-attention .portal-review-prompt-icon {
+  animation: portal-prompt-icon-bounce .45s ease-in-out;
+}
+@keyframes portal-prompt-icon-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  30%      { transform: translateY(-4px) scale(1.08); }
+  60%      { transform: translateY(0) scale(.97); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portal-review-prompt,
+  .portal-review-prompt .portal-review-prompt-icon { animation: none !important; transition: none !important; }
+}

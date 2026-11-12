@@ -1,0 +1,157 @@
+/* Shared staff logout confirmation modal */
+.staff-dashboard #logoutConfirmModal .modal-dialog,
+.staff-page #logoutConfirmModal .modal-dialog,
+.settings-page #logoutConfirmModal .modal-dialog {
+    max-width: 420px;
+}
+
+.staff-dashboard #logoutConfirmModal .modal-content,
+.staff-page #logoutConfirmModal .modal-content,
+.settings-page #logoutConfirmModal .modal-content {
+    overflow: hidden;
+    border: 1px solid #dce5e1 !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+    box-shadow: 0 22px 54px rgba(31, 49, 45, .2) !important;
+}
+
+.staff-dashboard #logoutConfirmModal .modal-header,
+.staff-page #logoutConfirmModal .modal-header,
+.settings-page #logoutConfirmModal .modal-header {
+    position: relative;
+    padding: 18px 20px 16px !important;
+    border: 0 !important;
+    background: #253634 !important;
+    color: #fff !important;
+}
+
+.staff-dashboard #logoutConfirmModal .modal-header::before,
+.staff-page #logoutConfirmModal .modal-header::before,
+.settings-page #logoutConfirmModal .modal-header::before {
+    content: "!";
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 1px solid rgba(230, 179, 111, .55);
+    border-radius: 9px;
+    background: #d99a51;
+    box-shadow: inset 0 0 0 7px rgba(255, 255, 255, .08);
+}
+
+.staff-dashboard #logoutConfirmModal .modal-title,
+.staff-page #logoutConfirmModal .modal-title,
+.settings-page #logoutConfirmModal .modal-title {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    color: #fff !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+}
+
+.staff-dashboard #logoutConfirmModal .btn-close,
+.staff-page #logoutConfirmModal .btn-close,
+.settings-page #logoutConfirmModal .btn-close {
+    filter: brightness(0) invert(1);
+    opacity: .78;
+}
+
+.staff-dashboard #logoutConfirmModal .modal-body,
+.staff-page #logoutConfirmModal .modal-body,
+.settings-page #logoutConfirmModal .modal-body {
+    padding: 24px 22px !important;
+    color: #64716f !important;
+    text-align: center;
+}
+
+.staff-dashboard #logoutConfirmModal .modal-body p,
+.staff-page #logoutConfirmModal .modal-body p,
+.settings-page #logoutConfirmModal .modal-body p {
+    margin: 0 !important;
+    color: #64716f !important;
+    font-size: .84rem !important;
+}
+
+.staff-dashboard #logoutConfirmModal .modal-footer,
+.staff-page #logoutConfirmModal .modal-footer,
+.settings-page #logoutConfirmModal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 14px 20px 18px !important;
+    border-top: 1px solid #dce5e1 !important;
+    background: #f7faf8 !important;
+}
+
+.staff-dashboard #logoutConfirmModal #noBtn,
+.staff-page #logoutConfirmModal #noBtn,
+.settings-page #logoutConfirmModal #noBtn {
+    min-height: 40px;
+    padding: 8px 16px;
+    border: 1px solid #dce5e1 !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    color: #64716f !important;
+    font-size: .84rem;
+    font-weight: 700;
+}
+
+.staff-dashboard #logoutConfirmModal #noBtn:hover,
+.staff-page #logoutConfirmModal #noBtn:hover,
+.settings-page #logoutConfirmModal #noBtn:hover {
+    border-color: #b97836 !important;
+    color: #855124 !important;
+}
+
+.staff-dashboard #logoutConfirmModal #yesBtn,
+.staff-page #logoutConfirmModal #yesBtn,
+.settings-page #logoutConfirmModal #yesBtn {
+    min-height: 40px;
+    padding: 8px 18px;
+    border: 1px solid #b97836 !important;
+    border-radius: 8px !important;
+    background: #b97836 !important;
+    color: #fff !important;
+    font-size: .84rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.staff-dashboard #logoutConfirmModal #yesBtn:hover,
+.staff-page #logoutConfirmModal #yesBtn:hover,
+.settings-page #logoutConfirmModal #yesBtn:hover {
+    border-color: #855124 !important;
+    background: #855124 !important;
+    color: #fff !important;
+}
+
+@media (max-width: 575.98px) {
+    .staff-dashboard #logoutConfirmModal,
+    .staff-page #logoutConfirmModal,
+    .settings-page #logoutConfirmModal {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .staff-dashboard #logoutConfirmModal .modal-footer,
+    .staff-page #logoutConfirmModal .modal-footer,
+    .settings-page #logoutConfirmModal .modal-footer {
+        justify-content: stretch;
+    }
+
+    .staff-dashboard #logoutConfirmModal #noBtn,
+    .staff-dashboard #logoutConfirmModal #yesBtn,
+    .staff-page #logoutConfirmModal #noBtn,
+    .staff-page #logoutConfirmModal #yesBtn,
+    .settings-page #logoutConfirmModal #noBtn,
+    .settings-page #logoutConfirmModal #yesBtn {
+        flex: 1;
+    }
+}

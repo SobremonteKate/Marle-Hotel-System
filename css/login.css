@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+.login-page {
+    --login-ink: #1f2a2a;
+    --login-muted: #64716f;
+    --login-bg: #eef3f0;
+    --login-surface: #ffffff;
+    --login-line: #dce5e1;
+    --login-brass: #b97836;
+    --login-brass-dark: #855124;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+        linear-gradient(135deg, rgba(218, 232, 225, .5), transparent 42rem),
+        var(--login-bg) !important;
+    color: var(--login-ink);
+}
+
+.login-page .login-wrapper {
+    min-height: 100vh;
+    height: auto;
+}
+
+.login-page .login-left {
+    min-width: 46%;
+    padding: 48px clamp(28px, 6vw, 88px) !important;
+    background: rgba(255, 255, 255, .48);
+}
+
+.login-page .login-content {
+    max-width: 410px;
+}
+
+.login-page .login-logo {
+    width: 156px;
+    margin: 0 auto 24px;
+}
+
+.login-page .main-title {
+    margin-bottom: 30px !important;
+    color: var(--login-ink) !important;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.25rem, 2vw, 1.6rem) !important;
+    line-height: 1.2;
+}
+
+.login-page .login-card {
+    padding: 26px !important;
+    border: 1px solid var(--login-line);
+    border-radius: 14px !important;
+    background: var(--login-surface);
+    box-shadow: 0 18px 42px rgba(31, 49, 45, .1) !important;
+}
+
+.login-page .login-card::before {
+    content: 'Staff access';
+    display: block;
+    margin-bottom: 18px;
+    color: var(--login-brass-dark);
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+/* Password field with a show/hide toggle sitting inside its right edge. */
+.login-page .password-field {
+    position: relative;
+}
+
+.login-page .password-field .form-control {
+    padding-right: 46px;
+}
+
+.login-page .password-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--login-muted);
+    font-size: .95rem;
+    cursor: pointer;
+}
+
+.login-page .password-toggle:hover {
+    color: var(--login-brass-dark);
+}
+
+.login-page .password-toggle:focus-visible {
+    outline: 2px solid var(--login-brass);
+    outline-offset: -4px;
+    border-radius: 8px;
+}
+
+/* Terms & Conditions agreement checkbox. */
+.login-page .terms-consent {
+    position: relative;
+    padding-left: 1.75rem;
+    color: var(--login-muted);
+    font-size: .78rem;
+    line-height: 1.45;
+}
+
+/* The target is 40×40 for a thumb; the box itself stays 18px, drawn as a
+   background so it never stretches with the target. It is positioned out of
+   flow so the 40px hit area does not push the label away from the box. */
+.login-page .terms-consent .form-check-input {
+    position: absolute;
+    top: -11px;
+    left: -11px;
+    width: 40px;
+    height: 40px;
+    margin: 0 !important;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Crect x='1' y='1' width='16' height='16' rx='4' fill='%23fff' stroke='%23c3cfca' stroke-width='1.6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 18px 18px;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.login-page .terms-consent .form-check-input:checked {
+    border-color: transparent;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Crect x='1' y='1' width='16' height='16' rx='4' fill='%23b97836' stroke='%23b97836' stroke-width='1.6'/%3E%3Cpath d='M5 9.2l2.7 2.7 5.3-5.5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Focus draws a brass halo around the 18px box — an outline on the 40px
+   target would sit 11px away from anything visible. */
+.login-page .terms-consent .form-check-input:focus-visible {
+    outline: none;
+    box-shadow: none;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='1' y='1' width='22' height='22' rx='6' fill='none' stroke='%23b97836' stroke-width='1.5'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Crect x='1' y='1' width='16' height='16' rx='4' fill='%23fff' stroke='%23c3cfca' stroke-width='1.6'/%3E%3C/svg%3E");
+    background-size: 24px 24px, 18px 18px;
+}
+
+.login-page .terms-consent .form-check-input:checked:focus-visible {
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='1' y='1' width='22' height='22' rx='6' fill='none' stroke='%23b97836' stroke-width='1.5'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Crect x='1' y='1' width='16' height='16' rx='4' fill='%23b97836' stroke='%23b97836' stroke-width='1.6'/%3E%3Cpath d='M5 9.2l2.7 2.7 5.3-5.5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.login-page .terms-consent a {
+    color: var(--login-brass-dark);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-page .terms-consent a:hover {
+    text-decoration: underline;
+}
+
+.login-page #termsModal .btn-terms-accept {
+    border: 1px solid var(--login-brass);
+    border-radius: 8px;
+    background: var(--login-brass);
+    color: #fff;
+    font-weight: 700;
+}
+
+.login-page #termsModal .btn-terms-accept:hover {
+    border-color: var(--login-brass-dark);
+    background: var(--login-brass-dark);
+}
+
+.login-page .form-control {
+    height: 46px !important;
+    padding: 10px 13px;
+    border: 1px solid var(--login-line) !important;
+    border-radius: 8px !important;
+    background: #fbfcfb;
+    color: var(--login-ink);
+    box-shadow: none !important;
+}
+
+.login-page .form-control:focus {
+    border-color: var(--login-brass) !important;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(185, 120, 54, .14) !important;
+}
+
+.login-page .form-control::placeholder {
+    color: #87938f;
+}
+
+.login-page .btn-login {
+    height: 46px !important;
+    border: 1px solid var(--login-brass) !important;
+    border-radius: 8px !important;
+    background: var(--login-brass) !important;
+    color: #fff !important;
+    font-size: .92rem !important;
+    font-weight: 800;
+    box-shadow: none !important;
+}
+
+.login-page .btn-login:hover {
+    border-color: var(--login-brass-dark) !important;
+    background: var(--login-brass-dark) !important;
+}
+
+.login-page .terms a {
+    color: var(--login-muted) !important;
+    font-size: .78rem !important;
+}
+
+.login-page .terms a:hover {
+    color: var(--login-brass-dark) !important;
+}
+
+.login-page .alert {
+    border: 1px solid #f1c4bf;
+    border-radius: 9px;
+    color: #8d3e36;
+    background: #fff5f3;
+    font-size: .84rem;
+}
+
+.login-page .login-right {
+    min-width: 54%;
+    padding: 30px clamp(28px, 4vw, 70px) !important;
+    background: #dce7e1 !important;
+}
+
+.login-page #loginCarousel {
+    max-width: 650px;
+    height: min(78vh, 720px);
+    border: 1px solid rgba(255, 255, 255, .65);
+    border-radius: 14px !important;
+    box-shadow: 0 22px 54px rgba(31, 49, 45, .18) !important;
+}
+
+.login-page .carousel-content {
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: clamp(28px, 5vw, 58px) !important;
+    /* The dot row sits on the floor of the photo; the last line of copy stops
+       one target above it instead of sharing its space. */
+    padding-bottom: calc(clamp(28px, 5vw, 58px) + 44px) !important;
+    text-align: left;
+    background: linear-gradient(180deg, rgba(31, 42, 42, .04), rgba(31, 42, 42, .82));
+}
+
+.login-page .carousel-content h2 {
+    margin-bottom: 8px;
+    color: #fff !important;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.4rem) !important;
+}
+
+.login-page .carousel-content p {
+    margin: 0;
+    color: rgba(255, 255, 255, .84);
+    font-size: .98rem;
+}
+
+.login-page .carousel-indicators {
+    right: auto;
+    left: clamp(28px, 5vw, 58px);
+    justify-content: flex-start;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+/* A 44×40 hit area around a 24×4 bar. The bar is painted as a background so
+   the target can grow without the dot turning into a slab. */
+.login-page .carousel-indicators {
+    bottom: 18px;
+    height: 40px;
+}
+
+.login-page .carousel-indicators [data-bs-target] {
+    width: 44px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='4'%3E%3Crect width='24' height='4' rx='2' fill='%23ffffff' fill-opacity='.62'/%3E%3C/svg%3E") center / 24px 4px no-repeat;
+    opacity: 1;
+}
+
+.login-page .carousel-indicators .active {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='4'%3E%3Crect width='24' height='4' rx='2' fill='%23b97836'/%3E%3C/svg%3E");
+    opacity: 1;
+}
+
+.login-page #termsModal .modal-content {
+    border: 1px solid var(--login-line);
+    border-radius: 14px;
+    box-shadow: 0 22px 54px rgba(31, 49, 45, .18);
+    overflow: hidden;
+}
+
+.login-page #termsModal .modal-header {
+    border: 0;
+    background: #253634;
+    color: #fff;
+}
+
+.login-page #termsModal .modal-title {
+    color: #fff;
+    font-weight: 800;
+}
+
+.login-page #termsModal .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.login-page #termsModal .modal-body {
+    color: var(--login-muted);
+}
+
+.login-page #termsModal .modal-footer {
+    border-top: 1px solid var(--login-line);
+    background: #f7faf8;
+}
+
+.login-page #termsModal .btn-secondary {
+    border: 1px solid var(--login-line);
+    border-radius: 8px;
+    color: var(--login-muted);
+    background: #fff;
+}
+
+@media (max-width: 992px) {
+    .login-page .login-left {
+        min-width: 100%;
+        background: transparent;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .login-page .login-left {
+        padding: 30px 16px !important;
+    }
+
+    .login-page .login-card {
+        padding: 20px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login-page *,
+    .login-page *::before,
+    .login-page *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* ── Touch floor — responsive audit, 2026-10-21 ─────────────────────────────
+   The Terms link was 21px tall and the carousel dots were 4px. Both are now
+   40px targets; the checkbox's 40px target lives with its own rules above. */
+
+/* Text links inside a line of copy get a padded target, cancelled by an equal
+   negative margin so the paragraph still sits on the same baseline. */
+.login-page .terms-consent a,
+.login-page .terms a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding-block: 10px;
+    margin-block: -10px;
+}

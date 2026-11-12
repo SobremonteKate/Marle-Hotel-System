@@ -1,0 +1,18 @@
+# Uploaded reservation proof — private guest financial data.
+#
+# Nothing in this directory is served directly. A guest's GCash/bank receipt is
+# reached only through the capability-gated viewer
+# (admin|superadmin|employee/view_deposit_proof.php), which checks the staff
+# session, the capability and the stored path before streaming the file.
+#
+# Deny-all is the belt; the braces below stop anything executable from ever
+# running here even if the rules above are relaxed by accident.
+
+Require all denied
+
+php_flag engine off
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .pl .py .cgi .sh
+<FilesMatch "\.(php|phtml|php[0-9]|pl|py|cgi|sh)$">
+    Require all denied
+</FilesMatch>
+Options -Indexes

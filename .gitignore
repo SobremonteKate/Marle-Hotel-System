@@ -1,0 +1,34 @@
+# ── Secrets and local environment ─────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+config.local.php
+
+# ── Local tools, editors and OS noise ─────────────────────────
+.vscode/
+.idea/
+.freebuff/
+.obsidian/
+.history/
+.DS_Store
+Thumbs.db
+*.bak
+*.bak.*
+
+# ── Real guest uploads: keep the folders, never the files ─────
+uploads/booking_proof/*
+uploads/chat/*
+!uploads/.htaccess
+!uploads/*/.htaccess
+
+# ── Database dumps, archives and documents ────────────────────
+*.sql
+!database/schema.sql
+!database/seed_demo.sql
+!database/phase*.sql
+*.zip
+*.pdf
+*.docx
+*.log

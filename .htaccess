@@ -1,0 +1,124 @@
+<Files "groq_config.php">
+    Require all denied
+</Files>
+
+# Data exports and documentation are never part of the running site.
+#
+# .sql/.bak/.backup were already refused. The three types added on 2026-10-14
+# were the ones actually reachable: .md served this project's Development.md,
+# DEPLOYMENT.md, DEPLOY_RUNBOOK.md and continuation.md (the full engineering
+# log); .txt served development notes; .json served payload.json, a decrypted
+# webhook payload that no page reads. .zip/.log are refuse-by-default because
+# a stray archive or log in the web root is the same mistake, later.
+#
+# Nothing the app serves is a file of these types — every .json the front end
+# touches is a response body it parses with r.json(), not a file fetched by
+# URL (verified 2026-10-14), and the chat widget's .pdf/.jpg attachments live
+# in uploads/, which this rule does not cover.
+<FilesMatch "\.(sql|bak|backup|md|markdown|txt|zip|log|json)$">
+    Require all denied
+</FilesMatch>
+
+RedirectMatch 404 /\.history(?:/|$)
+
+# The Obsidian vault's own settings directory. Harmless on its own, but it
+# names every note in the vault (workspace.json) and has no business being
+# served. Same treatment as .history above.
+RedirectMatch 404 /\.obsidian(?:/|$)
+
+# The web app manifest is not in Apache's default MIME map, so it would be
+# served as application/octet-stream and browsers would ignore it (a manifest
+# served with the wrong type is silently dropped, taking the home-screen icon
+# with it). Named .webmanifest rather than .json because the rule above
+# refuses every .json file on purpose.
+<IfModule mod_mime.c>
+    AddType application/manifest+json .webmanifest
+</IfModule>
+
+# ── No directory browsing ────────────────────────────────────────────────────
+# Apache ships with Options Indexes on for htdocs, so /MarleHotel/uploads/ and
+# /MarleHotel/obsidian brain/ both answered with a full index of their contents.
+# A listing is a map: it turns "is there anything worth asking for?" into a
+# shortlist. Denied tree-wide here; obsidian brain/ and database/ (`.htaccess`
+# inside each) and uploads/booking_proof/ go further still.
+Options -Indexes
+
+# ── Force HTTPS ──────────────────────────────────────────────────────────────
+# Works both directly (HTTPS on) and behind reverse-proxied TLS such as ngrok,
+# where Apache only sees plain HTTP and the real scheme arrives in
+# X-Forwarded-Proto. Local plain-HTTP development (localhost / 127.0.0.1)
+# stays untouched so the XAMPP workflow needs no self-signed certificates.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:[0-9]+)?$ [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ── Never leak PHP errors to visitors ────────────────────────────────────────
+# PHP_INI_SYSTEM-level values are not changeable from .htaccess on PHP 8+
+# (php_value/php_flag would 500 here); display_errors is PHP_INI_ALL but we
+# also cover log_errors/level via .user.ini for the XAMPP machine.
+<IfModule mod_php.c>
+    php_flag display_errors Off
+    # The hotel's clock (Asia/Manila). .user.ini covers FPM/CGI, but Apache
+    # mod_php ignores .user.ini entirely — without this the server's own zone
+    # (Europe/Berlin on this XAMPP box) would win for any request that reaches
+    # PHP before config.php runs. date.timezone is PHP_INI_ALL, so it is legal
+    # here; PHP_INI_SYSTEM values above are not.
+    php_value date.timezone Asia/Manila
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag display_errors Off
+    php_value date.timezone Asia/Manila
+</IfModule>
+
+# ── Compression ──────────────────────────────────────────────────────────────
+# The public page is markup, one stylesheet and two scripts; deflating them
+# routinely halves what the guest downloads on a phone. Already-compressed
+# formats (JPEG, WebP, WOFF2, PNG) are deliberately absent: re-deflating them
+# spends CPU on both ends to save nothing.
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE application/xml application/manifest+json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ── Caching ──────────────────────────────────────────────────────────────────
+# site.css and site-nav.js are linked with a `?v=` stamp that is changed when
+# they change, so a long cache is safe for those. PHP is explicitly no-store:
+# every price and availability answer on this site comes from the database, and
+# booking_status.php carries a guest's status token in its URL. Without this
+# block Apache sent no Cache-Control at all, so browsers re-asked for every room
+# photograph on every visit.
+#
+# Written with mod_headers rather than mod_expires on purpose: this machine's
+# Apache does not load mod_expires, and a directive that is silently skipped
+# looks identical to one that works until someone checks a response.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|woff2|woff)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    <FilesMatch "\.php$">
+        Header set Cache-Control "no-store, max-age=0"
+    </FilesMatch>
+</IfModule>
+
+# ── Security headers ─────────────────────────────────────────────────────────
+# These are the three that cost nothing and close real things: nosniff stops a
+# stray upload being treated as script, SAMEORIGIN stops the booking desk being
+# framed by another site, and the referrer policy keeps a guest's booking-status
+# token out of the Referer sent to Google Fonts and jsDelivr. `env=HTTPS` keeps
+# HSTS off plain-HTTP localhost so the XAMPP workflow is unaffected.
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+</IfModule>

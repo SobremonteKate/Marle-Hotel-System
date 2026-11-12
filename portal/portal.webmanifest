@@ -1,0 +1,36 @@
+{
+  "name": "Marle Hotel — Guest Portal",
+  "short_name": "Guest Portal",
+  "description": "Order, extend, chat with the front desk and settle your bill during your stay at Marle Hotel & Restaurant.",
+  "start_url": "portal.php",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#f3f5f1",
+  "theme_color": "#263431",
+  "icons": [
+    {
+      "src": "pics/marle-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "pics/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pics/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pics/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

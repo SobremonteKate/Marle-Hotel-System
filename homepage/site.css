@@ -1,0 +1,4282 @@
+/* ==========================================================================
+   Marle Hotel & Restaurant — public site design system
+   --------------------------------------------------------------------------
+   Used by: homepage/home.php, homepage/about.php, homepage/contact.php,
+            homepage/booking_status.php (header/nav only).
+   The old homepage.css is left in place for booking_status.php's body styles.
+
+   Everything page-specific is scoped under `body.site` so this file cannot
+   restyle the staff/portal screens. The header, drawer, footer and language
+   switch are global classes because more than one public page uses them.
+
+   Palette is the hotel's own: maroon from the sign, mustard from the facade
+   paint, brass from the room keys, paper for the tariff folio.
+   ========================================================================== */
+
+:root {
+    color-scheme: light;
+
+    --ink: #2A1812;
+    --ink-soft: rgba(42, 24, 18, 0.72);
+    --maroon: #7A2A15;
+    --maroon-deep: #571C0F;
+    --mustard: #E8B33F;
+    --brass: #C08A3C;
+    --paper: #FBF7EF;
+    --stone: #EFE6D7;
+    --stone-soft: #F5EDDF;
+    --line: rgba(42, 24, 18, 0.14);
+    --line-strong: rgba(42, 24, 18, 0.26);
+
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --header-h: 76px;
+    --shell: 1180px;
+    --gutter: clamp(1.125rem, 4vw, 2.5rem);
+    --radius: 2px;
+
+    /* How far the booking desk rises over the foot of the hero. The hero panel
+       reserves the same amount as extra bottom padding, so the panel's last
+       line of facts can never end up behind the desk on a short laptop. */
+    --desk-lift: 74px;
+}
+
+/* --------------------------------------------------------------------------
+   Base (scoped)
+   -------------------------------------------------------------------------- */
+
+body.site {
+    margin: 0;
+    padding-top: var(--header-h);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body.has-site-header {
+    padding-top: var(--header-h);
+}
+
+@media (max-width: 991.98px) {
+    :root { --header-h: 64px; }
+}
+
+body.site *,
+body.site *::before,
+body.site *::after {
+    box-sizing: border-box;
+}
+
+.site img,
+.site svg {
+    max-width: 100%;
+}
+
+.site main {
+    display: block;
+}
+
+.site h1,
+.site h2,
+.site h3,
+.site h4 {
+    margin: 0;
+    font-weight: 500;
+    text-wrap: balance;
+}
+
+.site p {
+    margin: 0;
+}
+
+.site a {
+    color: var(--maroon);
+}
+
+.site ::selection {
+    background: var(--mustard);
+    color: var(--maroon-deep);
+}
+
+.site :where(a, button, input, select, textarea):focus-visible,
+.site-header :where(a, button):focus-visible,
+.site-menu :where(a, button):focus-visible,
+.site-footer :where(a, button):focus-visible {
+    outline: 3px solid var(--mustard);
+    outline-offset: 3px;
+    border-radius: var(--radius);
+}
+
+/* Skip link — visible only once focused. */
+.skip-link {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 2000;
+    padding: 0.7rem 1rem;
+    background: var(--maroon);
+    color: var(--paper);
+    font: 600 0.8rem/1 var(--font-body);
+    text-decoration: none;
+    transform: translateY(-160%);
+    transition: transform 0.18s ease;
+}
+
+.skip-link:focus-visible {
+    transform: translateY(0);
+}
+
+/* Shared rhythm */
+.site .shell {
+    width: 100%;
+    max-width: calc(var(--shell) + (var(--gutter) * 2));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.site .section {
+    padding-block: clamp(3.25rem, 7vw, 6.5rem);
+    scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.site .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.site .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--brass);
+    flex: 0 0 auto;
+}
+
+.site .section-title {
+    margin-top: 0.85rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+}
+
+.site .section-lead {
+    max-width: 46ch;
+    margin-top: 0.9rem;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.site .section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: 1.5rem 3rem;
+    align-items: end;
+    margin-bottom: clamp(1.75rem, 3.5vw, 3rem);
+}
+
+.site .section-head .section-lead {
+    justify-self: end;
+    margin-top: 0;
+    max-width: 44ch;
+}
+
+@media (max-width: 767.98px) {
+    .site .section-head {
+        grid-template-columns: 1fr;
+    }
+
+    .site .section-head .section-lead {
+        justify-self: start;
+    }
+}
+
+/* Buttons ---------------------------------------------------------------- */
+
+.site .mh-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 48px;
+    padding: 0.8rem 1.35rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--maroon);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    line-height: 1.1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.site .mh-btn:hover,
+.site .mh-btn:focus-visible {
+    background: var(--maroon-deep);
+    color: var(--paper);
+}
+
+.site .mh-btn--mustard {
+    background: var(--mustard);
+    color: var(--maroon-deep);
+    border-color: var(--mustard);
+}
+
+.site .mh-btn--mustard:hover,
+.site .mh-btn--mustard:focus-visible {
+    background: #f0c158;
+    border-color: #f0c158;
+    color: var(--maroon-deep);
+}
+
+.site .mh-btn--ghost {
+    background: transparent;
+    border-color: rgba(251, 247, 239, 0.45);
+    color: var(--paper);
+}
+
+.site .mh-btn--ghost:hover,
+.site .mh-btn--ghost:focus-visible {
+    background: rgba(251, 247, 239, 0.1);
+    border-color: var(--paper);
+    color: var(--paper);
+}
+
+.site .mh-btn--outline {
+    background: transparent;
+    border-color: var(--line-strong);
+    color: var(--maroon);
+}
+
+.site .mh-btn--outline:hover,
+.site .mh-btn--outline:focus-visible {
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: var(--paper);
+}
+
+.site .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    color: var(--maroon);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(122, 42, 21, 0.35);
+    padding-bottom: 0.15rem;
+}
+
+.site .text-link:hover,
+.site .text-link:focus-visible {
+    color: var(--maroon-deep);
+    border-bottom-color: var(--maroon-deep);
+}
+
+/* --------------------------------------------------------------------------
+   Header — fixed on every public page, logo left, nav centred, actions right.
+   Deliberately not a Bootstrap navbar: the old absolute-centred brand and the
+   background-less collapsing panel were the mobile glitch.
+   -------------------------------------------------------------------------- */
+
+.site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 1040;
+    display: flex;
+    align-items: center;
+    height: var(--header-h);
+    background: rgba(251, 247, 239, 0.97);
+    border-bottom: 1px solid var(--line);
+    -webkit-backdrop-filter: saturate(1.05) blur(10px);
+    backdrop-filter: saturate(1.05) blur(10px);
+    transition: box-shadow 0.2s ease;
+}
+
+.site-header.is-scrolled {
+    box-shadow: 0 10px 30px -26px rgba(42, 24, 18, 0.65);
+}
+
+.site-header__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    width: 100%;
+    max-width: calc(var(--shell) + (var(--gutter) * 2));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    grid-column: 1;
+    text-decoration: none;
+}
+
+/* 178px wide is 48px tall: below that the "HOTEL & RESTAURANT" line in the
+   wordmark turns to mush at 1x. */
+.site-header__brand img {
+    display: block;
+    width: 178px;
+    height: auto;
+}
+
+.site-nav {
+    display: flex;
+    grid-column: 2;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 2.1vw, 1.9rem);
+}
+
+.site-nav__link {
+    position: relative;
+    padding: 0.45rem 0;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.045em;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.site-nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    height: 2px;
+    background: var(--brass);
+    transition: right 0.22s ease;
+}
+
+.site-nav__link:hover::after,
+.site-nav__link:focus-visible::after,
+.site-nav__link[aria-current="page"]::after {
+    right: 0;
+}
+
+.site-nav__link[aria-current="page"] {
+    color: var(--maroon);
+    font-weight: 600;
+}
+
+.site-header__actions {
+    display: flex;
+    grid-column: 3;
+    align-items: center;
+    gap: 0.7rem;
+    justify-self: end;
+}
+
+.site-header .lang-switch-item {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.site-header .btn-nav {
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0.65rem 1.05rem;
+    border: 1px solid var(--maroon);
+    border-radius: var(--radius);
+    background: var(--maroon);
+    color: var(--paper);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.site-header .btn-nav:hover,
+.site-header .btn-nav:focus-visible {
+    background: var(--maroon-deep);
+    border-color: var(--maroon-deep);
+    color: var(--paper);
+}
+
+.site-header__toggle {
+    display: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--maroon);
+    cursor: pointer;
+}
+
+.site-header__toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    margin: 2.5px auto;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.site-header__toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+}
+
+.site-header__toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.site-header__toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+@media (max-width: 991.98px) {
+    .site-header__inner {
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .site-nav,
+    .site-header .lang-switch-item,
+    .site-header .btn-nav {
+        display: none;
+    }
+
+    .site-header__toggle {
+        display: grid;
+    }
+
+    .site-header__brand img {
+        width: 150px;
+    }
+}
+
+/* Language pill (shared by the header, the drawer and staff pages) */
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid rgba(122, 42, 21, 0.32);
+    border-radius: 999px;
+    background: transparent;
+}
+
+.lang-switch .lang-option {
+    padding: 0.28rem 0.6rem;
+    border-radius: 999px;
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.lang-switch .lang-option:hover,
+.lang-switch .lang-option:focus-visible {
+    background: rgba(122, 42, 21, 0.09);
+}
+
+.lang-switch .lang-option.active {
+    background: var(--maroon);
+    color: var(--paper);
+}
+
+/* --------------------------------------------------------------------------
+   Drawer — a real modal dialog: opaque, full height, never floating links
+   over the hero, closable with Esc / backdrop / any link.
+   -------------------------------------------------------------------------- */
+
+.site-menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--maroon);
+    color: var(--paper);
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+}
+
+.site-menu::backdrop {
+    background: rgba(42, 24, 18, 0.45);
+}
+
+.site-menu[open] {
+    display: flex;
+    flex-direction: column;
+    animation: menu-in 0.24s ease both;
+}
+
+@keyframes menu-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+html.menu-open,
+html.menu-open body {
+    overflow: hidden;
+}
+
+.site-menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 14px var(--gutter);
+    border-bottom: 1px solid rgba(251, 247, 239, 0.16);
+}
+
+/* body.site a (0,1,1) would otherwise paint these two anchors maroon on the
+   maroon drawer. The explicit two-class selectors keep them legible. */
+.site-menu a.site-menu__brand {
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+}
+
+.site-menu__brand small {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--mustard);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+}
+
+.site-menu__close {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(251, 247, 239, 0.35);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--paper);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.site-menu__nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem var(--gutter);
+}
+
+.site-menu__nav a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(251, 247, 239, 0.14);
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 6vw, 2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+.site-menu__nav a i {
+    color: var(--mustard);
+    font-size: 1rem;
+}
+
+.site-menu__nav a[aria-current="page"] {
+    color: var(--mustard);
+}
+
+.site-menu__foot {
+    display: grid;
+    gap: 1rem;
+    margin-top: auto;
+    padding: 1.25rem var(--gutter) calc(1.5rem + env(safe-area-inset-bottom));
+}
+
+.site-menu__foot .lang-switch {
+    justify-self: start;
+    border-color: rgba(251, 247, 239, 0.4);
+}
+
+.site-menu__foot .lang-option {
+    color: var(--paper);
+}
+
+.site-menu__foot .lang-option:hover,
+.site-menu__foot .lang-option:focus-visible {
+    background: rgba(251, 247, 239, 0.12);
+}
+
+.site-menu__foot .lang-option {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.4rem 0.8rem;
+}
+
+.site-menu__foot .lang-option.active {
+    background: var(--mustard);
+    color: var(--maroon-deep);
+}
+
+.site-menu a.site-menu__call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    color: rgba(251, 247, 239, 0.8);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+}
+
+.site-menu .mh-btn {
+    width: 100%;
+    min-height: 52px;
+    background: var(--mustard);
+    border-color: var(--mustard);
+    color: var(--maroon-deep);
+}
+
+.site-menu .mh-btn:hover,
+.site-menu .mh-btn:focus-visible {
+    background: #f0c158;
+    border-color: #f0c158;
+    color: var(--maroon-deep);
+}
+
+@media (min-width: 992px) {
+    .site-menu {
+        display: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Hero — maroon panel + real facade photograph, the brass key tag between them
+   -------------------------------------------------------------------------- */
+
+.site .hero {
+    position: relative;
+    background: var(--paper);
+}
+
+.site .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    /* Capped so a 900px-tall laptop still shows the desk's button, not just
+       the top edge of the card. */
+    min-height: clamp(540px, calc(100svh - var(--header-h)), 720px);
+}
+
+.site .hero__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Bottom = the usual breathing room plus the desk's lift. Without the
+       second term a 1024–1440px laptop (where 5vw is still under 74px) let
+       the white desk cover the panel's third fact line. */
+    padding: clamp(2rem, 5vw, 5rem) clamp(1.4rem, 5.5vw, 5.5rem) calc(clamp(2rem, 5vw, 5rem) + var(--desk-lift));
+    background: var(--maroon);
+    color: var(--paper);
+    overflow: hidden;
+}
+
+.site .hero__panel::after {
+    content: "";
+    position: absolute;
+    inset: 1.25rem;
+    border: 1px solid rgba(251, 247, 239, 0.14);
+    pointer-events: none;
+}
+
+.site .hero__eyebrow {
+    color: var(--mustard);
+}
+
+.site .hero__eyebrow::before {
+    background: var(--mustard);
+}
+
+.site .hero h1 {
+    max-width: 15ch;
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4.1vw, 4.1rem);
+    font-weight: 500;
+    letter-spacing: 0.004em;
+    line-height: 0.98;
+    text-transform: uppercase;
+}
+
+.site .hero h1 em {
+    display: block;
+    color: var(--mustard);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.002em;
+}
+
+.site .hero__lead {
+    max-width: 42ch;
+    margin-top: 1.35rem;
+    color: rgba(251, 247, 239, 0.8);
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: 1.7;
+}
+
+.site .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.9rem;
+}
+
+.site .hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 2.5rem;
+    margin: 2.2rem 0 0;
+    padding-top: 1.15rem;
+    border-top: 1px solid rgba(251, 247, 239, 0.22);
+}
+
+.site .hero__facts div {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+}
+
+.site .hero__facts dt {
+    color: rgba(251, 247, 239, 0.65);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.site .hero__facts dd {
+    margin: 0;
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+}
+
+.site .hero__facts dd span {
+    color: rgba(251, 247, 239, 0.6);
+}
+
+.site .hero__media {
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    background: var(--stone);
+    /* The photo is clipped by .hero__photo, not here, so the brass key tag can
+       hang over the seam between the panel and the picture instead of being
+       sliced in half by the figure's own overflow. */
+    overflow: visible;
+}
+
+.site .hero__photo {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stone);
+}
+
+.site .hero__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 52% 38%;
+    animation: hero-photo 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes hero-photo {
+    from { transform: scale(1.04); opacity: 0.55; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+.site .keytag {
+    position: absolute;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    background: var(--mustard);
+    color: var(--maroon-deep);
+    box-shadow: 0 12px 30px -18px rgba(42, 24, 18, 0.8);
+}
+
+.site .keytag::before {
+    content: "";
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--maroon);
+    box-shadow: inset 0 0 0 2.5px var(--mustard);
+    transform: translateX(-50%);
+}
+
+.site .keytag__label {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.site .keytag__value {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.site .hero__media .keytag {
+    left: -54px;
+    bottom: 96px;
+    z-index: 2;
+}
+
+@media (max-width: 991.98px) {
+    .site .hero__grid {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .site .hero__media {
+        order: -1;
+        height: clamp(230px, 36svh, 340px);
+        min-height: 0;
+    }
+
+    .site .hero__media .keytag {
+        left: auto;
+        right: 1rem;
+        top: 1rem;
+        bottom: auto;
+        width: 86px;
+        height: 86px;
+    }
+
+    .site .keytag__value {
+        font-size: 1.15rem;
+    }
+
+    .site .hero__panel {
+        padding: clamp(1.75rem, 6vw, 2.75rem) var(--gutter) clamp(2rem, 7vw, 3rem);
+    }
+
+    .site .hero__panel::after {
+        inset: 0.7rem;
+    }
+
+    .site .hero h1 {
+        font-size: clamp(2.15rem, 8.2vw, 3.1rem);
+        max-width: 18ch;
+    }
+
+    .site .hero__lead {
+        margin-top: 1rem;
+        font-size: 0.97rem;
+    }
+
+    .site .hero__actions {
+        margin-top: 1.35rem;
+    }
+
+    .site .hero__actions .mh-btn {
+        flex: 1 1 100%;
+    }
+
+    .site .hero__facts {
+        margin-top: 1.5rem;
+        gap: 0.4rem 1.5rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Booking desk
+   -------------------------------------------------------------------------- */
+
+.site .desk-wrap {
+    position: relative;
+    z-index: 3;
+    margin-top: calc(var(--desk-lift) * -1);
+    padding-inline: var(--gutter);
+}
+
+.site .desk {
+    width: 100%;
+    max-width: var(--shell);
+    margin-inline: auto;
+    padding: clamp(1rem, 2.4vw, 1.6rem);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 70px -48px rgba(42, 24, 18, 0.55);
+    scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.site .desk__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.9rem;
+    margin-bottom: 0.9rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.site .desk__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.site .desk__title small {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.site .seg {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid var(--line-strong);
+}
+
+.site .seg__btn {
+    min-height: 36px;
+    padding: 0.45rem 0.8rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.site .seg__btn.is-active {
+    background: var(--maroon);
+    color: var(--paper);
+}
+
+/* Four questions and a button: check-in, check-out, guests, room type. */
+.site .desk__form {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+    gap: 0.8rem;
+    align-items: end;
+}
+
+.site .desk__form--hourly {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+}
+
+.site .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.site .field label {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.site .field--button {
+    justify-content: flex-end;
+}
+
+.site .field--button .mh-btn {
+    width: 100%;
+    min-height: 48px;
+    white-space: nowrap;
+}
+
+/* Bootstrap form controls, raised to the 48px / 16px mobile standard. */
+.site .form-control,
+.site .form-select {
+    min-height: 48px;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background-color: #fff;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.site .form-control:focus,
+.site .form-select:focus {
+    border-color: var(--maroon);
+    box-shadow: 0 0 0 3px rgba(232, 179, 63, 0.35);
+}
+
+.site .form-control::placeholder {
+    color: rgba(42, 24, 18, 0.45);
+}
+
+.site textarea.form-control {
+    min-height: 88px;
+}
+
+.site .desk__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.75rem;
+    margin: 0.9rem 0 0;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+}
+
+.site .desk__links a,
+.site .desk__linkbtn {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--maroon);
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.site .desk__links .dot {
+    color: var(--brass);
+}
+
+.site .results {
+    margin-top: 1rem;
+}
+
+.site .results:empty {
+    display: none;
+}
+
+.site .results .alert {
+    margin-bottom: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--line);
+    border-left-width: 3px;
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+}
+
+.site .results .alert-success {
+    background: #f2f7ef;
+    border-left-color: #3f6b3a;
+    color: #24401f;
+}
+
+.site .results .alert-warning {
+    background: var(--stone-soft);
+    border-left-color: var(--brass);
+    color: #5a3b12;
+}
+
+.site .results .alert-danger {
+    background: #fbf0ee;
+    border-left-color: var(--maroon);
+    color: #6c2213;
+}
+
+.site .results .card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+}
+
+.site .results .card .btn {
+    border-radius: var(--radius);
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: var(--paper);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.site .results .card .btn:hover,
+.site .results .card .btn:focus-visible {
+    background: var(--maroon-deep);
+    border-color: var(--maroon-deep);
+}
+
+.site .hourly-avail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.4rem;
+    padding: 0.12rem 0.5rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #fff;
+}
+
+@media (max-width: 991.98px) {
+    .site .desk-wrap {
+        margin-top: 0;
+    }
+
+    .site .desk {
+        border-left: 0;
+        border-right: 0;
+        box-shadow: none;
+    }
+
+    .site .desk__head {
+        flex-wrap: wrap;
+    }
+
+    .site .desk__form,
+    .site .desk__form--hourly {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .site .desk__form .field--button {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .site .desk__form,
+    .site .desk__form--hourly {
+        grid-template-columns: 1fr;
+    }
+
+    .site .seg {
+        width: 100%;
+    }
+
+    .site .seg__btn {
+        flex: 1;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Rooms — the tariff folio (photo + dotted-leader rate rows)
+   -------------------------------------------------------------------------- */
+
+.site .folio {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
+}
+
+.site .folio__figure {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+    margin: 0;
+}
+
+/* Square, not 4:5. The room photographs are landscape files, and the taller
+   crop both cut the beds awkwardly and left ~190px of empty column beside the
+   tariff rows. */
+.site .folio__media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--stone);
+}
+
+.site .folio__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.2s ease;
+}
+
+.site .folio__media.is-swapping img {
+    opacity: 0.35;
+}
+
+.site .folio__caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.site .folio__caption-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+}
+
+.site .folio__caption-meta {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: right;
+}
+
+.site .folio__action {
+    width: 100%;
+    margin-top: 0.35rem;
+}
+
+.site .folio__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line-strong);
+}
+
+.site .folio-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 100%;
+    padding: 1.1rem 0.75rem 1.2rem 0.9rem;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-left: 3px solid transparent;
+    background: transparent;
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.site .folio-row:hover {
+    background: rgba(239, 230, 215, 0.5);
+}
+
+.site .folio-row[aria-pressed="true"] {
+    background: var(--stone-soft);
+    border-left-color: var(--maroon);
+}
+
+.site .folio-row__head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    width: 100%;
+}
+
+.site .folio-row__name {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2vw, 1.65rem);
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.site .folio-row__dots {
+    flex: 1 1 auto;
+    min-width: 1.25rem;
+    border-bottom: 1px dotted rgba(42, 24, 18, 0.4);
+    transform: translateY(-0.28rem);
+}
+
+.site .folio-row__rates {
+    display: flex;
+    gap: 1.1rem;
+    flex: 0 0 auto;
+    text-align: right;
+}
+
+.site .folio-row__rate b {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+.site .folio-row__rate span {
+    display: block;
+    max-width: 8rem;
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    line-height: 1.35;
+    text-transform: uppercase;
+}
+
+/* Capacity as a chip of its own, so "Sleeps 2" reads as a fact about the room
+   rather than as another grey scrap of the meta line. */
+.site .folio-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.45rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--ink);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+}
+
+.site .folio-chip--sleeps {
+    border-color: var(--brass);
+    color: var(--maroon);
+    font-weight: 500;
+}
+
+.site .folio-row__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem 0.75rem;
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.site .folio-row__meta .sep {
+    color: var(--brass);
+}
+
+.site .folio-row[aria-pressed="true"] .folio-row__name {
+    color: var(--maroon);
+}
+
+@media (max-width: 991.98px) {
+    .site .folio {
+        grid-template-columns: 1fr;
+    }
+
+    .site .folio__figure {
+        position: static;
+    }
+
+    .site .folio__media {
+        aspect-ratio: 16 / 11;
+    }
+
+    /* The selected tariff row names the room right below the photograph;
+       repeating it in the caption just doubles the label. */
+    .site .folio__caption-name {
+        display: none;
+    }
+
+    .site .folio__caption {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .site .folio-row {
+        padding: 1rem 0.4rem 1.1rem 0.7rem;
+    }
+
+    .site .folio-row__head {
+        flex-wrap: wrap;
+        gap: 0.35rem 0.75rem;
+    }
+
+    .site .folio-row__dots {
+        display: none;
+    }
+
+    .site .folio-row__rates {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        text-align: left;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Room viewer — the four photographs behind "Check this room"
+   --------------------------------------------------------------------------
+   A native <dialog>, like the menu drawer: Esc, the focus trap and the top
+   layer come from the platform. The stage keeps its 3:2 box even when a file is
+   missing, so a half-filled gallery never collapses the sheet.
+   -------------------------------------------------------------------------- */
+
+html.roomview-open,
+html.roomview-open body {
+    overflow: hidden;
+}
+
+.site .roomview {
+    position: fixed;
+    inset: 0;
+    width: min(1040px, calc(100% - (2 * var(--gutter))));
+    max-width: none;
+    max-height: min(92svh, 900px);
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    overflow: hidden;
+    box-shadow: 0 40px 90px -50px rgba(42, 24, 18, 0.9);
+}
+
+.site .roomview::backdrop {
+    background: rgba(42, 24, 18, 0.62);
+}
+
+.site .roomview[open] {
+    display: flex;
+    flex-direction: column;
+    animation: roomview-in 0.22s ease both;
+}
+
+@keyframes roomview-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.site .roomview__sheet {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+
+/* Photograph on the left, the strip of three details and the facts on the
+   right: a laptop-height window fits the whole room without scrolling, so the
+   book button never falls below the fold. Phones stack it again. */
+.site .roomview__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.92fr);
+    gap: 1.1rem;
+    min-height: 0;
+    padding: 1rem 1.4rem;
+}
+
+.site .roomview__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-width: 0;
+}
+
+/* ── Head ─────────────────────────────────────────────────────────────── */
+
+.site .roomview__bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.4rem 1rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.site .roomview__eyebrow {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.site .roomview__number {
+    margin-left: 0.3rem;
+    color: var(--brass);
+}
+
+.site .roomview__title {
+    margin-top: 0.45rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.site .roomview__close {
+    display: grid;
+    place-content: center;
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: none;
+    color: var(--ink);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.16s ease, border-color 0.16s ease;
+}
+
+.site .roomview__close:hover {
+    border-color: var(--maroon);
+    color: var(--maroon);
+}
+
+/* ── Stage ────────────────────────────────────────────────────────────── */
+
+.site .roomview__stage {
+    position: relative;
+    align-self: start;
+    margin: 0;
+    aspect-ratio: 3 / 2;
+    background: var(--stone);
+    overflow: hidden;
+}
+
+.site .roomview__stage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.site .roomview__stage.is-empty img {
+    display: none;
+}
+
+.site .roomview__plate {
+    display: grid;
+    place-content: center;
+    gap: 0.35rem;
+    background: var(--stone-soft);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.site .roomview__stage .roomview__plate {
+    position: absolute;
+    inset: 0;
+}
+
+.site .roomview__counter,
+.site .roomview__credit {
+    position: absolute;
+    padding: 0.24rem 0.55rem;
+    background: rgba(20, 10, 7, 0.62);
+    color: rgba(251, 247, 239, 0.9);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+}
+
+.site .roomview__counter {
+    top: 0.7rem;
+    right: 0.7rem;
+}
+
+.site .roomview__credit {
+    left: 0;
+    bottom: 0;
+    padding: 0.22rem 0.6rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.03em;
+    text-transform: none;
+}
+
+.site .roomview__credit[hidden] {
+    display: none;
+}
+
+.site .roomview__credit a {
+    color: var(--mustard);
+}
+
+/* ── Thumbnails ───────────────────────────────────────────────────────── */
+
+.site .roomview__thumbs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 0.6rem;
+}
+
+.site .roomview__thumb {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.4rem 0 0;
+    border: 0;
+    border-top: 2px solid transparent;
+    background: none;
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+}
+
+.site .roomview__thumb img,
+.site .roomview__thumb .roomview__plate {
+    display: block;
+    width: 100%;
+    /* height:auto is load-bearing: the width/height attributes on the <img>
+       become presentational CSS, and without this they pin the thumbnail to
+       768px tall inside a 170px column. */
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--stone-soft);
+}
+
+.site .roomview__thumb .roomview__plate {
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+}
+
+.site .roomview__thumb-caption {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.site .roomview__thumb[aria-pressed="true"] {
+    border-top-color: var(--maroon);
+}
+
+.site .roomview__thumb[aria-pressed="true"] .roomview__thumb-caption {
+    color: var(--maroon);
+}
+
+/* ── Facts and foot ───────────────────────────────────────────────────── */
+
+.site .roomview__facts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    margin-top: auto;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line);
+}
+
+.site .roomview__meta {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.site .roomview__blurb {
+    max-width: 56ch;
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* "What is in this room" — the list a guest otherwise has to ask the desk for.
+   Separators rather than bullets, to stay in the page's type register. */
+.site .roomview__amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0;
+    margin: 0.55rem 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--ink);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.site .roomview__amenities li {
+    display: inline-flex;
+    align-items: center;
+}
+
+.site .roomview__amenities li + li::before {
+    content: "";
+    width: 1px;
+    height: 0.7em;
+    margin: 0 0.55rem;
+    background: var(--brass);
+}
+
+.site .roomview__rates {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 auto;
+    gap: 0.4rem 0.9rem;
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+}
+
+.site .roomview__rates span + span {
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--line);
+}
+
+.site .roomview__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.2rem;
+    margin-top: 1rem;
+    padding: 0.95rem 1.4rem 1.15rem;
+    border-top: 1px solid var(--line);
+    background: var(--stone-soft);
+}
+
+.site .roomview__call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+@media (max-width: 767.98px) {
+    .site .roomview {
+        inset: 0;
+        width: 100%;
+        height: 100svh;
+        max-height: 100svh;
+        margin: 0;
+        border: 0;
+    }
+
+    .site .roomview__bar {
+        padding: 1rem var(--gutter) 0.85rem;
+    }
+
+    .site .roomview__body {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        gap: 0;
+        min-height: 0;
+        padding: 0;
+    }
+
+    /* The spare height of a phone goes to the photograph, not to a gap above
+       the button: the sheet is exactly one screen tall. */
+    .site .roomview__stage {
+        flex: 1 1 auto;
+        align-self: stretch;
+        width: 100%;
+        min-height: 200px;
+        max-height: none;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .site .roomview__aside {
+        gap: 0.7rem;
+        padding: 0.7rem var(--gutter) 0;
+    }
+
+    .site .roomview__thumbs {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.4rem;
+    }
+
+    .site .roomview__thumb-caption {
+        font-size: 0.52rem;
+        letter-spacing: 0.04em;
+    }
+
+    .site .roomview__facts {
+        margin-top: 0;
+        padding-top: 0.7rem;
+    }
+
+    .site .roomview__foot {
+        padding: 0.8rem var(--gutter) calc(0.9rem + env(safe-area-inset-bottom));
+    }
+
+    .site .roomview__foot .mh-btn {
+        flex: 1 1 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site .roomview[open] {
+        animation: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Story
+   -------------------------------------------------------------------------- */
+
+.site .story {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    gap: clamp(1.5rem, 5vw, 4.5rem);
+    align-items: center;
+}
+
+.site .story__media {
+    margin: 0;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    background: var(--stone);
+}
+
+.site .story__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.site .story__copy h2 {
+    margin-top: 0.85rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, 3.3vw, 2.85rem);
+    font-weight: 500;
+    line-height: 1.08;
+}
+
+.site .story__copy p {
+    max-width: 54ch;
+    margin-top: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+.site .facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+}
+
+.site .facts dt {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.site .facts dd {
+    margin: 0.3rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.2;
+}
+
+@media (max-width: 991.98px) {
+    .site .story {
+        grid-template-columns: 1fr;
+    }
+
+    .site .story__media {
+        aspect-ratio: 16 / 10;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Dining — the single saturated colour block on the page
+   -------------------------------------------------------------------------- */
+
+.site .dining {
+    position: relative;
+    padding-block: clamp(3.25rem, 7vw, 6.5rem);
+    background: var(--mustard);
+    color: var(--maroon-deep);
+    overflow: hidden;
+    scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.site .dining::before {
+    content: "";
+    position: absolute;
+    inset: 1rem;
+    border: 1px solid rgba(87, 28, 15, 0.18);
+    pointer-events: none;
+}
+
+.site .dining__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(1.75rem, 5vw, 4.5rem);
+    align-items: center;
+}
+
+.site .dining__images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    align-items: end;
+}
+
+.site .dining__images figure {
+    margin: 0;
+    overflow: hidden;
+}
+
+.site .dining__images img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.site .dining__images figure:first-child {
+    aspect-ratio: 4 / 5;
+}
+
+.site .dining__images figure:last-child {
+    aspect-ratio: 4 / 3;
+    transform: translateY(1.5rem);
+}
+
+.site .dining .eyebrow {
+    color: var(--maroon-deep);
+}
+
+.site .dining .eyebrow::before {
+    background: var(--maroon-deep);
+}
+
+.site .dining h2 {
+    margin-top: 0.8rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
+    font-weight: 500;
+    line-height: 1.05;
+}
+
+.site .dining__lead {
+    max-width: 46ch;
+    margin-top: 1rem;
+    color: rgba(87, 28, 15, 0.82);
+    line-height: 1.7;
+}
+
+.site .dining__list {
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(87, 28, 15, 0.25);
+}
+
+.site .dining__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 0.9rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid rgba(87, 28, 15, 0.25);
+}
+
+.site .dining__item i {
+    color: var(--maroon);
+    font-size: 1rem;
+    margin-top: 0.2rem;
+}
+
+.site .dining__item h3 {
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.site .dining__item p {
+    margin-top: 0.2rem;
+    color: rgba(87, 28, 15, 0.82);
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.site .dining .mh-btn {
+    margin-top: 1.5rem;
+    background: var(--maroon-deep);
+    border-color: var(--maroon-deep);
+    color: var(--paper);
+}
+
+.site .dining .mh-btn:hover,
+.site .dining .mh-btn:focus-visible {
+    background: var(--maroon);
+    border-color: var(--maroon);
+}
+
+/* On a wide screen the collage fills the height of the copy beside it. Sizing
+   it from fixed aspect ratios left a band of bare mustard above and below the
+   photographs. */
+@media (min-width: 992px) {
+    .site .dining__grid {
+        align-items: stretch;
+    }
+
+    .site .dining__images {
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+        height: 100%;
+    }
+
+    .site .dining__images figure {
+        height: 100%;
+        min-height: 0;
+    }
+
+    .site .dining__images figure:first-child {
+        aspect-ratio: auto;
+        grid-row: 1 / span 2;
+    }
+
+    .site .dining__images figure:last-child {
+        aspect-ratio: auto;
+        grid-row: 2;
+        transform: none;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .site .dining__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site .dining__images {
+        max-width: 520px;
+    }
+
+    .site .dining__images figure:last-child {
+        transform: translateY(0.75rem);
+    }
+}
+
+@media (max-width: 767.98px) {
+    /* The hairline frame has nowhere to breathe on a phone. */
+    .site .dining::before {
+        display: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Booking policy — the four things the modal's checkbox used to bury.
+   A numbered list, because a guest reads it in order: what confirms, how to
+   pay, what cancelling costs, what happens if they are late.
+   -------------------------------------------------------------------------- */
+
+.site .policies {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    background: var(--stone-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.site .policies__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1.5rem, 4vw, 3.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line-strong);
+}
+
+.site .policy {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.2rem 0.9rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.site .policy__num {
+    grid-row: 1 / span 2;
+    padding-top: 0.3rem;
+    color: var(--brass);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.site .policy__title {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.site .policy__body {
+    grid-column: 2;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.site .policy__body strong {
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 500;
+}
+
+/* The GCash number and bank account are edited in Settings, not here, so they
+   are set in mono to read as an account number rather than as prose. */
+.site .policy__payment {
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+}
+
+.site .policies__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.75rem;
+    margin-top: 1.5rem;
+}
+
+.site .policies__foot .text-link {
+    margin-top: 0;
+}
+
+/* Booking form errors: a summary at the foot of the modal that a screen reader
+   announces, plus the same sentence beside the input that caused it. */
+.site .booking-summary {
+    margin-bottom: 0.85rem;
+    padding: 0.6rem 0.75rem;
+    border-left: 3px solid #A63A2A;
+    background: #FBEDE9;
+    color: #5E1F14;
+    border-radius: var(--radius);
+    font-size: 0.86rem;
+    line-height: 1.55;
+}
+
+.site .booking-errors {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+
+.site .booking-errors li + li {
+    margin-top: 0.25rem;
+}
+
+.site .invalid-feedback.d-block {
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+/* The link out of the terms checkbox. It opens the policy in a second dialog on
+   top of the booking form — the guest reads it without losing what they typed. */
+.site .policy-link {
+    display: inline-block;
+    margin-top: 0.4rem;
+    color: var(--maroon);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ── The policy reader ──────────────────────────────────────────────────────
+   A native dialog over the booking form, built the same way as .roomview. The
+   four cards inside are the page's own .policies__grid, copied in at open time,
+   so nothing about the numbering or the rules is restated here — only the frame
+   around them. */
+.site .policyreader {
+    position: fixed;
+    inset: 0;
+    width: min(760px, calc(100% - (2 * var(--gutter))));
+    max-width: none;
+    max-height: min(88svh, 880px);
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    overflow: hidden;
+    box-shadow: 0 40px 90px -50px rgba(42, 24, 18, 0.9);
+}
+
+.site .policyreader::backdrop {
+    background: rgba(42, 24, 18, 0.58);
+}
+
+.site .policyreader[open] {
+    display: flex;
+    flex-direction: column;
+    animation: policyreader-in 0.2s ease both;
+}
+
+@keyframes policyreader-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.site .policyreader__sheet {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+
+/* The bar and the foot stay put while the four cards scroll between them: on a
+   phone the reader is taller than the screen, and a close button that scrolls
+   out of reach is the one thing a dialog may not do. */
+.site .policyreader__bar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.3rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--stone-soft);
+}
+
+.site .policyreader__eyebrow {
+    margin: 0 0 0.15rem;
+    color: var(--brass);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.site .policyreader__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.site .policyreader__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    margin: -0.35rem -0.4rem 0 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.site .policyreader__close:hover {
+    background: rgba(87, 28, 15, 0.07);
+    color: var(--ink);
+}
+
+.site .policyreader__body {
+    padding: 1.1rem 1.3rem 1.3rem;
+}
+
+.site .policyreader__lead {
+    margin: 0 0 0.9rem;
+    max-width: 58ch;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.site .policyreader .policies__grid {
+    border-top: 1px solid var(--line-strong);
+}
+
+/* Two cards in a grid row share a height, and a grid distributes that spare
+   height across its auto rows — which pushed the shorter card's text to the
+   bottom of its cell, leaving a hole under the heading. Start the rows instead. */
+.site .policyreader .policy {
+    align-content: start;
+}
+
+.site .policyreader__foot {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1.3rem;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+}
+
+.site .policyreader__foot-note {
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+@media (max-width: 575.98px) {
+    .site .policyreader__bar,
+    .site .policyreader__body,
+    .site .policyreader__foot {
+        padding-inline: 1rem;
+    }
+
+    .site .policyreader__title {
+        font-size: 1.15rem;
+    }
+
+    .site .policyreader__foot {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6rem;
+    }
+
+    .site .policyreader__foot-note {
+        text-align: center;
+    }
+
+    .site .policyreader__foot .mh-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .site .policies__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Dining — the line that answers "can I eat here?" and the two ways in.
+   -------------------------------------------------------------------------- */
+
+.site .dining__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    margin-top: 1.1rem;
+    color: rgba(87, 28, 15, 0.9);
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+.site .dining__note i {
+    color: var(--maroon);
+    font-size: 1rem;
+    margin-top: 0.15rem;
+}
+
+.site .dining__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    margin-top: 1.6rem;
+}
+
+/* The block's own button rule adds a top margin; inside a flex row it would
+   push the button off the text link's baseline. */
+.site .dining__actions .mh-btn {
+    margin-top: 0;
+}
+
+.site .dining__reserve {
+    margin-top: 0;
+    color: var(--maroon-deep);
+    border-bottom-color: rgba(87, 28, 15, 0.45);
+}
+
+.site .dining__reserve:hover,
+.site .dining__reserve:focus-visible {
+    color: var(--maroon-deep);
+    border-bottom-color: var(--maroon-deep);
+}
+
+/* --------------------------------------------------------------------------
+   The menu — the paper page under the mustard block.
+
+   A price list, not a card wall: name and price on one line joined by dot
+   leaders, the description beneath, the portion in small caps. The nine
+   signature dishes keep their photographs above it, credited as the licence
+   requires.
+   -------------------------------------------------------------------------- */
+
+.site .menu-block {
+    padding-block: clamp(3rem, 6vw, 5.5rem);
+    background: var(--paper);
+    scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.site .menu-block__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: 1.5rem 3rem;
+    align-items: end;
+    margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.site .menu-block__head .section-lead {
+    justify-self: end;
+    margin-top: 0;
+    max-width: 44ch;
+}
+
+/* ── Signature dishes ─────────────────────────────────────────────────────── */
+
+.site .signature {
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--line-strong);
+}
+
+.site .signature__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.35rem 1.5rem;
+    margin-bottom: 1.35rem;
+}
+
+.site .signature__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.1vw, 1.6rem);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.site .signature__note {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.site .signature__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@media (min-width: 620px) {
+    .site .signature__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .site .signature__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.site .dishcard {
+    display: flex;
+    flex-direction: column;
+}
+
+.site .dishcard__figure {
+    margin: 0;
+}
+
+.site .dishcard__figure picture,
+.site .dishcard__figure img {
+    display: block;
+    width: 100%;
+}
+
+/* height:auto is load-bearing: without it the HTML height="480" attribute
+   wins over aspect-ratio and every photograph is cropped into a tall column. */
+.site .dishcard__figure img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--stone);
+}
+
+.site .dishcard__credit {
+    margin-top: 0.45rem;
+    color: rgba(42, 24, 18, 0.58);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    line-height: 1.45;
+}
+
+.site .dishcard__credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.site .dishcard__credit a:hover,
+.site .dishcard__credit a:focus-visible {
+    color: var(--maroon);
+}
+
+.site .dishcard__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding-top: 0.85rem;
+}
+
+.site .dishcard__name {
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.site .dishcard__desc {
+    margin-top: 0.3rem;
+    color: var(--ink-soft);
+    font-size: 0.87rem;
+    line-height: 1.55;
+}
+
+.site .dishcard__line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-top: auto;
+    padding-top: 0.7rem;
+}
+
+.site .dishcard__serves {
+    color: rgba(42, 24, 18, 0.6);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.site .dishcard__leader,
+.site .mitem__leader {
+    flex: 1 1 auto;
+    min-width: 0.75rem;
+    border-bottom: 1px dotted var(--line-strong);
+    transform: translateY(-0.22em);
+}
+
+.site .dishcard__price {
+    color: var(--maroon-deep);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* ── Section chips ────────────────────────────────────────────────────────── */
+
+.site .menutabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: clamp(2.25rem, 4vw, 3.25rem);
+    padding-bottom: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    overscroll-behavior-x: contain;
+}
+
+.site .menutab {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.site .menutab:hover {
+    border-color: var(--maroon);
+    color: var(--maroon);
+}
+
+.site .menutab.is-active {
+    border-color: var(--maroon);
+    background: var(--maroon);
+    color: var(--paper);
+}
+
+.site .menutabs__legend {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0.85rem 0 0;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+/* ── The price lists ──────────────────────────────────────────────────────── */
+
+.site .menusec {
+    margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.site .menusec[hidden] {
+    display: none;
+}
+
+.site .menusec__head {
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.site .menusec__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1.9vw, 1.4rem);
+    font-weight: 500;
+}
+
+.site .menusec__intro {
+    margin-top: 0.2rem;
+    color: var(--ink-soft);
+    font-size: 0.87rem;
+}
+
+.site .menulist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Two columns from tablet up: fifty-four dishes in one column is a seven-
+   thousand-pixel page. The drinks list, being twice the length of any other,
+   gets a third column on a wide screen. `columns` balances the halves and
+   `break-inside: avoid` stops a dish from being split across the gutter. */
+@media (min-width: 768px) {
+    .site .menulist {
+        columns: 2;
+        column-gap: clamp(2rem, 5vw, 4rem);
+    }
+}
+
+@media (min-width: 1200px) {
+    .site .menulist--two {
+        columns: 3;
+    }
+}
+
+.site .mitem {
+    padding: 0.72rem 0;
+    border-bottom: 1px solid var(--line);
+    break-inside: avoid;
+}
+
+.site .mitem__top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+}
+
+.site .mitem__name {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.site .mitem__price {
+    color: var(--maroon-deep);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.site .mitem__desc {
+    margin-top: 0.15rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    line-height: 1.55;
+}
+
+.site .mitem__serves {
+    margin-top: 0.25rem;
+    color: rgba(42, 24, 18, 0.55);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.site .vegmark {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin-left: 0.15rem;
+    border: 1px solid var(--brass);
+    border-radius: 50%;
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: center;
+    vertical-align: 0.1em;
+}
+
+.site .vegmark--inline {
+    margin-left: 0;
+}
+
+.site .menublock__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--line-strong);
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+}
+
+.site .menublock__foot .text-link {
+    margin-top: 0;
+}
+
+@media (max-width: 767.98px) {
+    .site .menu-block__head {
+        grid-template-columns: 1fr;
+    }
+
+    .site .menu-block__head .section-lead {
+        justify-self: start;
+    }
+
+    /* Nine full-width cards stacked would be five thousand pixels of scroll
+       before the first price. On a phone the strip becomes a snap-scroller
+       with the next card peeking, which is its own affordance. */
+    .site .signature__grid {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-right: calc(var(--gutter) * -1);
+        padding-right: var(--gutter);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .site .dishcard {
+        flex: 0 0 78%;
+        scroll-snap-align: start;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Amenities
+   -------------------------------------------------------------------------- */
+
+.site .amenities__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(1.5rem, 4vw, 3.5rem);
+    border-top: 1px solid var(--line-strong);
+}
+
+.site .amenity {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.9rem;
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.site .amenity i {
+    color: var(--maroon);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-top: 0.1rem;
+}
+
+.site .amenity h3 {
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.site .amenity h3 span {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.site .amenity p {
+    margin-top: 0.2rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 767.98px) {
+    .site .amenities__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Celebrations strip (replaces the non-functional package cards)
+   -------------------------------------------------------------------------- */
+
+.site .celebrate {
+    padding-block: clamp(2.25rem, 5vw, 3.75rem);
+    background: var(--maroon);
+    color: var(--paper);
+}
+
+.site .celebrate__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+    flex-wrap: wrap;
+}
+
+.site .celebrate h2 {
+    max-width: 22ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 2.8vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.site .celebrate p {
+    max-width: 44ch;
+    margin-top: 0.6rem;
+    color: rgba(251, 247, 239, 0.78);
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.site .celebrate .mh-btn {
+    flex: 0 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Guest quotes
+   -------------------------------------------------------------------------- */
+
+.site .quotes {
+    background: var(--stone);
+}
+
+.site .quotes__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.site .quote {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    /* Bootstrap's figure margin would leave a strip of the grid's hairline
+       background below each card — the "two slides at once" look, again. */
+    margin: 0;
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    background: var(--stone);
+}
+
+.site .quote__mark {
+    color: var(--brass);
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 0.7;
+}
+
+.site .quote p {
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    font-style: italic;
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+.site .quote__by {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+}
+
+.site .quote__initials {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    border: 1px solid var(--brass);
+    border-radius: 50%;
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+}
+
+.site .quote__name {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.site .quote__stars {
+    display: flex;
+    gap: 0.12rem;
+    color: var(--brass);
+    font-size: 0.65rem;
+    letter-spacing: 0;
+}
+
+@media (max-width: 991.98px) {
+    .site .quotes__grid {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(78%, 1fr);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .site .quotes__grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .site .quote {
+        scroll-snap-align: start;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Find us
+   -------------------------------------------------------------------------- */
+
+.site .findus__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
+}
+
+.site .contact-list {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+
+.site .contact-list a,
+.site .contact-list span.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 0.93rem;
+    text-decoration: none;
+}
+
+.site .contact-list a:hover,
+.site .contact-list a:focus-visible {
+    color: var(--maroon);
+}
+
+.site .contact-list i {
+    width: 1.1rem;
+    color: var(--maroon);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.site .contact-list small,
+.site .contact-cards small {
+    display: block;
+    margin-bottom: 0.1rem;
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.site .findus__map {
+    min-height: 340px;
+    border: 1px solid var(--line);
+    background: var(--stone);
+}
+
+.site .findus__map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    border: 0;
+}
+
+@media (max-width: 991.98px) {
+    .site .findus__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site .findus__map,
+    .site .findus__map iframe {
+        min-height: 260px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+    padding-block: clamp(2.5rem, 5vw, 4rem) 1.25rem;
+    background: var(--maroon);
+    color: var(--paper);
+}
+
+.site-footer a {
+    color: rgba(251, 247, 239, 0.82);
+    text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+    color: var(--mustard);
+}
+
+.site-footer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 0.75fr));
+    gap: clamp(1.5rem, 3.5vw, 3rem);
+}
+
+.site-footer__brand img {
+    display: block;
+    width: min(200px, 100%);
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.site-footer__brand p {
+    max-width: 34ch;
+    color: rgba(251, 247, 239, 0.75);
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+.site-footer__social {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.site-footer__social a {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(251, 247, 239, 0.35);
+    border-radius: 50%;
+    font-size: 0.95rem;
+}
+
+.site-footer h2 {
+    margin-bottom: 0.85rem;
+    color: var(--mustard);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.site-footer ul {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.88rem;
+}
+
+.site-footer address {
+    margin: 0;
+    color: rgba(251, 247, 239, 0.82);
+    font-size: 0.88rem;
+    font-style: normal;
+    line-height: 1.65;
+}
+
+.site-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    flex-wrap: wrap;
+    margin-top: 2.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(251, 247, 239, 0.2);
+    color: rgba(251, 247, 239, 0.66);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 991.98px) {
+    .site-footer__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer__brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 479.98px) {
+    .site-footer__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile booking bar
+   -------------------------------------------------------------------------- */
+
+.book-bar {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 1030;
+    display: none;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    padding: 0.6rem var(--gutter) calc(0.6rem + env(safe-area-inset-bottom));
+    background: rgba(251, 247, 239, 0.98);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -14px 34px -28px rgba(42, 24, 18, 0.7);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.book-bar .mh-btn {
+    min-height: 46px;
+    padding-inline: 1rem;
+    font-size: 0.76rem;
+}
+
+.book-bar .book-bar__call {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--line-strong);
+    color: var(--maroon);
+    text-decoration: none;
+}
+
+@media (max-width: 991.98px) {
+    .book-bar:not([hidden]) {
+        display: grid;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Inner pages (Our story, Contact)
+   -------------------------------------------------------------------------- */
+
+.site .page-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(1.5rem, 5vw, 4.5rem);
+    align-items: center;
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.site .page-hero__copy h1 {
+    max-width: 18ch;
+    margin-top: 0.9rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 4.2vw, 3.8rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.02;
+}
+
+.site .page-hero__lead {
+    max-width: 46ch;
+    margin-top: 1.1rem;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.site .page-hero__copy > p:not(.eyebrow):not(.page-hero__lead) {
+    max-width: 56ch;
+    margin-top: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+.site .page-hero__media {
+    margin: 0;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--stone);
+}
+
+.site .page-hero__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.site .contact-cards {
+    display: grid;
+    gap: 1px;
+    margin-top: 1.75rem;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.site .contact-cards a,
+.site .contact-cards span.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.1rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 0.94rem;
+    text-decoration: none;
+}
+
+.site .contact-cards a:hover,
+.site .contact-cards a:focus-visible {
+    background: var(--stone-soft);
+    color: var(--maroon);
+}
+
+.site .contact-cards i {
+    width: 1.1rem;
+    color: var(--maroon);
+    text-align: center;
+}
+
+@media (max-width: 991.98px) {
+    .site .page-hero {
+        grid-template-columns: 1fr;
+        padding-block: 1.75rem 2.5rem;
+    }
+
+    .site .page-hero__media {
+        order: -1;
+        aspect-ratio: 16 / 10;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Booth: shared modal polish (the booking sheets are refined in a later pass)
+   -------------------------------------------------------------------------- */
+
+.site .modal-content {
+    border: 0;
+    border-radius: var(--radius);
+}
+
+.site .modal-header {
+    border-bottom: 1px solid rgba(251, 247, 239, 0.16);
+    border-radius: 0;
+}
+
+.site .modal-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.site .addon-card {
+    cursor: pointer;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: #fff;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.site .addon-card.addon-selected {
+    border: 2px solid var(--maroon);
+    background: var(--stone-soft);
+}
+
+.site .modal .form-text,
+.site .modal .small {
+    font-size: 0.82rem;
+}
+
+/* --------------------------------------------------------------------------
+   Motion + reveal (opt-in: JS adds .reveal, so no-JS leaves content visible)
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+    html.site-scroll {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Movement only — never opacity. A fade-in from 0 leaves whole sections blank
+   whenever the observer does not fire (print, full-page capture, a background
+   tab), and the hotel's rooms and prices are the last thing that should
+   depend on a scroll event. */
+.site .reveal {
+    transform: translateY(14px);
+    transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.site .reveal.is-in {
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site *,
+    .site *::before,
+    .site *::after,
+    .site-header,
+    .site-menu {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .site .reveal {
+        transform: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Small details used by the folio and the hourly form
+   -------------------------------------------------------------------------- */
+
+.site .field__hint {
+    margin-top: 0.3rem;
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.site .field__hint output {
+    color: var(--maroon);
+    font-weight: 500;
+}
+
+.site .folio-row__desc {
+    max-width: 54ch;
+    color: var(--ink-soft);
+    font-size: 0.84rem;
+    line-height: 1.55;
+}
+
+.site .folio__keytag {
+    left: 1rem;
+    bottom: 1rem;
+    width: 88px;
+    height: 88px;
+}
+
+.site .folio__keytag .keytag__value {
+    font-size: 1.2rem;
+}
+
+/* A sheet or the drawer always wins over the sticky booking bar. */
+body.modal-open .book-bar,
+html.menu-open .book-bar {
+    display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Booking status lookup
+   --------------------------------------------------------------------------
+   The status page keeps its Bootstrap body (its deposit and cancellation
+   panels are built on it), but the lookup row is the first thing a guest
+   touches, so it uses the site's field and button styling — and stacks on a
+   phone instead of squeezing the email into 90px. */
+
+.status-page {
+    max-width: 760px;
+    margin-top: clamp(2rem, 5vw, 3.25rem);
+}
+
+.status-page h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3vw, 2.15rem);
+    font-weight: 500;
+}
+
+.status-lookup .form-control {
+    min-height: 48px;
+    border-color: var(--line-strong);
+    font-size: 16px; /* under 16px iOS zooms the whole page on focus */
+}
+
+.status-lookup .form-control:focus {
+    border-color: var(--maroon);
+    box-shadow: 0 0 0 3px rgba(232, 179, 63, 0.5);
+}
+
+.status-lookup .btn {
+    background: var(--maroon);
+    border: 1px solid var(--maroon);
+    color: var(--paper);
+    font-weight: 600;
+}
+
+.status-lookup .btn:hover,
+.status-lookup .btn:focus-visible {
+    background: var(--maroon-deep);
+    border-color: var(--maroon-deep);
+    color: var(--paper);
+}
+
+@media (max-width: 575.98px) {
+    .status-lookup .input-group {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .status-lookup .input-group > .form-control,
+    .status-lookup .input-group > .btn {
+        flex: 1 1 100%;
+        width: 100%;
+        border-radius: var(--radius) !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Small screens — one last pass on spacing and type
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 479.98px) {
+    .site .section {
+        padding-block: 2.75rem;
+    }
+
+    .site .hero__facts {
+        display: grid;
+        gap: 0.45rem;
+    }
+
+    .site .facts {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .site .quote__mark {
+        font-size: 2rem;
+    }
+}
+/* ==========================================================================
+   Arrival, tour and help
+   --------------------------------------------------------------------------
+   Added for the entry screen, the five-step website tour and the FAQ
+   concierge. Everything is scoped to the public site (body.site) except the
+   launcher and panel, which also appear on booking_status.php, and every
+   colour comes from the tokens at the top of this file.
+   ========================================================================== */
+
+/* ── Entry screen ───────────────────────────────────────────────────────── */
+
+.entry {
+    position: fixed;
+    inset: 0;
+    z-index: 2100;
+    display: grid;
+    place-items: center;
+    padding: var(--gutter);
+    background:
+        radial-gradient(120% 90% at 50% 0%, rgba(232, 179, 63, 0.08), transparent 60%),
+        var(--maroon);
+    color: var(--paper);
+    overflow: auto;
+}
+
+.entry[hidden] {
+    display: none;
+}
+
+.entry__panel {
+    width: min(560px, 100%);
+    text-align: center;
+    outline: none;
+}
+
+.entry__mark {
+    display: block;
+    width: min(240px, 62vw);
+    height: auto;
+    margin: 0 auto;
+}
+
+/* The entry screen's own margins are written as `.site .entry__*` on purpose.
+   The resets at the top of this file (`.site p`, `.site h1..h4`) carry an
+   element in their selector and therefore outranked the single-class rules
+   below: every margin-top here resolved to 0, the panel's three lines stacked
+   with no gap, and `.entry__lead`'s `margin: auto` was lost too, which parked
+   its 40ch column against the left edge instead of centring it. */
+.site .entry__place {
+    margin-top: 1.35rem;
+    color: rgba(251, 247, 239, 0.72);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.site .entry__title {
+    margin-top: 1.1rem;
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 4.4vw, 2.1rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+}
+
+.entry__count {
+    color: var(--mustard);
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    font-weight: 500;
+}
+
+.site .entry__lead {
+    max-width: 40ch;
+    margin: 0.9rem auto 0;
+    color: rgba(251, 247, 239, 0.82);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.entry__actions {
+    display: grid;
+    justify-items: center;
+    gap: 0.9rem;
+    margin-top: 1.9rem;
+}
+
+.entry__actions .mh-btn {
+    min-height: 50px;
+    padding-inline: 1.7rem;
+}
+
+.entry__tour {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.2rem;
+    border: 0;
+    background: none;
+    color: rgba(251, 247, 239, 0.86);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}
+
+.entry__tour:hover,
+.entry__tour:focus-visible {
+    color: var(--mustard);
+}
+
+.entry__timer {
+    width: 170px;
+    height: 2px;
+    margin: 2.1rem auto 0;
+    background: rgba(251, 247, 239, 0.18);
+    overflow: hidden;
+}
+
+.entry__timer span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--mustard);
+    transform-origin: left center;
+    animation: entry-timer 2.2s linear forwards;
+}
+
+.entry__panel.is-paused .entry__timer span {
+    animation-play-state: paused;
+}
+
+@keyframes entry-timer {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+/* A desktop door has more room, so it speaks a little louder. Kept after the
+   base rules on purpose: equal specificity means source order decides. */
+@media (min-width: 768px) {
+    .entry__mark {
+        width: 300px;
+    }
+
+    .site .entry__place {
+        margin-top: 1.7rem;
+    }
+
+    .site .entry__title {
+        margin-top: 1.3rem;
+        font-size: 2.55rem;
+    }
+
+    .site .entry__lead {
+        margin-top: 1.1rem;
+        font-size: 1rem;
+    }
+
+    .entry__actions {
+        margin-top: 2.2rem;
+    }
+
+    .entry__timer {
+        margin-top: 2.5rem;
+    }
+}
+
+html.entry-open,
+html.entry-open body {
+    overflow: hidden;
+}
+
+/* ── Tour ──────────────────────────────────────────────────────────────── */
+
+.tour {
+    position: fixed;
+    inset: 0;
+    z-index: 2050;
+}
+
+.tour[hidden] {
+    display: none;
+}
+
+.tour__spot {
+    position: fixed;
+    border-radius: 3px;
+    box-shadow:
+        0 0 0 1px rgba(232, 179, 63, 0.85),
+        0 0 0 9999px rgba(20, 10, 7, 0.74);
+    transition: top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease;
+    pointer-events: none;
+}
+
+.tour__card {
+    position: fixed;
+    z-index: 1;
+    padding: 1.1rem 1.2rem 1rem;
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    box-shadow: 0 24px 60px -28px rgba(20, 10, 7, 0.65);
+    color: var(--ink);
+}
+
+.tour__eyebrow {
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.tour__count {
+    color: var(--brass);
+}
+
+.tour__title {
+    margin-top: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.tour__text {
+    margin-top: 0.5rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.tour__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.1rem;
+}
+
+.tour__skip {
+    border: 0;
+    background: none;
+    padding: 0.4rem 0;
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.tour__skip:hover,
+.tour__skip:focus-visible {
+    color: var(--maroon);
+}
+
+.tour__nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tour__back,
+.tour__next {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 1.05rem;
+    border: 1px solid var(--maroon);
+    background: transparent;
+    color: var(--maroon);
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.tour__next {
+    background: var(--maroon);
+    color: var(--paper);
+}
+
+.tour__back:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.tour__live {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+html.tour-open body {
+    overflow: hidden;
+}
+
+@media (max-width: 767.98px) {
+    .tour__card {
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+    }
+
+    .tour__text {
+        font-size: 0.88rem;
+    }
+}
+
+/* ── FAQ concierge ─────────────────────────────────────────────────────── */
+
+.help-launcher {
+    position: fixed;
+    right: 18px;
+    bottom: calc(18px + env(safe-area-inset-bottom));
+    z-index: 1045;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    height: 48px;
+    padding: 0 1.05rem 0 0.95rem;
+    border: 1px solid var(--maroon-deep);
+    border-radius: 999px;
+    background: var(--maroon);
+    color: var(--paper);
+    box-shadow: 0 16px 34px -18px rgba(42, 24, 18, 0.8);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.help-launcher i {
+    font-size: 1.05rem;
+}
+
+.help-launcher:hover,
+.help-launcher:focus-visible {
+    background: var(--maroon-deep);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 991.98px) {
+    /* Above the mobile book/call bar, never on top of it. */
+    html.has-book-bar .help-launcher {
+        bottom: calc(84px + env(safe-area-inset-bottom));
+    }
+}
+
+.help {
+    position: fixed;
+    right: 18px;
+    bottom: calc(18px + 48px + 14px + env(safe-area-inset-bottom));
+    z-index: 1046;
+    display: flex;
+    flex-direction: column;
+    width: min(390px, calc(100vw - 36px));
+    max-height: min(620px, calc(100dvh - 140px));
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    box-shadow: 0 28px 60px -30px rgba(20, 10, 7, 0.7);
+}
+
+.help[hidden] {
+    display: none;
+}
+
+.help__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.1rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.help__eyebrow {
+    color: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.help__title {
+    margin-top: 0.3rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.help__close {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin: -0.35rem -0.5rem 0 0;
+    border: 1px solid transparent;
+    background: none;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.help__close:hover,
+.help__close:focus-visible {
+    color: var(--maroon);
+    border-color: var(--line-strong);
+}
+
+.help__search {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0.85rem 1.1rem 0;
+    padding: 0 0.75rem;
+    border: 1px solid var(--line-strong);
+    background: #fff;
+}
+
+.help__search i {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+}
+
+.help__search input {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px; /* 16px keeps iOS from zooming the panel */
+    outline: none;
+}
+
+.help__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.8rem 1.1rem 0.9rem;
+}
+
+/* Narrow screens get one swipeable row rather than three wrapped ones. */
+@media (max-width: 575.98px) {
+    .help__chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .help__chips::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.help__chip {
+    flex: 0 0 auto;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.help__chip:hover,
+.help__chip:focus-visible {
+    border-color: var(--maroon);
+    color: var(--maroon);
+}
+
+.help__chip[aria-pressed="true"] {
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: var(--paper);
+}
+
+.help__noresult {
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.help__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 0 1.1rem 1rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    color: var(--ink);
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.help__body p + p,
+.help__body p + ul,
+.help__body ul + p {
+    margin-top: 0.6rem;
+}
+
+.help__answer-title {
+    margin-bottom: 0.45rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.help__list {
+    margin: 0.35rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+}
+
+.help__list li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.84rem;
+}
+
+.help__list a {
+    color: var(--maroon);
+}
+
+.help__meta {
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+}
+
+.help__note {
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+}
+
+.help__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--maroon);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.help__foot {
+    display: flex;
+    gap: 1.2rem;
+    padding: 0.8rem 1.1rem calc(0.8rem + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line);
+    background: var(--stone-soft);
+}
+
+.help__foot a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--maroon);
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.help__foot a:hover,
+.help__foot a:focus-visible {
+    text-decoration: underline;
+}
+
+/* A booking sheet always wins over the concierge and the tour. */
+body.modal-open .help,
+body.modal-open .help-launcher,
+body.modal-open .tour,
+body.modal-open .entry {
+    display: none !important;
+}
+
+@media (max-width: 575.98px) {
+    .help {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        max-height: 82dvh;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+    }
+
+    .help-launcher span {
+        display: none;
+    }
+
+    .help-launcher {
+        width: 48px;
+        padding: 0;
+        justify-content: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .entry__timer span {
+        animation: none;
+        transform: scaleX(1);
+    }
+
+    .tour__spot,
+    .help-launcher {
+        transition: none;
+    }
+}
+
+/* ── Touch floor — responsive audit, 2026-10-20 ─────────────────────────────
+   The public header's nav links (36px), language pair (25px), BY NIGHTS /
+   BY HOURS toggles (36px) and the standalone text links (27px) were under the
+   app's 40×40 minimum. Only hit areas change: text links get vertical padding
+   cancelled by an equal negative margin so no line moves. */
+.site .site-nav__link,
+.site #modeDaily,
+.site #modeHourly,
+.site .skip-link,
+.site .lang-switch .lang-option,
+.site #main .status-lookup .btn {
+    min-height: 40px;
+}
+
+.site .site-nav__link,
+.site .skip-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.site .lang-switch .lang-option {
+    min-width: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site .text-link,
+.site #main .text-decoration-none {
+    padding-block: 11px;
+    margin-block: -11px;
+}
+
+/* Booking status sits outside the .site wrapper, so its control floor is
+   unscoped; the inline back link gets padding without moving its line. */
+#main .status-lookup .btn {
+    min-height: 40px;
+}
+
+#main .text-decoration-none {
+    padding-block: 11px;
+    margin-block: -11px;
+}
+
+/* 17px of text plus 22px of padding is 39; one more pixel makes the floor. */
+#main .text-decoration-none {
+    padding-block: 12px;
+    margin-block: -12px;
+}
+
+/* ── Touch floor, second pass — responsive audit, 2026-10-21 ────────────────
+   The first pass scoped the nav floor to .site, which the booking-status page
+   does not use, and asked for exactly 40px — one rounding from the bar. The
+   header links now get 44px unconditionally, and the "already booked" links
+   get a padded target inside their flex line. */
+.site-header .site-nav__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: 2px;
+}
+
+.site .desk__links a,
+.site .desk__linkbtn {
+    padding-block: 10px;
+}
